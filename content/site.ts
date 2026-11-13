@@ -10,7 +10,7 @@ export const site = {
   shortName: "HeyMeister",
   tagline: "Elektroprüfung im Abo",
   /** Without protocol, e.g. "heymeister-elektro.de". Never hard-code the domain elsewhere. */
-  domain: "[DOMAIN]",
+  domain: "www.hey-meister.de",
   locale: "de-DE",
 
   contact: {
