@@ -3,8 +3,8 @@
 Marketing website for **HeyMeister Elektro**: electrical inspections (DGUV V3, BetrSichV) as a monthly subscription per site.
 Next.js (App Router) · TypeScript strict · Tailwind CSS · statically generated · deployed on Vercel.
 
-> **Not public yet.** Until `PUBLIC_LAUNCH=true` the site is `noindex`, `robots.txt` disallows everything,
-> and the build refuses to launch with placeholders in the legal pages.
+> **Publicly reachable, not yet indexed.** Anyone can open the site. Until `PUBLIC_LAUNCH=true` it is `noindex`,
+> `robots.txt` disallows everything, and the build refuses to launch with placeholders in the legal pages.
 
 ## Setup (under 5 minutes)
 
@@ -84,8 +84,10 @@ Switch by setting `SITE_MODE=full` in Vercel and redeploying (values are baked i
 
 - `PUBLIC_LAUNCH` not `true` → `<meta name="robots" content="noindex, nofollow">`, `X-Robots-Tag` header,
   `robots.txt` with `Disallow: /`, empty sitemap.
-- Enable **Vercel Password Protection** (Project → Settings → Deployment Protection). As a second layer, set
-  `SITE_PASSWORD` to require HTTP Basic Auth (see `src/proxy.ts`).
+- The site is public by default. There is no password gate unless you opt in.
+- Optional preview password: set `PREVIEW_AUTH=true` **and** `PREVIEW_PASSWORD` to require HTTP Basic Auth
+  (see `src/proxy.ts`). If either is missing, the site stays open. Vercel Deployment Protection is configured
+  separately in the Vercel dashboard.
 - `npm run build` runs `scripts/check-launch.ts`: with `PUBLIC_LAUNCH=true` the build **fails** if `content/legal.ts` still
   contains placeholders, and warns about placeholders elsewhere.
 
@@ -106,7 +108,7 @@ and sees who viewed or downloaded what. It is not linked from the public site; s
 signed URLs that expire after 60 seconds, created after a session and permission check (`/dataroom/files/[id]`). All tables
 have Row Level Security without policies, so the browser cannot read anything directly; the server uses the secret key after
 checking the role. The data room is always `noindex`, excluded in `robots.txt`, has no analytics and is exempt from
-`SITE_PASSWORD` (it has its own login).
+the optional preview password (it has its own login).
 
 ### Setup (about 10 minutes)
 
@@ -144,4 +146,4 @@ third-party request. The booking widget (`BOOKING_URL`) loads only after a click
 - [ ] Site sizes and Basis/Plus difference defined
 - [ ] Real photos of Leon and the testing equipment
 - [ ] References only with written approval
-- [ ] Domain connected, `PUBLIC_LAUNCH=true`, password protection off
+- [ ] Domain connected, `PUBLIC_LAUNCH=true`, `PREVIEW_AUTH` not set

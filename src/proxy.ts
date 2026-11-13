@@ -3,13 +3,14 @@ import { NextResponse, type NextRequest } from "next/server";
 
 /**
  * 1. Data room (/dataroom): refreshes the Supabase session cookie on every request. The data room
- *    has its own login, so it is exempt from the pre-launch Basic Auth below.
- * 2. Everything else: while PUBLIC_LAUNCH is not "true" and SITE_PASSWORD is set, every request
- *    requires HTTP Basic Auth (defence in depth next to Vercel Password Protection).
+ *    has its own login and is never behind the optional preview password.
+ * 2. Everything else is public. An optional HTTP Basic Auth gate exists for previews, but it is
+ *    strictly opt-in: it only runs when PREVIEW_AUTH is exactly "true" AND PREVIEW_PASSWORD is set.
+ *    Any other combination (including missing variables) leaves the site open.
  */
 export async function proxy(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith("/dataroom")) return refreshDataroomSession(req);
-  return basicAuth(req);
+  return previewAuth(req);
 }
 
 async function refreshDataroomSession(req: NextRequest) {
@@ -35,21 +36,10 @@ async function refreshDataroomSession(req: NextRequest) {
   return res;
 }
 
-function basicAuth(req: NextRequest) {
-  const password = process.env.SITE_PASSWORD;
-  if (process.env.PUBLIC_LAUNCH === "true") return NextResponse.next();
-
-  if (!password) {
-    // Fail closed on Vercel: before launch the site must never be public, even if the
-    // password variable was forgotten. Locally (no VERCEL env) it stays open for development.
-    if (process.env.VERCEL) {
-      return new NextResponse("Vorschau gesperrt. SITE_PASSWORD ist in Vercel nicht gesetzt.", {
-        status: 503,
-        headers: { "X-Robots-Tag": "noindex, nofollow", "Content-Type": "text/plain; charset=utf-8" },
-      });
-    }
-    return NextResponse.next();
-  }
+function previewAuth(req: NextRequest) {
+  const password = process.env.PREVIEW_PASSWORD;
+  // Opt-in only. Never lock the site because a variable is missing.
+  if (process.env.PREVIEW_AUTH !== "true" || !password) return NextResponse.next();
 
   const header = req.headers.get("authorization");
   if (header?.startsWith("Basic ")) {
