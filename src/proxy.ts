@@ -37,7 +37,19 @@ async function refreshDataroomSession(req: NextRequest) {
 
 function basicAuth(req: NextRequest) {
   const password = process.env.SITE_PASSWORD;
-  if (process.env.PUBLIC_LAUNCH === "true" || !password) return NextResponse.next();
+  if (process.env.PUBLIC_LAUNCH === "true") return NextResponse.next();
+
+  if (!password) {
+    // Fail closed on Vercel: before launch the site must never be public, even if the
+    // password variable was forgotten. Locally (no VERCEL env) it stays open for development.
+    if (process.env.VERCEL) {
+      return new NextResponse("Vorschau gesperrt. SITE_PASSWORD ist in Vercel nicht gesetzt.", {
+        status: 503,
+        headers: { "X-Robots-Tag": "noindex, nofollow", "Content-Type": "text/plain; charset=utf-8" },
+      });
+    }
+    return NextResponse.next();
+  }
 
   const header = req.headers.get("authorization");
   if (header?.startsWith("Basic ")) {
