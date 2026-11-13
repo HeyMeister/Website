@@ -25,11 +25,11 @@ export function FAQ({ items, disclaimer }: { items: FaqItem[]; disclaimer?: stri
       <div className="divide-y divide-line border-y border-line">
         {items.map((item) => (
           <details key={item.id} id={`faq-${item.id}`} className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-subheading font-semibold text-ink [&::-webkit-details-marker]:hidden">
               {item.question}
               <ChevronDownIcon className="h-5 w-5 shrink-0 text-ink-muted transition-transform group-open:rotate-180 motion-reduce:transition-none" />
             </summary>
-            <div className="space-y-3 pb-6 pr-10 text-ink-muted">
+            <div className="max-w-prose space-y-3 pb-6 pr-10 text-ink-muted">
               {item.answer.map((p, i) => (
                 <p key={i}>
                   <Fill text={p} />
@@ -39,7 +39,7 @@ export function FAQ({ items, disclaimer }: { items: FaqItem[]; disclaimer?: stri
           </details>
         ))}
       </div>
-      {disclaimer && <p className="mt-6 text-sm text-ink-muted">{disclaimer}</p>}
+      {disclaimer && <p className="mt-6 text-small text-ink-muted">{disclaimer}</p>}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
     </div>
   );

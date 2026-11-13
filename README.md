@@ -23,7 +23,7 @@ Without `RESEND_API_KEY`, form submissions in development are printed to the ser
 | `npm test` | Unit tests (Vitest) |
 | `npm run typecheck` / `npm run lint` | TypeScript / ESLint |
 | `npm run check:launch` | Show remaining placeholders |
-| `npm run generate:logo` | Regenerate wordmark paths and favicon from Inter Bold |
+| `npm run generate:logo` | Regenerate wordmark, icons and favicon from Poppins Bold |
 
 ## Editing text and prices
 
@@ -42,16 +42,36 @@ All copy lives in typed files under [`content/`](content/). Components never con
 **Placeholders** are written in square brackets, e.g. `"[TELEFON]"`. They render as violet, dashed markers so nothing
 unfinished goes unnoticed. Phone/email links are only created once the value is real.
 
-## Design tokens
+## Brand (HeyMeister Brandbook v1, November 2026)
 
-Colours are defined once in [`src/styles/tokens.ts`](src/styles/tokens.ts). Tailwind exposes them as utilities and as CSS
-variables on `:root` (`--hm-accent`, `--hm-accent-rgb`, …) for reuse in Ops engine and CRM. `tests/basics.test.ts`
-fails if a text/background pair drops below WCAG AA (4.5:1).
+The brandbook is the reference for every design decision. Where it differs from the original build prompt, the brandbook wins.
 
-- Brand accent `#E4572E` is for the logo, dots, icons and large display text only. It is too light for small text, so
-  primary buttons use `accent-strong` (`#CC4620`, white text) and small accent text on dark uses `accent-on-dark`.
-- Because `text-base` is Tailwind's font-size utility, the base colour is `text-ink` for text and `bg-base`/`border-base`
-  elsewhere.
+- **Name:** "HeyMeister" (one word, no dot). In running text and as company name: "HeyMeister Elektro".
+- **Wordmark:** Poppins Bold, letter-spacing −3.5 %, exported as paths by `npm run generate:logo`
+  ([`logo-paths.ts`](src/components/brand/logo-paths.ts), static files in [`public/brand/`](public/brand/)).
+  "Hey" coral, "Meister" navy (white on navy; on coral "Hey" turns white). Minimum width 120 px, below that use the icon.
+  Protective space: the height of the "H".
+- **Icon:** "H" with a coral dot on a rounded square (radius 22 %): `icon-navy` (favicon, standard), `icon-koralle`, `icon-hell`.
+  Never next to the wordmark.
+- **Colours** ([`tokens.ts`](src/styles/tokens.ts), also as CSS variables `--hm-*`): Koralle `#E4572E`, Koralle-Dunkel `#C4461F`,
+  Koralle-Hell, Navy `#14213D`, Navy-Hell, Papier `#FBFBF8`, Fläche-2. Status colours are separate from the brand;
+  focus ring blue `#1F4FD8`. Ratio 80 % paper/white, 15 % navy, 5 % coral.
+- **Type:** Poppins 700 for display and headings, Inter 400/600 for body, tables and forms, JetBrains Mono 500 for measurements,
+  IDs and dates in tables. Always tabular figures. Scale: display-xl 64/68, display-l 44/50, heading 28/34, subheading 20/28,
+  body 16/24, small 14/20, label 12/16 (uppercase, 0.08 em), data mono 14/20. Body text max. 65 characters.
+- **Components:** primary button coral, hover coral-dark, radius 10 px; secondary with navy border; never two primary buttons
+  side by side. Cards white on paper, 1 px border, radius 16 px, padding 24 px, no shadow. Tables: head in Fläche-2 with labels,
+  numbers right-aligned in mono, status as pill with a word.
+- **Language:** "Sie" for customers, "Du" for applicants and the team. No exclamation marks, no "Jetzt", "Sofort", "Revolutionär".
+  "kann kürzen", never "wird kürzen". Defect classes 1–3 are explained where they first appear.
+- **Never:** symbols (lightning bolts, tools, helmets), yellow/black, a dot after the name, gradients, shadows, outlines, emojis.
+
+**Accessibility notes.** Coral reaches 3.6:1 with white, which WCAG only allows for large text. Button labels are therefore
+set in 19 px bold (counts as large text). Small accent text uses Koralle-Dunkel; on navy it uses Koralle-Hell. The blue focus
+ring turns white on navy, where blue would not reach 3:1. `tests/basics.test.ts` checks every colour pair.
+
+Because `text-base` is Tailwind's font-size utility, the navy base colour is `text-ink` for text and `bg-base`/`border-base`
+elsewhere.
 
 ## Site modes
 
@@ -79,7 +99,7 @@ A failing webhook never affects the visitor.
 
 ## Privacy
 
-Self-hosted Inter, no Google services, no cookies. Plausible is proxied through `/stats/*`, so the browser makes no
+Self-hosted fonts (Poppins, Inter, JetBrains Mono), no Google services, no cookies. Plausible is proxied through `/stats/*`, so the browser makes no
 third-party request. The booking widget (`BOOKING_URL`) loads only after a click.
 
 ## Launch checklist

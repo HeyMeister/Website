@@ -19,12 +19,12 @@ export function Footer() {
       <Container className="grid gap-10 py-14 md:grid-cols-12">
         <div className="md:col-span-5">
           <Logo variant="on-dark" className="h-7 w-auto" />
-          <p className="mt-3 text-sm text-ink-inverse-muted">
+          <p className="mt-3 text-small text-ink-inverse-muted">
             {site.tagline}. Meisterbetrieb aus {address.city} für {site.region.label}.
           </p>
         </div>
 
-        <div className="text-sm md:col-span-4">
+        <div className="text-small md:col-span-4">
           <h2 className="mb-3 font-semibold">Kontakt</h2>
           <address className="space-y-1 not-italic text-ink-inverse-muted">
             <p>
@@ -56,7 +56,7 @@ export function Footer() {
           </address>
         </div>
 
-        <nav aria-label="Fußzeile" className="text-sm md:col-span-3">
+        <nav aria-label="Fußzeile" className="text-small md:col-span-3">
           <h2 className="mb-3 font-semibold">Informationen</h2>
           <ul className="space-y-2">
             {links.map((l) => (
@@ -70,7 +70,7 @@ export function Footer() {
         </nav>
       </Container>
       <div className="border-t border-white/10">
-        <Container className="py-5 text-xs text-ink-inverse-muted">
+        <Container className="py-5 text-small text-ink-inverse-muted">
           © {new Date().getFullYear()} <Fill text={`${operator.company} ${operator.legalForm}`} />
         </Container>
       </div>

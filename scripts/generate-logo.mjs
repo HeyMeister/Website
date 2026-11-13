@@ -1,89 +1,141 @@
-// Generates the HeyMeister wordmark and icon as pure SVG path data from Inter Bold.
-// Output is committed, so the logo renders identically everywhere (favicon, OG image, email)
-// without depending on font loading. Re-run with `npm run generate:logo` after changes.
+// Generates the HeyMeister wordmark and icon as pure SVG path data, following Brandbook v1:
+// Poppins Bold, letter-spacing -3.5 %, exported as paths (not bound to a font licence at runtime).
+// Wordmark: "HeyMeister" without a dot. Icon: "H" with a coral dot on a rounded square (radius 22 %).
+// Output is committed. Re-run with `npm run generate:logo`.
 import fs from "node:fs";
 import path from "node:path";
 import opentype from "opentype.js";
 
 const root = path.resolve(import.meta.dirname, "..");
-const fontPath = path.join(root, "node_modules/@fontsource/inter/files/inter-latin-700-normal.woff");
+const fontPath = path.join(root, "node_modules/@fontsource/poppins/files/poppins-latin-700-normal.woff");
 const buf = fs.readFileSync(fontPath);
 const font = opentype.parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
 
-const SIZE = 100; // font size in SVG units
-const TRACKING = -0.02 * SIZE; // slight negative letter-spacing for a tighter wordmark
+const SIZE = 100;
+const TRACKING = -0.035 * SIZE;
+const NAVY = "#14213D";
+const CORAL = "#E4572E";
+const WHITE = "#FFFFFF";
+
+const r = (n) => Math.round(n * 100) / 100;
+
+// opentype.js 2.0's toPathData() can emit "NaN" coordinates, so serialise commands ourselves.
+const num = (n) => {
+  if (!Number.isFinite(n)) throw new Error(`Invalid coordinate: ${n}`);
+  return String(r(n));
+};
+function toPathData(p) {
+  return p.commands
+    .map((c) => {
+      switch (c.type) {
+        case "M":
+        case "L":
+          return `${c.type}${num(c.x)} ${num(c.y)}`;
+        case "Q":
+          return `Q${num(c.x1)} ${num(c.y1)} ${num(c.x)} ${num(c.y)}`;
+        case "C":
+          return `C${num(c.x1)} ${num(c.y1)} ${num(c.x2)} ${num(c.y2)} ${num(c.x)} ${num(c.y)}`;
+        case "Z":
+          return "Z";
+        default:
+          throw new Error(`Unknown path command ${c.type}`);
+      }
+    })
+    .join("");
+}
 
 function layout(parts) {
   let x = 0;
   const out = [];
   for (const { text, role } of parts) {
-    const glyphPaths = [];
+    const ds = [];
+    const boxes = [];
     for (const ch of text) {
       const glyph = font.charToGlyph(ch);
       const p = glyph.getPath(x, 0, SIZE);
-      glyphPaths.push(p.toPathData(2));
+      ds.push(toPathData(p));
+      boxes.push(p.getBoundingBox());
       x += (glyph.advanceWidth / font.unitsPerEm) * SIZE + TRACKING;
     }
-    out.push({ role, d: glyphPaths.join(" ") });
+    out.push({ role, d: ds.join(" "), boxes });
   }
-  return { parts: out, width: x - TRACKING };
+  return out;
 }
 
 function bounds(parts) {
-  // Compute a tight vertical box from the actual path commands.
-  let minY = Infinity, maxY = -Infinity, minX = Infinity, maxX = -Infinity;
-  for (const { d } of parts) {
-    const nums = d.match(/-?\d+(\.\d+)?/g).map(Number);
-    for (let i = 0; i + 1 < nums.length; i += 2) {
-      minX = Math.min(minX, nums[i]); maxX = Math.max(maxX, nums[i]);
-      minY = Math.min(minY, nums[i + 1]); maxY = Math.max(maxY, nums[i + 1]);
+  const box = { x1: Infinity, y1: Infinity, x2: -Infinity, y2: -Infinity };
+  for (const { boxes } of parts) {
+    for (const b of boxes) {
+      box.x1 = Math.min(box.x1, b.x1);
+      box.y1 = Math.min(box.y1, b.y1);
+      box.x2 = Math.max(box.x2, b.x2);
+      box.y2 = Math.max(box.y2, b.y2);
     }
   }
-  return { minX, maxX, minY, maxY };
+  return { x: r(box.x1), y: r(box.y1), width: r(box.x2 - box.x1), height: r(box.y2 - box.y1) };
 }
 
-const word = layout([
+const strip = (parts) => parts.map(({ role, d }) => ({ role, d }));
+
+// Height of the "H" = protective space on every side (brandbook rule).
+const capHeight = r((font.tables.os2.sCapHeight / font.unitsPerEm) * SIZE);
+
+const wordParts = layout([
   { text: "Hey", role: "accent" },
   { text: "Meister", role: "base" },
-  { text: ".", role: "accent" },
 ]);
-const wb = bounds(word.parts);
+const wb = bounds(wordParts);
 
-const icon = layout([
+const iconParts = layout([
   { text: "H", role: "base" },
   { text: ".", role: "accent" },
 ]);
-const ib = bounds(icon.parts);
+const ib = bounds(iconParts);
 
-const r = (n) => Math.round(n * 100) / 100;
-const wordmark = {
-  viewBox: `${r(wb.minX)} ${r(wb.minY)} ${r(wb.maxX - wb.minX)} ${r(wb.maxY - wb.minY)}`,
-  width: r(wb.maxX - wb.minX),
-  height: r(wb.maxY - wb.minY),
-  parts: word.parts,
-};
-const iconData = {
-  bounds: { x: r(ib.minX), y: r(ib.minY), width: r(ib.maxX - ib.minX), height: r(ib.maxY - ib.minY) },
-  parts: icon.parts,
+// Icon geometry: glyphs centred on a square, H fills roughly 55 % of the side.
+const side = r(ib.width / 0.62);
+const tx = r((side - ib.width) / 2 - ib.x);
+const ty = r((side - ib.height) / 2 - ib.y);
+
+const data = {
+  wordmark: { viewBox: `${wb.x} ${wb.y} ${wb.width} ${wb.height}`, ...wb, capHeight, parts: strip(wordParts) },
+  icon: { side, radius: r(side * 0.22), translate: [tx, ty], parts: strip(iconParts) },
 };
 
-const ts = `// AUTO-GENERATED by scripts/generate-logo.mjs from Inter Bold (SIL OFL 1.1). Do not edit by hand.
+const ts = `// AUTO-GENERATED by scripts/generate-logo.mjs from Poppins Bold (SIL OFL 1.1). Do not edit by hand.
 export type LogoPart = { role: "accent" | "base"; d: string };
 
-export const wordmark = ${JSON.stringify(wordmark, null, 2)} as const;
+export const wordmark = ${JSON.stringify(data.wordmark, null, 2)} as const;
 
-export const iconGlyphs = ${JSON.stringify(iconData, null, 2)} as const;
+export const icon = ${JSON.stringify(data.icon, null, 2)} as const;
 `;
 fs.writeFileSync(path.join(root, "src/components/brand/logo-paths.ts"), ts);
 
-// Static favicon: square, base background, "H" in white, dot in accent.
-const pad = 22;
-const side = Math.max(iconData.bounds.width, iconData.bounds.height) + pad * 2;
-const tx = (side - iconData.bounds.width) / 2 - iconData.bounds.x;
-const ty = (side - iconData.bounds.height) / 2 - iconData.bounds.y;
-const fill = { base: "#FFFFFF", accent: "#E4572E" };
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${r(side)} ${r(side)}"><rect width="${r(side)}" height="${r(side)}" rx="${r(side * 0.18)}" fill="#14213D"/><g transform="translate(${r(tx)} ${r(ty)})">${iconData.parts
-  .map((p) => `<path fill="${fill[p.role]}" d="${p.d}"/>`)
-  .join("")}</g></svg>\n`;
-fs.writeFileSync(path.join(root, "src/app/icon.svg"), svg);
-console.log("Logo generated:", wordmark.viewBox, "| icon side", r(side));
+// Static SVG files (favicon + brand assets for other uses).
+const iconSvg = (bg, h, dot) =>
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${side} ${side}">${
+    bg ? `<rect width="${side}" height="${side}" rx="${data.icon.radius}" fill="${bg}"/>` : ""
+  }<g transform="translate(${tx} ${ty})">${iconParts
+    .map((p) => `<path fill="${p.role === "accent" ? dot : h}" d="${p.d}"/>`)
+    .join("")}</g></svg>\n`;
+
+const wordSvg = (hey, meister, bg) => {
+  const pad = capHeight; // protective space
+  const w = r(wb.width + pad * 2);
+  const h = r(wb.height + pad * 2);
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${r(wb.x - pad)} ${r(wb.y - pad)} ${w} ${h}">${
+    bg ? `<rect x="${r(wb.x - pad)}" y="${r(wb.y - pad)}" width="${w}" height="${h}" fill="${bg}"/>` : ""
+  }${wordParts.map((p) => `<path fill="${p.role === "accent" ? hey : meister}" d="${p.d}"/>`).join("")}</svg>\n`;
+};
+
+const brandDir = path.join(root, "public/brand");
+fs.mkdirSync(brandDir, { recursive: true });
+fs.writeFileSync(path.join(root, "src/app/icon.svg"), iconSvg(NAVY, WHITE, CORAL));
+fs.writeFileSync(path.join(brandDir, "icon-navy.svg"), iconSvg(NAVY, WHITE, CORAL));
+fs.writeFileSync(path.join(brandDir, "icon-koralle.svg"), iconSvg(CORAL, WHITE, NAVY));
+fs.writeFileSync(path.join(brandDir, "icon-hell.svg"), iconSvg(null, NAVY, CORAL));
+fs.writeFileSync(path.join(brandDir, "wortmarke.svg"), wordSvg(CORAL, NAVY, null));
+fs.writeFileSync(path.join(brandDir, "wortmarke-navy.svg"), wordSvg(CORAL, WHITE, NAVY));
+fs.writeFileSync(path.join(brandDir, "wortmarke-koralle.svg"), wordSvg(WHITE, NAVY, CORAL));
+fs.writeFileSync(path.join(brandDir, "wortmarke-einfarbig.svg"), wordSvg(NAVY, NAVY, null));
+console.log("Logo generated:", data.wordmark.viewBox, "| cap height", capHeight, "| icon side", side);

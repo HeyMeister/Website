@@ -19,8 +19,8 @@ export default function DankePage() {
       <span className="flex h-12 w-12 items-center justify-center rounded-full bg-base text-accent">
         <CheckIcon className="h-6 w-6" strokeWidth={2.6} />
       </span>
-      <h1 className="mt-6 text-4xl font-bold tracking-tight text-ink">Vielen Dank. Ihre Anfrage ist da.</h1>
-      <p className="mt-4 text-lg text-ink-muted">
+      <h1 className="mt-6 text-heading lg:text-display-l text-ink">Vielen Dank. Ihre Anfrage ist da.</h1>
+      <p className="mt-4 text-body text-ink-muted">
         Wir melden uns {site.contact.responseTime}. Wenn Sie nicht warten möchten, buchen Sie direkt einen Termin für ein
         kostenloses Erstgespräch ({site.contact.callDuration}).
       </p>

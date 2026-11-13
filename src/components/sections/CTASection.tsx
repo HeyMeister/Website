@@ -16,12 +16,12 @@ export function CTASection({ id = "kontakt" }: { id?: string }) {
   return (
     <Section id={id} eyebrow={c.eyebrow} title={c.title} intro={c.text}>
       <div className="grid gap-10 lg:grid-cols-12">
-        <div className="rounded-2xl border border-line bg-surface-raised p-6 sm:p-8 lg:col-span-8">
+        <div className="rounded-card border border-line bg-surface-raised p-6 lg:col-span-8 lg:p-8">
           <LeadForm />
         </div>
         <aside className="space-y-6 lg:col-span-4" aria-label="Weitere Kontaktwege">
           <div className="space-y-3">
-            <p className="font-semibold text-ink">Lieber direkt?</p>
+            <p className="font-display text-subheading font-bold text-ink">Lieber direkt?</p>
             <p className="flex items-center gap-3">
               <PhoneIcon className="text-accent" />
               {tel ? (

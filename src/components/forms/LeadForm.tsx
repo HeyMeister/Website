@@ -41,7 +41,7 @@ export function LeadForm(props: LeadFormProps) {
 }
 
 const inputClass =
-  "mt-1.5 block w-full rounded-lg border border-line-strong bg-surface-raised px-3.5 py-2.5 text-base text-ink placeholder:text-ink-muted/70 aria-[invalid=true]:border-danger aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger";
+  "mt-1.5 block w-full rounded-control border border-line-strong bg-surface-raised px-3.5 py-2.5 text-body text-ink focus-visible:outline-offset-0 placeholder:text-ink-muted/70 aria-[invalid=true]:border-danger aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger";
 
 function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: LeadFormProps & { initialWish?: Wish }) {
   const router = useRouter();
@@ -113,12 +113,12 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
   return (
     <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-5" aria-describedby={formError ? `${formId}-form-error` : undefined}>
       <fieldset>
-        <legend className="text-sm font-semibold text-ink">Ihr Anliegen</legend>
+        <legend className="text-small font-semibold text-ink">Ihr Anliegen</legend>
         <div className="mt-2 flex flex-wrap gap-2">
           {wishOptions.map((o) => (
             <label key={o.value} className="cursor-pointer">
               <input type="radio" name="wish" value={o.value} defaultChecked={o.value === initialWish} className="peer sr-only" />
-              <span className="inline-flex min-h-[44px] items-center rounded-lg border border-line-strong bg-surface-raised px-4 text-sm font-medium text-ink peer-checked:border-base peer-checked:bg-base peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent-strong">
+              <span className="inline-flex min-h-[44px] items-center rounded-control border border-line-strong bg-surface-raised px-4 text-small font-medium text-ink peer-checked:border-base peer-checked:bg-base peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus">
                 {o.label}
               </span>
             </label>
@@ -177,9 +177,9 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
         <input id={`${formId}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
       </div>
 
-      <p className="text-sm text-ink-muted">
+      <p className="text-small text-ink-muted">
         Mit dem Absenden verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Details in der{" "}
-        <Link href="/datenschutz" className="font-medium text-ink underline underline-offset-2">
+        <Link href="/datenschutz" className="font-semibold text-accent-dark underline underline-offset-2 hover:text-ink">
           Datenschutzerklärung
         </Link>
         . Pflichtfelder sind mit * markiert.
@@ -187,7 +187,7 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
 
       <div aria-live="polite" role="status">
         {formError && (
-          <p id={`${formId}-form-error`} className="rounded-lg border border-danger bg-danger-soft px-4 py-3 text-sm font-medium text-danger">
+          <p id={`${formId}-form-error`} className="rounded-control border border-danger bg-danger-soft px-4 py-3 text-small font-medium text-danger">
             {formError}
           </p>
         )}
@@ -217,10 +217,10 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="block text-sm font-semibold text-ink">
+      <label htmlFor={htmlFor} className="block text-small font-semibold text-ink">
         {label}
         {required && (
-          <span aria-hidden="true" className="text-accent-strong">
+          <span aria-hidden="true" className="text-accent-dark">
             {" "}
             *
           </span>
@@ -229,7 +229,7 @@ function Field({
       </label>
       {children}
       {error && (
-        <p id={errorId} className="mt-1.5 text-sm font-medium text-danger">
+        <p id={errorId} className="mt-1.5 text-small font-medium text-danger">
           {error}
         </p>
       )}

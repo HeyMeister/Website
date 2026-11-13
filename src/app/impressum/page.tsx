@@ -9,7 +9,7 @@ export const metadata = pageMetadata({ title: impressum.title, description: impr
 function Block({ heading, children }: { heading: string; children: ReactNode }) {
   return (
     <section className="mt-10">
-      <h2 className="text-xl font-semibold text-ink">{heading}</h2>
+      <h2 className="text-subheading text-ink">{heading}</h2>
       <div className="mt-3 space-y-1 text-ink-muted">{children}</div>
     </section>
   );
@@ -19,8 +19,8 @@ export default function ImpressumPage() {
   const o = operator;
   return (
     <Container className="max-w-prose py-16 sm:py-20">
-      <h1 className="text-4xl font-bold tracking-tight text-ink">{impressum.title}</h1>
-      <p className="mt-2 text-sm text-ink-muted">Angaben gemäß § 5 DDG</p>
+      <h1 className="text-heading lg:text-display-l text-ink">{impressum.title}</h1>
+      <p className="mt-2 text-small text-ink-muted">Angaben gemäß § 5 DDG</p>
 
       <Block heading="Anbieter">
         <p>

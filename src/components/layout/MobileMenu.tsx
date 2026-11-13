@@ -33,7 +33,7 @@ export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: 
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
-        className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-ink hover:bg-surface-muted"
+        className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-control text-ink hover:bg-surface-2"
       >
         {open ? <CloseIcon /> : <MenuIcon />}
         <span className="sr-only">{open ? "Menü schließen" : "Menü öffnen"}</span>
@@ -42,7 +42,7 @@ export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: 
       <div
         id={panelId}
         hidden={!open}
-        className="absolute inset-x-0 top-16 border-b border-line bg-surface shadow-lg"
+        className="absolute inset-x-0 top-16 border-b border-line bg-surface"
       >
         <nav aria-label="Mobile Navigation" className="px-4 py-4 sm:px-6">
           <ul className="flex flex-col">
@@ -51,7 +51,7 @@ export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: 
                 <Link
                   href={item.href}
                   onClick={close}
-                  className="block rounded px-2 py-3 text-base font-medium text-ink hover:bg-surface-muted"
+                  className="block rounded px-2 py-3 text-body font-semibold text-ink hover:bg-surface-2"
                 >
                   {item.label}
                 </Link>

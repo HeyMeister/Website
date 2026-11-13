@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import { formatDate, formatEuro } from "@/lib/format";
 import { findPlaceholders, hasPlaceholder, splitPlaceholders } from "@/lib/placeholders";
 import { contrastRatio } from "@/lib/contrast";
-import { colors, contrastPairs, uiContrastPairs } from "@/styles/tokens";
+import { colors, contrastPairs, largeTextAndUiPairs } from "@/styles/tokens";
 import { postSignedWebhook, signPayload, SIGNATURE_HEADER } from "@/lib/webhook";
 import { contactHref, telHref } from "@/lib/links";
 import { lowestMonthlyPrice } from "@/content/pricing";
@@ -59,7 +59,7 @@ describe("design tokens", () => {
   it.each(contrastPairs)("%s on %s reaches 4.5:1", (fg, bg) => {
     expect(contrastRatio(colors[fg], colors[bg])).toBeGreaterThanOrEqual(4.5);
   });
-  it.each(uiContrastPairs)("UI element %s on %s reaches 3:1", (fg, bg) => {
+  it.each(largeTextAndUiPairs)("large text / UI element %s on %s reaches 3:1", (fg, bg) => {
     expect(contrastRatio(colors[fg], colors[bg])).toBeGreaterThanOrEqual(3);
   });
 });

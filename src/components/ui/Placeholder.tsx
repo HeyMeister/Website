@@ -21,8 +21,8 @@ export function Placeholder({
     <div
       className={`flex flex-col items-center justify-center gap-1 rounded-card border-2 border-dashed border-placeholder bg-placeholder-soft p-6 text-center text-placeholder ${aspect ?? ""} ${className}`}
     >
-      <span className="text-sm font-semibold uppercase tracking-wide">{label}</span>
-      {children ? <span className="text-sm">{children}</span> : null}
+      <span className="label">{label}</span>
+      {children ? <span className="text-small">{children}</span> : null}
     </div>
   );
 }

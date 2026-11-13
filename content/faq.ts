@@ -41,7 +41,8 @@ export const faq: FaqItem[] = [
     id: "mangel",
     question: "Was passiert, wenn ein Mangel gefunden wird?",
     answer: [
-      "Klasse 1, ein Standardteil wie Stecker oder Abdeckung: Wir beheben den Mangel sofort vor Ort.",
+      "Wir ordnen jeden Mangel einer von drei Mängelklassen zu. Sie legt fest, wie schnell und auf welchem Weg er behoben wird.",
+      "Klasse 1, ein Standardteil wie Stecker oder Abdeckung: Wir beheben den Mangel direkt bei der Prüfung.",
       "Klasse 2, ein objektspezifisches Teil: über die Ersatzteilbox oder innerhalb von 10 Werktagen.",
       "Klasse 3, größerer Aufwand: Sie bekommen ein eigenes Angebot.",
     ],

@@ -1,10 +1,10 @@
 import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
-import { colors, fontFamily, layout } from "./src/styles/tokens";
+import { colors, fontFamily, fontSize, layout, radius } from "./src/styles/tokens";
 import { hexToRgb } from "./src/lib/contrast";
 
-// Every token is exposed as a CSS variable on :root and Tailwind colors point at those
-// variables, so Ops engine and CRM can reuse the exact same values.
+// Every token is exposed as a CSS variable on :root and Tailwind colours point at those
+// variables, so portal, app, Ops engine and CRM can reuse the exact same values.
 const cssVars: Record<string, string> = {};
 const themeColors: Record<string, string> = {};
 for (const [name, hex] of Object.entries(colors)) {
@@ -12,13 +12,15 @@ for (const [name, hex] of Object.entries(colors)) {
   cssVars[`--hm-${name}-rgb`] = hexToRgb(hex).join(" ");
   themeColors[name] = `rgb(var(--hm-${name}-rgb) / <alpha-value>)`;
 }
-// "text-base" is Tailwind's font-size utility. To avoid a clash the base colour is exposed
-// as "ink" in the general palette (text-ink, bg-ink, …) and as "base" only for
+// "text-base" would clash with Tailwind's font-size utility, so the navy base colour is
+// exposed as "ink" in the general palette (text-ink, …) and as "base" only for
 // backgrounds, borders, rings and outlines (bg-base, border-base, …).
 const baseColor = themeColors.base!;
+const baseLightColor = themeColors["base-light"]!;
 delete themeColors.base;
+delete themeColors["base-light"];
 themeColors.ink = baseColor;
-const baseOnly = { base: baseColor };
+const baseOnly = { base: baseColor, "base-light": baseLightColor };
 
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}", "./content/**/*.{ts,tsx,mdx}"],
@@ -30,17 +32,14 @@ const config: Config = {
       ringColor: baseOnly,
       outlineColor: baseOnly,
       fontFamily,
+      fontSize: fontSize as unknown as Record<string, [string, Record<string, string>]>,
       maxWidth: {
         content: layout.maxWidth,
-        prose: "70ch",
-      },
-      fontSize: {
-        // Body text 16–18px
-        base: ["1rem", { lineHeight: "1.65" }],
-        lg: ["1.125rem", { lineHeight: "1.65" }],
+        prose: layout.measure,
       },
       borderRadius: {
-        card: "0.75rem",
+        control: radius.control,
+        card: radius.card,
       },
     },
   },

@@ -1,46 +1,50 @@
 /**
- * HeyMeister design tokens — single source of truth.
+ * HeyMeister design tokens, following the HeyMeister Brandbook v1 (November 2026).
  *
  * Consumed by tailwind.config.ts, which also emits every color as a CSS variable
  * (`--hm-<name>` as hex and `--hm-<name>-rgb` as channels) on :root, so the same
- * values can later be reused in the Ops engine and CRM.
+ * values can be reused in the customer portal, technician app, Ops engine and CRM.
  *
- * Contrast rules are enforced in tests/tokens.test.ts.
+ * Ratio: 80 % paper and white, 15 % navy, 5 % coral. Coral is scarce, that is why it works.
+ * Contrast rules are enforced in tests/basics.test.ts.
  */
 export const colors = {
-  /** Dark navy: text, header, dark surfaces. */
-  base: "#14213D",
-  /** Slightly lighter dark surface for cards on dark backgrounds. */
-  "base-soft": "#1F2D4D",
-  /**
-   * Brand accent: "Hey", the dot, decorative highlights, icons, large display text.
-   * Reaches only ~4.3:1 on base and ~3.6:1 with white, so it is NOT used for small text
-   * or as a button background with small text. Use the derived tokens below for that.
-   */
+  /** Koralle: accent. "Hey", buttons, links, icons, display text. 3.5:1 on paper: never body text. */
   accent: "#E4572E",
-  /** Accent for primary buttons (white text) and accent text on light surfaces. */
-  "accent-strong": "#CC4620",
-  "accent-strong-hover": "#B03A18",
-  /** Accent for small text on dark surfaces. */
-  "accent-on-dark": "#F08A6C",
-  /** Surfaces */
+  /** Koralle-Dunkel: button hover and small text in the accent colour (4.6:1 on paper). */
+  "accent-dark": "#C4461F",
+  /** Koralle-Hell: tinted backgrounds; accent text on navy. */
+  "accent-light": "#FDE4DC",
+  /** Navy: "Meister", headings, text, dark surfaces. */
+  base: "#14213D",
+  /** Navy-Hell: secondary dark surface. */
+  "base-light": "#2B3A5C",
+  /** Papier: page background, never pure white. */
   surface: "#FBFBF8",
+  /** Weiß: cards on paper ("depth comes from white on paper"). */
   "surface-raised": "#FFFFFF",
-  "surface-muted": "#F1F1EC",
+  /** Fläche-2: table heads, muted sections. */
+  "surface-2": "#F1F1EC",
   /** Secondary text on light surfaces. */
   "ink-muted": "#4A5568",
-  /** Secondary text on dark surfaces. */
+  /** Secondary text on navy. */
   "ink-inverse-muted": "#B9C1D0",
-  /** Borders and dividers. */
-  line: "#E0E0D9",
+  /** 1 px borders of cards, tables and dividers. */
+  line: "#E1E0DA",
+  /** Input borders (needs 3:1 against the background). */
   "line-strong": "#7B8494",
-  /** Deadline traffic light (logbook mockup). Text-safe on light surfaces. */
-  success: "#17733A",
-  "success-soft": "#E6F4EA",
-  warning: "#8F5600",
-  "warning-soft": "#FFF4D6",
+  /**
+   * Status colours, separate from the brand. Critical is a different red than coral,
+   * so "overdue" never looks like the brand. Always next to a word or check mark.
+   */
+  success: "#1D7342",
+  "success-soft": "#E2F3E8",
+  warning: "#8A5A00",
+  "warning-soft": "#FDF0D5",
   danger: "#B42318",
-  "danger-soft": "#FDECEA",
+  "danger-soft": "#FBE4E2",
+  /** Keyboard focus ring: blue, distinct from coral and critical. */
+  focus: "#1F4FD8",
   /** Visible placeholder for missing content. Intentionally off-brand. */
   placeholder: "#6D28D9",
   "placeholder-soft": "#F4EEFF",
@@ -48,45 +52,75 @@ export const colors = {
 
 export type ColorToken = keyof typeof colors;
 
+const fallback = ["Segoe UI", "Arial", "sans-serif"];
+
 export const fontFamily = {
-  sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+  /** Poppins 700: display and headings (the typeface of the wordmark). */
+  display: ["var(--font-poppins)", ...fallback],
+  /** Inter 400/600: body text, tables, forms. */
+  sans: ["var(--font-inter)", ...fallback],
+  /** JetBrains Mono 500: measurements, device IDs, inspection numbers, dates in tables. */
+  mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+};
+
+/** Type scale from the brandbook (size / line height in px). */
+export const fontSize = {
+  "display-xl": ["4rem", { lineHeight: "4.25rem", letterSpacing: "-0.02em" }], // 64/68
+  "display-l": ["2.75rem", { lineHeight: "3.125rem", letterSpacing: "-0.02em" }], // 44/50
+  heading: ["1.75rem", { lineHeight: "2.125rem", letterSpacing: "-0.01em" }], // 28/34
+  subheading: ["1.25rem", { lineHeight: "1.75rem" }], // 20/28
+  body: ["1rem", { lineHeight: "1.5rem" }], // 16/24
+  small: ["0.875rem", { lineHeight: "1.25rem" }], // 14/20
+  label: ["0.75rem", { lineHeight: "1rem", letterSpacing: "0.08em" }], // 12/16, uppercase
+  data: ["0.875rem", { lineHeight: "1.25rem" }], // mono 14/20
+} as const;
+
+export const radius = {
+  /** Buttons and inputs */
+  control: "10px",
+  /** Cards, photos, panels */
+  card: "16px",
+  /** App icon: 22 % of the side */
+  iconRatio: 0.22,
 };
 
 export const layout = {
   maxWidth: "1200px",
+  /** Body text at most 65 characters wide. */
+  measure: "65ch",
 };
 
 /** Text/background pairs used in the UI. Each must reach WCAG AA (4.5:1). */
 export const contrastPairs: Array<[fg: ColorToken, bg: ColorToken]> = [
   ["base", "surface"],
   ["base", "surface-raised"],
-  ["base", "surface-muted"],
+  ["base", "surface-2"],
   ["ink-muted", "surface"],
   ["ink-muted", "surface-raised"],
-  ["ink-muted", "surface-muted"],
-  ["surface-raised", "accent-strong"], // primary button text
-  ["surface-raised", "accent-strong-hover"],
-  ["accent-strong", "surface"], // accent text links on light
-  ["accent-strong", "surface-raised"],
-  ["accent-on-dark", "base"], // accent text on dark
-  ["accent-on-dark", "base-soft"],
+  ["ink-muted", "surface-2"],
+  ["accent-dark", "surface"], // small accent text, links
+  ["accent-dark", "surface-raised"],
+  ["accent-light", "base"], // small accent text on navy
   ["surface", "base"],
-  ["surface", "base-soft"],
+  ["surface", "base-light"],
   ["ink-inverse-muted", "base"],
-  ["ink-inverse-muted", "base-soft"],
-  ["success", "surface-raised"],
   ["success", "success-soft"],
-  ["warning", "surface-raised"],
   ["warning", "warning-soft"],
-  ["danger", "surface-raised"],
   ["danger", "danger-soft"],
+  ["danger", "surface-raised"], // form errors
   ["placeholder", "placeholder-soft"],
 ];
 
-/** Non-text pairs (icons, dots, borders of inputs) need 3:1 (WCAG 1.4.11). */
-export const uiContrastPairs: Array<[fg: ColorToken, bg: ColorToken]> = [
-  ["accent", "surface"],
-  ["accent", "base"],
-  ["line-strong", "surface"],
-  ["line-strong", "surface-raised"],
+/**
+ * Large text (≥ 18.66 px bold or ≥ 24 px) and UI graphics need 3:1.
+ * Button labels on coral are set in 19 px bold for this reason (see Button.tsx).
+ */
+export const largeTextAndUiPairs: Array<[fg: ColorToken, bg: ColorToken]> = [
+  ["surface-raised", "accent"], // primary button label
+  ["surface-raised", "accent-dark"], // primary button hover
+  ["accent", "surface"], // wordmark, icons, display text
+  ["accent", "base"], // wordmark on navy, prices on navy
+  ["line-strong", "surface-raised"], // input borders
+  ["focus", "surface"],
+  ["focus", "surface-raised"],
 ];

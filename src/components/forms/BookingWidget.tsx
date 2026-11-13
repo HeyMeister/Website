@@ -14,7 +14,7 @@ export function BookingWidget({ url, duration }: { url: string | null; duration:
 
   if (!url) {
     return (
-      <p className="rounded-lg border-2 border-dashed border-placeholder bg-placeholder-soft p-4 text-sm text-placeholder">
+      <p className="rounded-control border-2 border-dashed border-placeholder bg-placeholder-soft p-4 text-small text-placeholder">
         Terminbuchung folgt (BOOKING_URL nicht gesetzt).
       </p>
     );
@@ -43,7 +43,7 @@ export function BookingWidget({ url, duration }: { url: string | null; duration:
       <p className="flex items-center gap-2 font-semibold text-ink">
         <CalendarIcon className="h-5 w-5 text-accent" /> Erstgespräch buchen ({duration})
       </p>
-      <p className="mt-2 text-sm text-ink-muted">
+      <p className="mt-2 text-small text-ink-muted">
         Der Kalender wird von {host} bereitgestellt. Erst wenn Sie ihn laden, werden Daten (z. B. Ihre IP-Adresse) an diesen
         Anbieter übertragen.
       </p>

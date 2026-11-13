@@ -12,10 +12,10 @@ export function TrustBar({ className = "" }: { className?: string }) {
   if (!items.length) return null;
 
   return (
-    <ul aria-label="Qualifikation" className={`flex flex-col gap-3 text-sm font-medium text-ink sm:flex-row sm:flex-wrap sm:gap-x-6 ${className}`}>
+    <ul aria-label="Qualifikation" className={`flex flex-col gap-3 text-small font-semibold text-ink sm:flex-row sm:flex-wrap sm:gap-x-6 ${className}`}>
       {items.map((i) => (
         <li key={i.key} className="flex items-center gap-2">
-          <CheckIcon className="h-4 w-4 shrink-0 text-accent" strokeWidth={2.4} />
+          <CheckIcon className="h-4 w-4 shrink-0 text-accent" strokeWidth={2.6} />
           <span>
             <Fill text={i.text} />
           </span>

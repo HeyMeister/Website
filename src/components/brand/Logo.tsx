@@ -1,25 +1,31 @@
-import { iconGlyphs, wordmark } from "./logo-paths";
+import { icon, wordmark } from "./logo-paths";
 
-type Variant = "on-light" | "on-dark" | "mono";
+/**
+ * Wordmark rules (Brandbook v1):
+ * - "Hey" is always the accent, colours are never swapped, no dot, no "Elektro" in the mark.
+ * - Minimum width 120 px on screen; below that use <LogoIcon />.
+ * - Protective space: the height of the "H" on every side (handled by the surrounding layout).
+ */
+type Variant = "on-light" | "on-dark" | "on-accent" | "mono";
 
-const fills: Record<Variant, { accent: string; base: string }> = {
-  // Dark wordmark on light surfaces ("Hey" and dot in accent)
-  "on-light": { accent: "var(--hm-accent)", base: "var(--hm-base)" },
-  // Light wordmark on dark surfaces
-  "on-dark": { accent: "var(--hm-accent)", base: "#FFFFFF" },
-  // Single colour, inherits `color`
-  mono: { accent: "currentColor", base: "currentColor" },
+const fills: Record<Variant, { hey: string; meister: string }> = {
+  "on-light": { hey: "var(--hm-accent)", meister: "var(--hm-base)" },
+  // On navy "Meister" turns white.
+  "on-dark": { hey: "var(--hm-accent)", meister: "#FFFFFF" },
+  // On coral "Hey" turns white.
+  "on-accent": { hey: "#FFFFFF", meister: "var(--hm-base)" },
+  // Single colour (stamp, engraving, embroidery): inherits `color`.
+  mono: { hey: "currentColor", meister: "currentColor" },
 };
 
 type LogoProps = {
   variant?: Variant;
   className?: string;
-  /** Accessible name; pass null when a visible label is next to the logo. */
+  /** Accessible name; pass null when the logo sits inside a labelled link. */
   title?: string | null;
 };
 
-/** Wordmark "HeyMeister." as pure SVG paths (generated from Inter Bold). */
-export function Logo({ variant = "on-light", className, title = "HeyMeister Elektro" }: LogoProps) {
+export function Logo({ variant = "on-light", className, title = "HeyMeister" }: LogoProps) {
   const f = fills[variant];
   return (
     <svg
@@ -31,32 +37,48 @@ export function Logo({ variant = "on-light", className, title = "HeyMeister Elek
       focusable="false"
     >
       {wordmark.parts.map((p, i) => (
-        <path key={i} d={p.d} fill={p.role === "accent" ? f.accent : f.base} />
+        <path key={i} d={p.d} fill={p.role === "accent" ? f.hey : f.meister} />
       ))}
     </svg>
   );
 }
 
-/** Square app icon "H." on a dark tile. */
-export function LogoIcon({ className, title = "HeyMeister" }: { className?: string; title?: string | null }) {
-  const { bounds } = iconGlyphs;
-  const pad = 22;
-  const side = Math.max(bounds.width, bounds.height) + pad * 2;
-  const tx = (side - bounds.width) / 2 - bounds.x;
-  const ty = (side - bounds.height) / 2 - bounds.y;
+type IconVariant = "navy" | "koralle" | "hell";
+
+const iconFills: Record<IconVariant, { bg: string | null; h: string; dot: string }> = {
+  // Standard: favicon, app, social
+  navy: { bg: "var(--hm-base)", h: "#FFFFFF", dot: "var(--hm-accent)" },
+  // Campaigns, stickers
+  koralle: { bg: "var(--hm-accent)", h: "#FFFFFF", dot: "var(--hm-base)" },
+  // Light surfaces where the dark square would be too heavy
+  hell: { bg: null, h: "var(--hm-base)", dot: "var(--hm-accent)" },
+};
+
+/** "H" with a dot on a rounded square (radius 22 %). Never placed next to the wordmark. */
+export function LogoIcon({
+  variant = "navy",
+  className,
+  title = "HeyMeister",
+}: {
+  variant?: IconVariant;
+  className?: string;
+  title?: string | null;
+}) {
+  const f = iconFills[variant];
+  const [tx, ty] = icon.translate;
   return (
     <svg
-      viewBox={`0 0 ${side} ${side}`}
+      viewBox={`0 0 ${icon.side} ${icon.side}`}
       className={className}
       role={title ? "img" : undefined}
       aria-label={title ?? undefined}
       aria-hidden={title ? undefined : true}
       focusable="false"
     >
-      <rect width={side} height={side} rx={side * 0.18} fill="var(--hm-base)" />
+      {f.bg && <rect width={icon.side} height={icon.side} rx={icon.radius} fill={f.bg} />}
       <g transform={`translate(${tx} ${ty})`}>
-        {iconGlyphs.parts.map((p, i) => (
-          <path key={i} d={p.d} fill={p.role === "accent" ? "var(--hm-accent)" : "#FFFFFF"} />
+        {icon.parts.map((p, i) => (
+          <path key={i} d={p.d} fill={p.role === "accent" ? f.dot : f.h} />
         ))}
       </g>
     </svg>

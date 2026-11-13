@@ -23,7 +23,7 @@ export function Header() {
         </Link>
 
         <nav aria-label="Hauptnavigation" className="ml-4 hidden lg:block">
-          <ul className="flex items-center gap-6 text-sm font-medium">
+          <ul className="flex items-center gap-6 text-small font-medium">
             {items.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className="rounded text-ink-muted hover:text-ink">
@@ -39,14 +39,14 @@ export function Header() {
           {tel ? (
             <a
               href={tel}
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-lg text-sm font-semibold text-ink hover:bg-surface-muted sm:px-2"
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-control text-small font-semibold text-ink hover:bg-surface-2 sm:px-2"
             >
               <PhoneIcon />
               <span className="sr-only sm:not-sr-only">{site.contact.phone}</span>
               <span className="sr-only sm:hidden">Anrufen</span>
             </a>
           ) : (
-            <span className="inline-flex items-center gap-2 text-sm font-semibold">
+            <span className="inline-flex items-center gap-2 text-small font-semibold">
               <PhoneIcon />
               <span className="hidden sm:inline">
                 <Fill text={site.contact.phone} />

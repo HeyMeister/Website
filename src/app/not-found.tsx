@@ -10,15 +10,15 @@ export default function NotFound() {
   ];
   return (
     <Container className="max-w-2xl py-20 sm:py-28">
-      <p className="text-sm font-semibold uppercase tracking-wider text-ink-muted">Fehler 404</p>
-      <h1 className="mt-3 text-4xl font-bold tracking-tight text-ink">Diese Seite gibt es nicht.</h1>
-      <p className="mt-4 text-lg text-ink-muted">Vielleicht hilft Ihnen einer dieser Links weiter:</p>
+      <p className="label text-accent-dark">Fehler 404</p>
+      <h1 className="mt-3 text-heading lg:text-display-l text-ink">Diese Seite gibt es nicht.</h1>
+      <p className="mt-4 text-body text-ink-muted">Vielleicht hilft Ihnen einer dieser Links weiter:</p>
       <ul className="mt-6 flex flex-wrap gap-3">
         {links.map((l) => (
           <li key={l.label}>
             <Link
               href={l.href}
-              className="inline-flex min-h-[44px] items-center rounded-lg border border-line-strong bg-surface-raised px-4 font-semibold text-ink hover:border-base"
+              className="inline-flex min-h-[44px] items-center rounded-control border border-line-strong bg-surface-raised px-4 font-semibold text-ink hover:border-base"
             >
               {l.label}
             </Link>

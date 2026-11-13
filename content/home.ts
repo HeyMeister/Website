@@ -84,7 +84,7 @@ export const home = {
         label: "Klasse 1",
         title: "Standardteil",
         example: "z. B. Stecker, Abdeckung",
-        resolution: "Sofort vor Ort behoben.",
+        resolution: "Direkt bei der Prüfung vor Ort behoben.",
       },
       {
         label: "Klasse 2",
@@ -134,12 +134,12 @@ export const home = {
     company: "Beispiel GmbH",
     summary: "4 Standorte",
     sites: [
-      { name: "Filiale Bilk", type: "Bäckerei", nextCheck: "2027-03-18", status: "ok", statusLabel: "Fristgerecht" },
-      { name: "Filiale Oberkassel", type: "Bäckerei", nextCheck: "2026-12-04", status: "due", statusLabel: "Fällig in 21 Tagen" },
-      { name: "Filiale Benrath", type: "Bäckerei", nextCheck: "2026-11-02", status: "overdue", statusLabel: "Überfällig" },
-      { name: "Produktion Flingern", type: "Backstube", nextCheck: "2027-06-30", status: "ok", statusLabel: "Fristgerecht" },
+      { name: "Bilk", devices: 24, nextCheck: "2027-02-14", status: "ok", statusLabel: "Geprüft" },
+      { name: "Oberkassel", devices: 31, nextCheck: "2026-11-25", status: "due", statusLabel: "Fällig in 12 Tagen" },
+      { name: "Flingern", devices: 18, nextCheck: "2026-11-05", status: "overdue", statusLabel: "Überfällig" },
+      { name: "Benrath", devices: 27, nextCheck: "2027-05-03", status: "ok", statusLabel: "Geprüft" },
     ],
-    report: { name: "Prüfbericht_Filiale-Bilk_2026-09.pdf", meta: "Geräteprüfung · 42 Geräte · 1 Mangel behoben" },
+    report: { name: "Prüfbericht_Bilk_2026-09.pdf", meta: "HM-0412 · 24 Geräte · 1 Mangel behoben" },
   },
 } as const;
 
