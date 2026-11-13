@@ -22,7 +22,7 @@ export const team: TeamMember[] = [
     role: "Elektrotechnikermeister, Betriebsleiter",
     quote: "[ZITAT IN LEONS WORTEN, von Leon freizugeben]",
     photo: null,
-    qualification: "Eingetragen in der Handwerksrolle [HWK Düsseldorf]",
+    // Add "Eingetragen in der Handwerksrolle …" once the GmbH is registered.
     published: true,
   },
 ];

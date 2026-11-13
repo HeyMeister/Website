@@ -40,7 +40,8 @@ export const site = {
    */
   trust: {
     meisterbetrieb: true,
-    handwerksrolle: true,
+    /** Off until the GmbH (i. G.) itself is entered in the Handwerksrolle. */
+    handwerksrolle: false,
     /** Chamber shown next to the Handwerksrolle entry. */
     chamber: "[HWK Düsseldorf]",
     norms: true,

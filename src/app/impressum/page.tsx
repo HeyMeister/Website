@@ -1,4 +1,5 @@
 import { impressum, operator } from "@/content/legal";
+import { site } from "@/content/site";
 import { pageMetadata } from "@/lib/seo";
 import { Fill } from "@/components/ui/Placeholder";
 import { Container } from "@/components/ui/layout";
@@ -72,9 +73,7 @@ export default function ImpressumPage() {
         <p>
           Zuständige Kammer: <Fill text={o.chamber} />
         </p>
-        <p>
-          Eintragung in die Handwerksrolle der zuständigen Handwerkskammer.
-        </p>
+        {site.trust.handwerksrolle && <p>Eintragung in die Handwerksrolle der zuständigen Handwerkskammer.</p>}
         <p>
           Gesetzliche Berufsbezeichnung: <Fill text={o.professionalTitle} />
         </p>
