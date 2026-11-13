@@ -5,7 +5,7 @@ import { contactHref } from "@/lib/links";
 import { LinkButton } from "@/components/ui/Button";
 
 /**
- * Hero: a full-bleed photograph (testing at a switch cabinet) in an inset frame with large
+ * Hero: a full-bleed photograph (a distribution board) in an inset frame with large
  * corners and fine film grain, the words in a navy box on the right, vertically centred.
  * Reduced to four things: claim, one sentence, one button, the price.
  * On phones the photograph sits on top and the words follow on the paper ground.
@@ -29,7 +29,7 @@ export function HomeHero() {
             priority
             sizes="100vw"
             data-enter-media
-            className="object-cover object-[30%_50%]"
+            className="object-cover object-[15%_50%]"
           />
           <div
             aria-hidden="true"
