@@ -31,6 +31,7 @@ export function Section({
   children,
   className = "",
   headingLevel = 2,
+  layout = "stacked",
 }: {
   id?: string;
   tone?: Tone;
@@ -40,6 +41,8 @@ export function Section({
   children?: ReactNode;
   className?: string;
   headingLevel?: 1 | 2;
+  /** "split": heading column left (sticky on desktop), content right. */
+  layout?: "stacked" | "split";
 }) {
   const H = headingLevel === 1 ? "h1" : "h2";
   const headingId = id ? `${id}-heading` : undefined;
@@ -49,9 +52,9 @@ export function Section({
       aria-labelledby={title ? headingId : undefined}
       className={`scroll-mt-20 py-16 sm:py-20 lg:py-28 ${toneClasses[tone]} ${className}`}
     >
-      <Container>
+      <Container className={layout === "split" ? "grid gap-10 lg:grid-cols-12 lg:gap-12" : ""}>
         {(eyebrow || title || intro) && (
-          <header className="mb-10 max-w-3xl sm:mb-14">
+          <header className={layout === "split" ? "lg:sticky lg:top-28 lg:col-span-4 lg:self-start" : "mb-10 max-w-3xl sm:mb-14"}>
             {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
             {title && (
               <H id={headingId} className={sectionHeadingClass}>
@@ -65,7 +68,7 @@ export function Section({
             )}
           </header>
         )}
-        {children}
+        {layout === "split" ? <div className="lg:col-span-8">{children}</div> : children}
       </Container>
     </section>
   );

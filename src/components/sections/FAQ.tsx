@@ -21,7 +21,7 @@ export function FAQ({ items, disclaimer }: { items: FaqItem[]; disclaimer?: stri
   };
 
   return (
-    <div className="max-w-3xl">
+    <div>
       <div className="divide-y divide-line border-y border-line">
         {items.map((item) => (
           <details key={item.id} id={`faq-${item.id}`} className="group">

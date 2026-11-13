@@ -2,7 +2,8 @@
 export const navigation = {
   validation: [
     { label: "Leistung", href: "/#leistung" },
-    { label: "Ablauf", href: "/#ablauf" },
+    { label: "Fristen", href: "/#fristen" },
+    { label: "Für wen", href: "/#fuer-wen" },
     { label: "Preise", href: "/#preise" },
     { label: "Pilotprogramm", href: "/#pilot" },
     { label: "FAQ", href: "/#faq" },

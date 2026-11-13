@@ -8,13 +8,13 @@ import { MailIcon, PhoneIcon } from "@/components/icons";
 import { Fill } from "@/components/ui/Placeholder";
 import { Section } from "@/components/ui/layout";
 
-export function CTASection({ id = "kontakt" }: { id?: string }) {
+export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; tone?: "light" | "muted" }) {
   const c = home.contact;
   const tel = telHref(site.contact.phone);
   const mail = mailHref(site.contact.email);
 
   return (
-    <Section id={id} eyebrow={c.eyebrow} title={c.title} intro={c.text}>
+    <Section id={id} tone={tone} eyebrow={c.eyebrow} title={c.title} intro={c.text}>
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="rounded-card border border-line bg-surface-raised p-6 lg:col-span-8 lg:p-8">
           <LeadForm />

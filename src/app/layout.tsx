@@ -4,9 +4,6 @@ import type { ReactNode } from "react";
 import { site } from "@/content/site";
 import { robotsMeta, siteUrl } from "@/lib/seo";
 import { colors } from "@/styles/tokens";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { Analytics } from "@/components/analytics/Analytics";
 import "./globals.css";
 
 // All fonts self-hosted (no Google servers). Brandbook: Poppins carries the character,
@@ -64,12 +61,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Zum Inhalt springen
         </a>
-        <Header />
-        <main id="main" className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <Analytics />
+        {children}
       </body>
     </html>
   );

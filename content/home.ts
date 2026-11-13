@@ -5,8 +5,13 @@
 
 export const home = {
   hero: {
-    title: "Elektroprüfung im Abo. Alle Standorte, ein fester Preis.",
-    lead: "Wir übernehmen Ihre Betreiberpflichten nach DGUV Vorschrift 3 und Betriebssicherheitsverordnung: Prüfung, digitales Betriebsbuch und Kleinreparaturen zum Monatspreis pro Standort.",
+    /** Label above the headline; keeps the search term at the top. */
+    eyebrow: "Elektroprüfung im Abo nach DGUV Vorschrift 3",
+    title: "Prüffristen im Griff. An jedem Standort, zum festen Preis.",
+    lead: "Wir prüfen Ihre Geräte und Anlagen, führen das digitale Betriebsbuch und beheben kleine Mängel direkt bei der Prüfung. Sie sehen jederzeit, was geprüft ist und was als Nächstes fällig wird.",
+    /** Rendered as "ab 29 € pro Standort und Monat, netto" (price from pricing.ts). */
+    priceSuffix: "pro Standort und Monat, netto",
+    priceNote: "Erstgespräch kostenlos und unverbindlich",
     primaryCta: "Angebot anfordern",
     secondaryCta: "Erstgespräch buchen",
   },
@@ -100,18 +105,115 @@ export const home = {
     note: "Mängel, die vor Vertragsbeginn bestanden, sind nicht im Abo enthalten. Wir erfassen sie beim Erstbesuch und machen Ihnen ein separates Angebot.",
   },
 
+  /**
+   * Indicative intervals from DGUV Vorschrift 3. Always shown together with `disclaimer`:
+   * binding intervals come from the operator's risk assessment.
+   */
+  intervals: {
+    eyebrow: "Fristen und Normen",
+    title: "Was geprüft wird, wie oft und von wem",
+    intro: "Ein Überblick über die Prüfungen im Abo. Die Fristen sind Richtwerte, keine starren Termine.",
+    columns: { item: "Prüfgegenstand", norm: "Norm", interval: "Richtwert", who: "Wer darf prüfen" },
+    rows: [
+      {
+        item: "Ortsfeste Anlagen",
+        examples: "Verteilungen, Stromkreise, Steckdosen, Beleuchtung, fest angeschlossene Geräte",
+        norm: "DIN VDE 0105-100",
+        interval: "4 Jahre",
+        intervalNote: "In Betriebsstätten, Räumen und Anlagen besonderer Art jährlich.",
+        who: "Elektrofachkraft",
+      },
+      {
+        item: "Ortsveränderliche Geräte",
+        examples: "Geräte mit Stecker, Verlängerungs- und Anschlussleitungen",
+        norm: "DIN EN 50699 (VDE 0702)",
+        interval: "6 Monate",
+        intervalNote: "Bei einer Fehlerquote unter 2 % verlängerbar, in Büros bis 2 Jahre.",
+        who: "Elektrofachkraft oder elektrotechnisch unterwiesene Person mit geeignetem Prüfgerät, unter Aufsicht einer Elektrofachkraft",
+      },
+      {
+        item: "Geräte nach Reparatur",
+        examples: "Instandgesetzte Betriebsmittel",
+        norm: "DIN EN 50678 (VDE 0701)",
+        interval: "Nach jeder Instandsetzung",
+        intervalNote: "",
+        who: "Elektrofachkraft",
+      },
+      {
+        item: "Neue oder geänderte Anlagen",
+        examples: "Erweiterungen, neue Stromkreise",
+        norm: "DIN VDE 0100-600",
+        interval: "Vor Inbetriebnahme",
+        intervalNote: "",
+        who: "Elektrofachkraft",
+      },
+    ],
+    disclaimer:
+      "Die verbindlichen Prüffristen legt der Arbeitgeber bzw. Betreiber in seiner Gefährdungsbeurteilung fest. Die Werte aus DGUV Vorschrift 3 (Tabellen 1A bis 1C) sind Richtwerte. Wir unterstützen Sie dabei.",
+  },
+
+  segments: {
+    eyebrow: "Für wen",
+    title: "Für Betriebe mit einem oder vielen Standorten",
+    items: [
+      {
+        title: "Filialisten",
+        audience: "5 bis 50 Standorte: Bäckereien, Autohäuser, Gastronomie, Praxen",
+        pain: "Viele Standorte, unterschiedliche Dienstleister je Filiale und keine gemeinsame Übersicht.",
+        benefit: "Eine Ansprechperson, ein Betriebsbuch für alle Filialen, ein Preis pro Standort.",
+        note: "",
+      },
+      {
+        title: "Inhabergeführter Mittelstand",
+        audience: "Inhabergeführte Betriebe mit einem oder wenigen Standorten",
+        pain: "Arbeitssicherheit macht eine Person nebenbei, zwischen allen anderen Aufgaben.",
+        benefit: "Fristen und Nachweise laufen, ohne dass jemand daran denken muss.",
+        note: "",
+      },
+      {
+        title: "Hausverwaltungen",
+        audience: "Gemeinschaftsflächen und Allgemeinstrom in verwalteten Objekten",
+        pain: "Eigentümer und Versicherer fragen nach Nachweisen, die über viele Objekte verteilt sind.",
+        benefit: "Prüfberichte pro Objekt, abrufbar für die Eigentümerversammlung.",
+        note: "Den Leistungsumfang für Wohngebäude stimmen wir je Objekt mit Ihnen ab.",
+      },
+    ],
+  },
+
   pricingTeaser: {
     eyebrow: "Preise",
     prefix: "ab",
     suffix: "pro Standort und Monat, netto",
-    text: "Der Preis richtet sich nach der Größe des Standorts. Ab 5 Standorten gibt es Mengenrabatt. Bei 24 Monaten Laufzeit entfällt die Einrichtungsgebühr.",
+    text: "Der Preis richtet sich nach der Größe des Standorts. Die endgültige Einstufung erfolgt beim Erstbesuch.",
+    discountsTitle: "Mengenrabatt",
+    setupNote: "Bei 24 Monaten Laufzeit entfällt die einmalige Einrichtungsgebühr.",
     fullLink: "Alle Preise und Rechner",
     cta: "Angebot anfordern",
+  },
+
+  promise: {
+    eyebrow: "Wer dahinter steht",
+    title: "Planbar, dokumentiert, ehrlich",
+    values: [
+      {
+        title: "Planbar",
+        text: "Sie wissen, wann wir kommen, was es kostet und was Sie bekommen. Ein fester Preis pro Standort und Monat.",
+      },
+      {
+        title: "Dokumentiert",
+        text: "Jede Prüfung hinterlässt einen Nachweis. Fristen und Status sehen Sie jederzeit im digitalen Betriebsbuch.",
+      },
+      {
+        title: "Ehrlich",
+        text: "Wir sagen, was Pflicht ist und was Richtwert. Keine Angstmache und keine Rechtsberatung.",
+      },
+    ],
   },
 
   faq: {
     eyebrow: "Häufige Fragen",
     title: "Kurz beantwortet",
+    intro: "Ihre Frage ist nicht dabei? Rufen Sie uns an oder schreiben Sie uns.",
     disclaimer: "Diese Antworten sind allgemeine Hinweise und keine Rechtsberatung.",
   },
 

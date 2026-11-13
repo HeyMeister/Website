@@ -91,6 +91,14 @@ export const datenschutz = {
       ],
     },
     {
+      heading: "6a. Datenraum für Investoren",
+      paragraphs: [
+        "Für eingeladene Investoren betreiben wir einen geschützten Datenraum. Dafür verarbeiten wir Name, E-Mail-Adresse, Firma, Anmeldezeitpunkte sowie Zeitpunkte, zu denen Dokumente angesehen oder heruntergeladen werden. IP-Adressen speichern wir dabei nicht.",
+        "Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO) und unser berechtigtes Interesse am Schutz vertraulicher Unterlagen (Art. 6 Abs. 1 lit. f DSGVO). Anbieter für Anmeldung, Datenbank und Dateispeicher ist Supabase Inc. mit Serverstandort Frankfurt am Main. [Auftragsverarbeitungsvertrag und Garantien prüfen]",
+        "Zugänge und Protokolle löschen wir spätestens [12] Monate nach Ende des Gesprächs.",
+      ],
+    },
+    {
       heading: "7. Speicherdauer",
       paragraphs: [
         "Wir speichern personenbezogene Daten nur so lange, wie es für den jeweiligen Zweck erforderlich ist oder gesetzliche Aufbewahrungsfristen bestehen (z. B. nach HGB und AO). [Konkrete Fristen ergänzen]",

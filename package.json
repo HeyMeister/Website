@@ -16,9 +16,12 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "check:launch": "tsx scripts/check-launch.ts",
-    "generate:logo": "node scripts/generate-logo.mjs"
+    "generate:logo": "node scripts/generate-logo.mjs",
+    "dataroom:create-admin": "tsx --env-file=.env.local scripts/dataroom-create-admin.ts"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.119.0",
     "next": "^16.4.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

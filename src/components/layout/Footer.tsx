@@ -20,7 +20,9 @@ export function Footer() {
         <div className="md:col-span-5">
           <Logo variant="on-dark" className="h-7 w-auto" />
           <p className="mt-3 text-small text-ink-inverse-muted">
-            {site.tagline}. Meisterbetrieb aus {address.city} für {site.region.label}.
+            {site.tagline}. Planbar, dokumentiert, ehrlich.
+            <br />
+            Meisterbetrieb aus {address.city}. Einsatzgebiet: {site.region.label}.
           </p>
         </div>
 

@@ -36,6 +36,7 @@ export const faq: FaqItem[] = [
     answer: [
       "Ortsfeste Anlagen prüft nur eine Elektrofachkraft. Ortsveränderliche Geräte darf auch eine elektrotechnisch unterwiesene Person mit geeignetem Mess- und Prüfgerät prüfen, unter Leitung und Aufsicht einer Elektrofachkraft.",
     ],
+    short: true,
   },
   {
     id: "mangel",
@@ -54,6 +55,7 @@ export const faq: FaqItem[] = [
     answer: [
       "Mängel, die vor Vertragsbeginn bestanden, sind nicht im Abo enthalten. Wir erfassen sie beim Erstbesuch und machen Ihnen ein separates Angebot.",
     ],
+    short: true,
   },
   {
     id: "unterschied",
@@ -61,6 +63,7 @@ export const faq: FaqItem[] = [
     answer: [
       "Wir sind ein Meisterbetrieb. Prüfung und Reparatur kommen aus einer Hand, das digitale Betriebsbuch ist inklusive, und Sie zahlen einen festen Preis pro Standort.",
     ],
+    short: true,
   },
   {
     id: "laufzeit",

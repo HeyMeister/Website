@@ -16,6 +16,8 @@ function originOf(url: string | undefined): string | null {
 // Third-party frames are only rendered after an explicit click (two-click solution),
 // but they still need to be allowed by the CSP.
 const frameSources = ["https://www.openstreetmap.org", originOf(process.env.BOOKING_URL)].filter(Boolean);
+// Data room: the admin's browser uploads files directly to Supabase Storage.
+const supabaseOrigin = originOf(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
 // Static generation rules out per-request nonces, so inline scripts emitted by Next.js
 // need 'unsafe-inline'. All other sources are first-party only.
@@ -25,7 +27,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
-  "connect-src 'self'",
+  `connect-src 'self'${supabaseOrigin ? ` ${supabaseOrigin}` : ""}`,
   `frame-src ${frameSources.length ? frameSources.join(" ") : "'none'"}`,
   "form-action 'self'",
   "frame-ancestors 'none'",

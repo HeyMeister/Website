@@ -5,12 +5,12 @@ import { LinkButton } from "@/components/ui/Button";
 import { Fill } from "@/components/ui/Placeholder";
 import { Section, cardClass } from "@/components/ui/layout";
 
-export function PilotOffer({ headingLevel = 2 }: { headingLevel?: 1 | 2 }) {
+export function PilotOffer({ headingLevel = 2, tone = "light" }: { headingLevel?: 1 | 2; tone?: "light" | "muted" }) {
   const { pilot } = site;
   return (
     <Section
       id="pilot"
-      tone="muted"
+      tone={tone}
       eyebrow="Pilotprogramm"
       headingLevel={headingLevel}
       title={`${pilot.headline}: ${pilot.period}`}

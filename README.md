@@ -97,6 +97,40 @@ in-memory otherwise), email via Resend, optional CRM webhook signed with HMAC-SH
 (`X-HeyMeister-Signature: sha256=<hex>` over `<timestamp>.<body>`, timestamp in `X-HeyMeister-Timestamp`).
 A failing webhook never affects the visitor.
 
+## Investor data room (`/dataroom`)
+
+Private area for investor materials: an admin creates personal logins, uploads decks and documents, decides who sees what,
+and sees who viewed or downloaded what. It is not linked from the public site; share the URL directly.
+
+**Stack:** Supabase (region Frankfurt) for login, database and private file storage. Files are only reachable through
+signed URLs that expire after 60 seconds, created after a session and permission check (`/dataroom/files/[id]`). All tables
+have Row Level Security without policies, so the browser cannot read anything directly; the server uses the secret key after
+checking the role. The data room is always `noindex`, excluded in `robots.txt`, has no analytics and is exempt from
+`SITE_PASSWORD` (it has its own login).
+
+### Setup (about 10 minutes)
+
+1. Create a project at supabase.com, region **Frankfurt (eu-central-1)**.
+2. SQL Editor → paste [`supabase/migrations/0001_dataroom.sql`](supabase/migrations/0001_dataroom.sql) → Run.
+3. Settings → API: copy URL, publishable key and secret key into `.env.local` (and later into Vercel):
+   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`.
+4. Authentication → Sign In / Providers: keep Email enabled, **disable "Allow new users to sign up"**
+   (accounts are only created by admins).
+5. Create the first admin: `npm run dataroom:create-admin -- --email you@example.de --name "Vorname Nachname"`.
+   The password is printed once.
+6. Sign in at `/dataroom/login`.
+
+### Use
+
+- **Zugänge:** name, e-mail, company, optional expiry date, role. A password is generated and shown once, with a ready-made
+  message to send. "Neues Passwort", "Sperren" (also ends open sessions) and "Löschen" per person.
+- **Dokumente:** PDF, PPTX, XLSX, DOCX, CSV, PNG, JPG, MP4 up to 50 MB (Supabase free plan). Uploads go straight from the
+  browser to storage. Visible to all investors or to selected ones; editable later.
+- **Aktivität:** logins, views and downloads per person (no IP addresses). Admin previews are not logged.
+
+**Limits:** no watermarking and no page-level tracking (would need files to pass through the server). Downloaded files can be
+forwarded; the log shows who downloaded what. Add the data room to the privacy policy before inviting external investors.
+
 ## Privacy
 
 Self-hosted fonts (Poppins, Inter, JetBrains Mono), no Google services, no cookies. Plausible is proxied through `/stats/*`, so the browser makes no
