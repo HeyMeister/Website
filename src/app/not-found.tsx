@@ -13,7 +13,7 @@ export default function NotFound() {
   return (
     <>
       <Header />
-      <main id="main" className="flex-1">
+      <main id="main" className="flex-1 pt-16">
     <Container className="max-w-2xl py-20 sm:py-28">
       <p className="label text-accent-dark">Fehler 404</p>
       <h1 className="mt-3 text-heading lg:text-display-l text-ink">Diese Seite gibt es nicht.</h1>

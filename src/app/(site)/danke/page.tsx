@@ -21,8 +21,9 @@ export default function DankePage() {
       </span>
       <h1 className="mt-6 text-heading lg:text-display-l text-ink">Vielen Dank. Ihre Anfrage ist da.</h1>
       <p className="mt-4 text-body text-ink-muted">
-        Wir melden uns {site.contact.responseTime}. Wenn Sie nicht warten möchten, buchen Sie direkt einen Termin für ein
-        kostenloses Erstgespräch ({site.contact.callDuration}).
+        Wir melden uns {site.contact.responseTime}.
+        {bookingUrl &&
+          ` Wenn Sie nicht warten möchten, buchen Sie direkt einen Termin für ein kostenloses Erstgespräch (${site.contact.callDuration}).`}
       </p>
       <div className="mt-8">
         <BookingWidget url={bookingUrl} duration={site.contact.callDuration} />

@@ -3,8 +3,10 @@ import type { ComponentProps, ReactNode } from "react";
 import { ArrowRightIcon } from "@/components/icons";
 
 /**
- * Brandbook: primary coral with coral-dark hover, radius 10 px; secondary with navy border.
- * Never two primary buttons next to each other.
+ * Brandbook: primary coral with coral-dark hover, radius 10 px. Secondary is "tonal"
+ * (tasteskill deal): a soft coral fill with navy text; on navy the tonal fill is white at 12 %.
+ * Never two primary buttons next to each other. Motion: .m-btn steps up 1px on hover and
+ * presses 1px down (globals.css).
  *
  * Accessibility: white on coral is 3.6:1. Labels are therefore set in 19 px bold, which
  * counts as large text under WCAG (≥ 18.66 px bold → 3:1 required).
@@ -13,12 +15,12 @@ type Variant = "primary" | "secondary" | "inverse";
 type Size = "md" | "lg";
 
 const base =
-  "group inline-flex items-center justify-center gap-2 rounded-control text-[1.1875rem] font-bold leading-6 transition-colors duration-150 motion-reduce:transition-none disabled:cursor-not-allowed disabled:opacity-60";
+  "m-btn inline-flex items-center justify-center gap-2 rounded-control text-[1.1875rem] font-bold leading-6 disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
   primary: "bg-accent text-white hover:bg-accent-dark",
-  secondary: "border border-base bg-transparent text-ink hover:bg-surface-raised",
-  inverse: "border border-white text-white hover:bg-white/10",
+  secondary: "bg-accent-light text-ink hover:bg-[#F3CFC3]",
+  inverse: "bg-white/[0.12] text-white hover:bg-white/20",
 };
 
 const sizes: Record<Size, string> = {
@@ -63,9 +65,6 @@ export function LinkButton({
 
 export function ButtonArrow() {
   return (
-    <ArrowRightIcon
-      className="h-5 w-5 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
-      strokeWidth={2.4}
-    />
+    <ArrowRightIcon className="m-arrow h-5 w-5 shrink-0" strokeWidth={2.4} />
   );
 }

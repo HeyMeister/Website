@@ -12,13 +12,8 @@ import { track } from "@/lib/analytics";
 export function BookingWidget({ url, duration }: { url: string | null; duration: string }) {
   const [loaded, setLoaded] = useState(false);
 
-  if (!url) {
-    return (
-      <p className="rounded-control border-2 border-dashed border-placeholder bg-placeholder-soft p-4 text-small text-placeholder">
-        Terminbuchung folgt (BOOKING_URL nicht gesetzt).
-      </p>
-    );
-  }
+  // No booking provider yet: show nothing on the public site rather than a placeholder.
+  if (!url) return null;
 
   let host = url;
   try {

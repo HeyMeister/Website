@@ -5,7 +5,9 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    scroll-behavior: smooth;
+    /* tasteskill: anchors land on a screen tile; the fixed header covers the section's top padding. */
+    scroll-behavior: auto;
+    scroll-padding-top: 0;
   }
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -46,6 +48,128 @@
 }
 
 @layer components {
+  /* --- Motion layer (tasteskill motion.md): hover answers on fine pointers, press everywhere. --- */
+  .m-btn {
+    transition:
+      transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      background-color 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 150ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      color 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .m-btn:active {
+    transform: translateY(1px) scale(0.985);
+    transition-duration: 90ms;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .m-btn:hover {
+      transform: translateY(-1px);
+    }
+    .m-btn:active {
+      transform: translateY(1px) scale(0.985);
+    }
+  }
+  /* Arrow inside a button or link nudges 3px. */
+  .m-arrow {
+    transition: transform 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    :is(a, button):hover > .m-arrow,
+    :is(a, button):hover .m-arrow {
+      transform: translateX(3px);
+    }
+  }
+  /* Links: underline draws left to right. */
+  .m-link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 150ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    padding-bottom: 2px;
+  }
+  .m-link:hover,
+  .m-link:focus-visible {
+    background-size: 100% 1px;
+  }
+  /* Linked card lifts 2px; its border darkens one step. */
+  .m-card {
+    transition:
+      transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .m-card:hover {
+      transform: translateY(-2px);
+      border-color: rgb(var(--hm-line-strong-rgb));
+    }
+  }
+  /* Photograph zooms 1.03 inside its frame. */
+  .m-zoom {
+    overflow: hidden;
+  }
+  .m-zoom img {
+    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .m-zoom:hover img {
+      transform: scale(1.03);
+    }
+  }
+
+  /* --- Hero entrance (once on load, about 1.1 s): lines rise in, the photograph settles. --- */
+  @keyframes hm-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes hm-settle {
+    from {
+      transform: scale(1.05);
+    }
+    to {
+      transform: none;
+    }
+  }
+  .hero-enter [data-enter-step] {
+    animation: hm-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--step, 0) * 90ms + 80ms);
+  }
+  .hero-enter [data-enter-media] {
+    animation: hm-settle 1100ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  /* Reduced motion: no entrance at all, the hero simply stands. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-enter [data-enter-step],
+    .hero-enter [data-enter-media] {
+      animation: none !important;
+    }
+  }
+
+  /* --- Statement moment (word-highlight): words rest at half ink and turn to ink on scroll. --- */
+  .mo-wh .mo-w {
+    color: rgb(var(--hm-base-rgb) / 0.58); /* about 4:1 on paper: readable at rest */
+    transition: color 160ms ease;
+  }
+  .mo-wh .mo-w.is-on {
+    color: rgb(var(--hm-base-rgb));
+  }
+  .mo-wh strong .mo-w.is-on {
+    color: rgb(var(--hm-accent-rgb));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mo-wh .mo-w {
+      color: rgb(var(--hm-base-rgb));
+    }
+    .mo-wh strong .mo-w {
+      color: rgb(var(--hm-accent-rgb));
+    }
+  }
+
   /* Hero backdrop: faint technical grid, fading out from the top right. */
   .hm-grid-bg {
     background-image:

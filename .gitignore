@@ -18,3 +18,7 @@ next-env.d.ts
 /coverage
 /.lighthouseci
 npm-debug.log*
+
+# tasteskill working files (history, checker profiles, shots)
+.taste-skill/
+shots/

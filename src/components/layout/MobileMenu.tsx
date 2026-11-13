@@ -26,7 +26,7 @@ export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: 
   const close = () => setOpen(false);
 
   return (
-    <div className="lg:hidden">
+    <div className="xl:hidden">
       <button
         ref={buttonRef}
         type="button"

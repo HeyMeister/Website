@@ -1,53 +1,58 @@
 import { faq } from "@/content/faq";
 import { home } from "@/content/home";
+import { site } from "@/content/site";
+import { publishedTeam } from "@/content/team";
 import { isFullMode } from "@/lib/env";
+import { contactHref, telHref } from "@/lib/links";
 import { pageMetadata } from "@/lib/seo";
-import { Hero } from "@/components/sections/Hero";
-import { ProblemCards } from "@/components/sections/ProblemCards";
-import { IncludedList } from "@/components/sections/IncludedList";
-import { DefectClasses } from "@/components/sections/DefectClasses";
+import { HomeHero } from "@/components/home/HomeHero";
+import { BeforeAfter } from "@/components/home/BeforeAfter";
+import { Pillars } from "@/components/home/Pillars";
+import { ReportBand } from "@/components/home/ReportBand";
+import { StepsPhoto } from "@/components/home/StepsPhoto";
+import { Statement } from "@/components/home/Statement";
+import { Segments } from "@/components/home/Segments";
+import { Pricing } from "@/components/home/Pricing";
+import { Pilot } from "@/components/home/Pilot";
 import { InspectionIntervals } from "@/components/sections/InspectionIntervals";
-import { Steps } from "@/components/sections/Steps";
-import { SegmentCards } from "@/components/sections/SegmentCards";
-import { PricingTeaser } from "@/components/sections/PricingTeaser";
-import { PilotOffer } from "@/components/sections/PilotOffer";
-import { MeisterSection } from "@/components/sections/MeisterSection";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
 import { StickyCta } from "@/components/sections/StickyCta";
-import { site } from "@/content/site";
-import { contactHref, telHref } from "@/lib/links";
 import { Section } from "@/components/ui/layout";
 
 export const metadata = pageMetadata({ path: "/" });
 
 /**
- * Validation mode: single landing page with jump links.
- * Sections alternate paper / surface-2, with navy for prices (brandbook ratio 80/15/5).
+ * Landing page, built with tasteskill (kind: service; deal: photo hero, nav-centre,
+ * footer-visit, close-type, dark-band, tonal buttons; moment: word-highlight) and the
+ * structure of floy.com: big claim, before/after, two pillars, report, steps, close.
+ * Brand colours and fonts follow the HeyMeister brandbook.
  */
 export default function HomePage() {
   const faqItems = isFullMode ? faq : faq.filter((f) => f.short);
+  const meister = publishedTeam[0];
   return (
     <>
-      <Hero />
-      <ProblemCards />
-      <Section id="leistung" eyebrow={home.included.eyebrow} title={home.included.title} intro={home.included.intro}>
-        <IncludedList />
-        <div className="mt-16 border-t border-line pt-16">
-          <DefectClasses />
-        </div>
-      </Section>
-      <InspectionIntervals tone="muted" />
-      <Steps />
-      <SegmentCards tone="muted" />
-      <PricingTeaser />
-      <PilotOffer tone="light" />
-      <MeisterSection tone="muted" />
+      <HomeHero />
+      <BeforeAfter />
+      <Pillars />
+      <InspectionIntervals tone="light" />
+      <ReportBand />
+      <StepsPhoto />
+      <Statement
+        eyebrow={home.promise.eyebrow}
+        before={home.promise.before}
+        strong={home.promise.strong}
+        signature={meister ? `${meister.name}, ${meister.role}` : undefined}
+      />
+      <Segments />
+      <Pricing />
+      <Pilot />
       <Section id="faq" layout="split" eyebrow={home.faq.eyebrow} title={home.faq.title} intro={home.faq.intro}>
         <FAQ items={faqItems} disclaimer={home.faq.disclaimer} />
       </Section>
       <CTASection tone="muted" />
-      <StickyCta href={contactHref("angebot")} label={home.cta.sticky} tel={telHref(site.contact.phone)} />
+      <StickyCta href={contactHref("angebot")} label={home.mainAction} tel={telHref(site.contact.phone)} />
     </>
   );
 }

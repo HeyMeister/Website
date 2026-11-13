@@ -8,7 +8,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main id="main" className="flex-1">
+      <main id="main" className="flex-1 pt-16">
         {children}
       </main>
       <Footer />

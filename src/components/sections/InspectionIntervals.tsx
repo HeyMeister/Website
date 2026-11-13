@@ -1,7 +1,5 @@
 import { home } from "@/content/home";
-import { contactHref } from "@/lib/links";
 import { Section } from "@/components/ui/layout";
-import { CtaBand } from "./CtaBand";
 
 /**
  * Inspection overview in the brandbook table style. Intervals are indicative values and are
@@ -10,9 +8,9 @@ import { CtaBand } from "./CtaBand";
 export function InspectionIntervals({ tone = "muted" }: { tone?: "light" | "muted" }) {
   const t = home.intervals;
   return (
-    <Section id="fristen" tone={tone} eyebrow={t.eyebrow} title={t.title} intro={t.intro}>
+    <Section id="fristen" tone={tone} layout="row" eyebrow={t.eyebrow} title={t.title} intro={t.intro}>
       {/* Desktop table */}
-      <div className="hidden overflow-hidden rounded-card border border-line bg-surface-raised md:block">
+      <div className="hidden overflow-hidden rounded-card border border-line md:block">
         <table className="w-full text-left">
           <caption className="sr-only">{t.title}</caption>
           <thead className="border-b border-line bg-surface-2">
@@ -26,16 +24,16 @@ export function InspectionIntervals({ tone = "muted" }: { tone?: "light" | "mute
           <tbody>
             {t.rows.map((r) => (
               <tr key={r.item} className="border-b border-line align-top last:border-b-0">
-                <th scope="row" className="px-6 py-5 font-normal">
+                <th scope="row" className="px-6 py-4 font-normal">
                   <span className="block font-semibold text-ink">{r.item}</span>
                   <span className="mt-1 block text-small text-ink-muted">{r.examples}</span>
                 </th>
-                <td className="whitespace-nowrap px-4 py-5 font-mono text-data text-ink">{r.norm}</td>
-                <td className="px-4 py-5">
+                <td className="whitespace-nowrap px-4 py-4 font-mono text-data text-ink">{r.norm}</td>
+                <td className="px-4 py-4">
                   <span className="block font-semibold text-ink">{r.interval}</span>
                   {r.intervalNote && <span className="mt-1 block text-small text-ink-muted">{r.intervalNote}</span>}
                 </td>
-                <td className="px-6 py-5 text-small text-ink">{r.who}</td>
+                <td className="px-6 py-4 text-small text-ink">{r.who}</td>
               </tr>
             ))}
           </tbody>
@@ -71,12 +69,6 @@ export function InspectionIntervals({ tone = "muted" }: { tone?: "light" | "mute
 
       <p className="mt-6 max-w-prose border-l-2 border-accent pl-4 text-small text-ink-muted">{t.disclaimer}</p>
 
-      <CtaBand
-        location="intervals"
-        title={home.cta.afterIntervals.title}
-        text={home.cta.afterIntervals.text}
-        primary={{ label: home.cta.afterIntervals.primary, href: contactHref("angebot"), track: "cta_offer_click" }}
-      />
     </Section>
   );
 }

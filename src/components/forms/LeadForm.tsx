@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { Suspense, useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
   industries,
   lastCheckOptions,
@@ -17,6 +17,7 @@ import { track } from "@/lib/analytics";
 import { home } from "@/content/home";
 import { site } from "@/content/site";
 import { ButtonArrow, buttonClass } from "@/components/ui/Button";
+import { Field, inputClass } from "./fields";
 
 type Wish = LeadInput["wish"];
 
@@ -42,8 +43,7 @@ export function LeadForm(props: LeadFormProps) {
   );
 }
 
-const inputClass =
-  "mt-1.5 block w-full rounded-control border border-line-strong bg-surface-raised px-3.5 py-2.5 text-body text-ink focus-visible:outline-offset-0 placeholder:text-ink-muted/70 aria-[invalid=true]:border-danger aria-[invalid=true]:ring-1 aria-[invalid=true]:ring-danger";
+
 
 function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: LeadFormProps & { initialWish?: Wish }) {
   const router = useRouter();
@@ -115,7 +115,7 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
   };
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-5" aria-describedby={formError ? `${formId}-form-error` : undefined}>
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-4" aria-describedby={formError ? `${formId}-form-error` : undefined}>
       <fieldset>
         <legend className="text-small font-semibold text-ink">Ihr Anliegen</legend>
         <div className="mt-2 flex flex-wrap gap-2">
@@ -137,7 +137,7 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
         </div>
       </fieldset>
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <Field label="Name" required error={errors.name} errorId={`${formId}-name-error`} htmlFor={`${formId}-name`}>
           <input {...fieldProps("name")} type="text" autoComplete="name" required className={inputClass} />
         </Field>
@@ -179,7 +179,7 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
       </div>
 
       <Field label="Nachricht" error={errors.message} errorId={`${formId}-message-error`} htmlFor={`${formId}-message`}>
-        <textarea {...fieldProps("message")} rows={4} className={inputClass} />
+        <textarea {...fieldProps("message")} rows={3} className={inputClass} />
       </Field>
 
       {/* Honeypot: hidden from people and assistive technology, bots fill it in. */}
@@ -205,7 +205,7 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-        <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full sm:w-auto")}>
+        <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full shrink-0 whitespace-nowrap sm:w-auto")}>
           {submitting ? (
             "Wird gesendet …"
           ) : (
@@ -220,42 +220,5 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
         </p>
       </div>
     </form>
-  );
-}
-
-function Field({
-  label,
-  required,
-  error,
-  errorId,
-  htmlFor,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  error?: string;
-  errorId: string;
-  htmlFor: string;
-  children: ReactNode;
-}) {
-  return (
-    <div>
-      <label htmlFor={htmlFor} className="block text-small font-semibold text-ink">
-        {label}
-        {required && (
-          <span aria-hidden="true" className="text-accent-dark">
-            {" "}
-            *
-          </span>
-        )}
-        {required && <span className="sr-only"> (Pflichtfeld)</span>}
-      </label>
-      {children}
-      {error && (
-        <p id={errorId} className="mt-1.5 text-small font-medium text-danger">
-          {error}
-        </p>
-      )}
-    </div>
   );
 }

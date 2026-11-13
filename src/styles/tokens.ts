@@ -13,6 +13,8 @@ export const colors = {
   accent: "#E4572E",
   /** Koralle-Dunkel: button hover and small text in the accent colour (4.6:1 on paper). */
   "accent-dark": "#C4461F",
+  /** Coral-dark one step deeper: #C4461F reads only 4.37:1 on Fläche-2, so small accent text on surface-2 uses this. */
+  "accent-deep": "#BC431E",
   /** Koralle-Hell: tinted backgrounds; accent text on navy. */
   "accent-light": "#FDE4DC",
   /** Navy: "Meister", headings, text, dark surfaces. */
@@ -100,6 +102,7 @@ export const contrastPairs: Array<[fg: ColorToken, bg: ColorToken]> = [
   ["ink-muted", "surface-2"],
   ["accent-dark", "surface"], // small accent text, links
   ["accent-dark", "surface-raised"],
+  ["accent-deep", "surface-2"], // small accent text on Fläche-2
   ["accent-light", "base"], // small accent text on navy
   ["surface", "base"],
   ["surface", "base-light"],
