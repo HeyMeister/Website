@@ -15,7 +15,7 @@ export const site = {
 
   contact: {
     /** Display format, e.g. "+49 211 123456-0". The tel: link is derived from it. */
-    phone: "[TELEFON]",
+    phone: "+49 1588 8628386",
     email: "[E-MAIL]",
     address: {
       street: "[STRASSE UND HAUSNUMMER]",

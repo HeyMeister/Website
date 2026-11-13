@@ -19,12 +19,12 @@ export type Photo = {
 
 export const photos = {
   hero: {
-    src: "/photos/duesseldorf-blaue-stunde.jpg",
+    src: "/photos/hochspannung-himmel.jpg",
     width: 2400,
     height: 1800,
-    alt: "Düsseldorfer Medienhafen mit Rheinturm zur blauen Stunde",
-    credit: "Gerd Sachowsky, CC BY 2.0",
-    source: "https://commons.wikimedia.org/wiki/File:Medienhafen_D%C3%BCsseldorf_2013_-_Flickr_-_Sacho2000.jpg",
+    alt: "Hochspannungsleitungen, die in einen tiefblauen Himmel laufen",
+    credit: "Rémih, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:High-voltage_overhead_power_line_@_Plaine_de_Pierrelaye-Bessancourt_01.jpg",
   },
   steps: {
     src: "/photos/unterverteilung-hoch.jpg",

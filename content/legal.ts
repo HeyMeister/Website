@@ -17,7 +17,7 @@ export const operator = {
   zip: "[PLZ]",
   city: "[ORT]",
   representatives: "[GESCHÄFTSFÜHRER/IN]",
-  phone: "[TELEFON]",
+  phone: "+49 1588 8628386",
   email: "[E-MAIL]",
   /** Fill in after registration (GmbH i. G. is not registered yet). */
   registerCourt: "[REGISTERGERICHT, nach Eintragung]",
@@ -48,7 +48,7 @@ export const datenschutz = {
     {
       heading: "1. Verantwortlicher",
       paragraphs: [
-        "Verantwortlich für die Datenverarbeitung auf dieser Website ist [BETREIBER-FIRMA], [STRASSE UND HAUSNUMMER], [PLZ] [ORT], E-Mail: [E-MAIL], Telefon: [TELEFON].",
+        "Verantwortlich für die Datenverarbeitung auf dieser Website ist [BETREIBER-FIRMA], [STRASSE UND HAUSNUMMER], [PLZ] [ORT], E-Mail: [E-MAIL], Telefon: +49 1588 8628386.",
         "[Falls vorhanden: Kontaktdaten des Datenschutzbeauftragten]",
       ],
     },

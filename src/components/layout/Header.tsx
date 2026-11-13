@@ -36,14 +36,14 @@ export function Header() {
         </nav>
 
         <div className="ml-auto flex items-center gap-2 sm:gap-4">
-          {/* Phone: only once a real number is set (no placeholder in the bar). Icon, number from 2xl. */}
+          {/* Phone: icon only (the number is in the contact section and footer), shown once a real number is set. */}
           {tel && (
             <a
               href={tel}
-              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center gap-2 rounded-control text-small font-semibold text-ink hover:bg-surface-2 2xl:px-2"
+              aria-label={`Anrufen: ${site.contact.phone}`}
+              className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-control text-ink hover:bg-surface-2"
             >
               <PhoneIcon />
-              <span className="sr-only 2xl:not-sr-only">{site.contact.phone}</span>
             </a>
           )}
 
