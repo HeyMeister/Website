@@ -31,8 +31,8 @@ export function PilotOffer({ headingLevel = 2, tone = "light" }: { headingLevel?
           </ul>
         </div>
         <div className="flex flex-col justify-center gap-3 lg:col-span-4">
-          <LinkButton href={contactHref("pilot")} track="cta_pilot_click">
-            Pilotkunde werden
+          <LinkButton href={contactHref("pilot")} track="cta_pilot_click" trackLocation="pilot" arrow>
+            Pilotplatz anfragen
           </LinkButton>
           <p className="text-small text-ink-muted">Unverbindlich. Wir melden uns {site.contact.responseTime}.</p>
         </div>

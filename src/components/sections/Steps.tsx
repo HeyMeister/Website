@@ -1,5 +1,7 @@
 import { home } from "@/content/home";
+import { contactHref } from "@/lib/links";
 import { Section } from "@/components/ui/layout";
+import { CtaBand } from "./CtaBand";
 
 export function Steps() {
   const { steps } = home;
@@ -14,6 +16,13 @@ export function Steps() {
           </li>
         ))}
       </ol>
+      <CtaBand
+        location="steps"
+        title={home.cta.afterSteps.title}
+        text={home.cta.afterSteps.text}
+        primary={{ label: home.cta.afterSteps.primary, href: contactHref("erstgespraech"), track: "cta_call_click" }}
+        secondary={{ label: home.cta.afterSteps.secondary, href: contactHref("angebot"), track: "cta_offer_click" }}
+      />
     </Section>
   );
 }

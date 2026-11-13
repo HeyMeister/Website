@@ -14,7 +14,9 @@ import {
   type LeadInput,
 } from "@/lib/lead-schema";
 import { track } from "@/lib/analytics";
-import { buttonClass } from "@/components/ui/Button";
+import { home } from "@/content/home";
+import { site } from "@/content/site";
+import { ButtonArrow, buttonClass } from "@/components/ui/Button";
 
 type Wish = LeadInput["wish"];
 
@@ -51,6 +53,8 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  // Drives the submit label, so the button says exactly what happens next.
+  const [wish, setWish] = useState<Wish>(initialWish);
 
   // Set on the client only: used for the "submitted < 3 s" spam check.
   useEffect(() => {
@@ -117,7 +121,14 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
         <div className="mt-2 flex flex-wrap gap-2">
           {wishOptions.map((o) => (
             <label key={o.value} className="cursor-pointer">
-              <input type="radio" name="wish" value={o.value} defaultChecked={o.value === initialWish} className="peer sr-only" />
+              <input
+                type="radio"
+                name="wish"
+                value={o.value}
+                defaultChecked={o.value === initialWish}
+                onChange={() => setWish(o.value)}
+                className="peer sr-only"
+              />
               <span className="inline-flex min-h-[44px] items-center rounded-control border border-line-strong bg-surface-raised px-4 text-small font-medium text-ink peer-checked:border-base peer-checked:bg-base peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus">
                 {o.label}
               </span>
@@ -193,9 +204,21 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
         )}
       </div>
 
-      <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full sm:w-auto")}>
-        {submitting ? "Wird gesendet …" : "Anfrage senden"}
-      </button>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+        <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full sm:w-auto")}>
+          {submitting ? (
+            "Wird gesendet …"
+          ) : (
+            <>
+              {home.contact.submit[wish]}
+              <ButtonArrow />
+            </>
+          )}
+        </button>
+        <p className="text-small text-ink-muted">
+          {home.contact.submitNote} Antwort {site.contact.responseTime}.
+        </p>
+      </div>
     </form>
   );
 }

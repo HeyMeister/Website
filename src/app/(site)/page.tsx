@@ -14,6 +14,9 @@ import { PilotOffer } from "@/components/sections/PilotOffer";
 import { MeisterSection } from "@/components/sections/MeisterSection";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTASection } from "@/components/sections/CTASection";
+import { StickyCta } from "@/components/sections/StickyCta";
+import { site } from "@/content/site";
+import { contactHref, telHref } from "@/lib/links";
 import { Section } from "@/components/ui/layout";
 
 export const metadata = pageMetadata({ path: "/" });
@@ -44,6 +47,7 @@ export default function HomePage() {
         <FAQ items={faqItems} disclaimer={home.faq.disclaimer} />
       </Section>
       <CTASection tone="muted" />
+      <StickyCta href={contactHref("angebot")} label={home.cta.sticky} tel={telHref(site.contact.phone)} />
     </>
   );
 }

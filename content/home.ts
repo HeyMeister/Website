@@ -7,13 +7,40 @@ export const home = {
   hero: {
     /** Label above the headline; keeps the search term at the top. */
     eyebrow: "Elektroprüfung im Abo nach DGUV Vorschrift 3",
-    title: "Prüffristen im Griff. An jedem Standort, zum festen Preis.",
+    /** Two lines of the h1: the promise, then the proof. Read together as one sentence pair. */
+    titleLines: ["Prüffristen im Griff.", "An jedem Standort, zum festen Preis."],
     lead: "Wir prüfen Ihre Geräte und Anlagen, führen das digitale Betriebsbuch und beheben kleine Mängel direkt bei der Prüfung. Sie sehen jederzeit, was geprüft ist und was als Nächstes fällig wird.",
     /** Rendered as "ab 29 € pro Standort und Monat, netto" (price from pricing.ts). */
     priceSuffix: "pro Standort und Monat, netto",
-    priceNote: "Erstgespräch kostenlos und unverbindlich",
-    primaryCta: "Angebot anfordern",
-    secondaryCta: "Erstgespräch buchen",
+    priceNote: "Bei 24 Monaten Laufzeit entfällt die Einrichtungsgebühr.",
+    primaryCta: "Angebot zum Festpreis anfordern",
+    /** Shown instead of primaryCta on phones, so the button stays on one line. */
+    primaryCtaShort: "Angebot anfordern",
+    /** Quieter text link next to the primary button. */
+    secondaryCta: "Oder kostenloses Erstgespräch buchen (15 Min.)",
+  },
+
+  /**
+   * Shared call-to-action copy. Only state what is true: no countdowns, no invented scarcity.
+   * `reassurance` is shown under primary buttons; the response time comes from site.ts.
+   */
+  cta: {
+    offer: "Angebot anfordern",
+    /** "Antwort <responseTime>" from site.ts is appended automatically. */
+    reassurance: ["Kostenlos und unverbindlich", "Festpreis pro Standort"],
+    afterSteps: {
+      title: "Schritt 1 ist ein kurzes Gespräch",
+      text: "15 Minuten, kostenlos. Danach wissen Sie, wie das Abo für Ihre Standorte aussieht und mit welchem Preis Sie rechnen können.",
+      primary: "Erstgespräch buchen",
+      secondary: "Lieber direkt ein Angebot",
+    },
+    afterIntervals: {
+      title: "Unklar, wann zuletzt geprüft wurde?",
+      text: "Kein Problem. Beim Erstbesuch nehmen wir alle Geräte und Anlagen auf und erstellen Ihren Prüfplan mit allen Fristen.",
+      primary: "Erstbesuch anfragen",
+    },
+    meister: "Mit {name} sprechen",
+    sticky: "Angebot anfordern",
   },
 
   problem: {
@@ -188,7 +215,7 @@ export const home = {
     discountsTitle: "Mengenrabatt",
     setupNote: "Bei 24 Monaten Laufzeit entfällt die einmalige Einrichtungsgebühr.",
     fullLink: "Alle Preise und Rechner",
-    cta: "Angebot anfordern",
+    cta: "Ihr Angebot anfordern",
   },
 
   promise: {
@@ -223,8 +250,20 @@ export const home = {
 
   contact: {
     eyebrow: "Kontakt",
-    title: "Angebot anfordern oder Erstgespräch buchen",
-    text: "Schreiben Sie uns kurz, wie viele Standorte Sie haben. Wir melden uns innerhalb von einem Werktag.",
+    title: "Ihr Festpreis-Angebot, kostenlos und unverbindlich",
+    text: "Schreiben Sie uns kurz, wie viele Standorte Sie haben. Den Rest klären wir im Gespräch.",
+    nextStepsTitle: "So geht es weiter",
+    nextSteps: [
+      "Sie senden uns Ihre Anfrage.",
+      "Wir melden uns innerhalb von einem Werktag und klären Ihre Standorte.",
+      "Sie erhalten Ihr Angebot zum festen Preis pro Standort und Monat.",
+    ],
+    submit: {
+      angebot: "Angebot anfordern",
+      erstgespraech: "Erstgespräch anfragen",
+      pilot: "Als Pilotkunde anfragen",
+    },
+    submitNote: "Kostenlos und unverbindlich.",
   },
 
   /**
@@ -241,7 +280,34 @@ export const home = {
       { name: "Flingern", devices: 18, nextCheck: "2026-11-05", status: "overdue", statusLabel: "Überfällig" },
       { name: "Benrath", devices: 27, nextCheck: "2027-05-03", status: "ok", statusLabel: "Geprüft" },
     ],
-    report: { name: "Prüfbericht_Bilk_2026-09.pdf", meta: "HM-0412 · 24 Geräte · 1 Mangel behoben" },
+    report: { name: "Prüfbericht_Bilk_2026-08.pdf", meta: "HM-0412 · 24 Geräte · 1 Mangel behoben" },
+
+    /** Hero animation: this site's status switches to `animatedTo` and the toast appears. */
+    animated: {
+      site: "Oberkassel",
+      to: { status: "ok", statusLabel: "Geprüft" },
+      toast: { title: "Prüfung abgeschlossen", meta: "Oberkassel · 31 Geräte · 0 Mängel" },
+    },
+    /** Floating chip: the overdue site already has an appointment. 19.11.2026 is a Thursday. */
+    appointment: { label: "Termin geplant", text: "Flingern · Do, 19.11. · 8:00 Uhr" },
+    /** Back screen 1: report preview. */
+    reportPreview: {
+      title: "Prüfbericht HM-0412",
+      meta: "Standort Bilk · 14.08.2026",
+      rows: [
+        { item: "Kaffeevollautomat", result: "Bestanden" },
+        { item: "Verlängerung 5 m", result: "Bestanden" },
+        { item: "Monitor Empfang", result: "Bestanden" },
+        { item: "Wasserkocher", result: "Mangel behoben" },
+      ],
+    },
+    /** Back screen 2: inspection plan. Bilk: portable devices every 6 months. */
+    plan: {
+      title: "Prüfplan 2027",
+      meta: "Standort Bilk",
+      months: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+      marked: ["Feb", "Aug"],
+    },
   },
 } as const;
 

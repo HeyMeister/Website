@@ -46,6 +46,19 @@
 }
 
 @layer components {
+  /* Hero backdrop: faint technical grid, fading out from the top right. */
+  .hm-grid-bg {
+    background-image:
+      linear-gradient(rgb(var(--hm-base-rgb) / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--hm-base-rgb) / 0.06) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 70% 80% at 75% 20%, #000 0%, transparent 75%);
+  }
+  /* Navy mockup stage: fine dot pattern. */
+  .hm-dots {
+    background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
   /* Brandbook label: 12/16, uppercase, 0.08 em tracking. */
   .label {
     @apply text-label font-semibold uppercase;

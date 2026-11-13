@@ -7,6 +7,7 @@ import { contactHref, pricesHref } from "@/lib/links";
 import { ArrowRightIcon } from "@/components/icons";
 import { LinkButton } from "@/components/ui/Button";
 import { Container, Eyebrow, sectionHeadingClass } from "@/components/ui/layout";
+import { Reassurance } from "@/components/ui/Reassurance";
 
 export function PricingTeaser() {
   const t = home.pricingTeaser;
@@ -22,9 +23,10 @@ export function PricingTeaser() {
             <p className="mt-4 max-w-prose text-ink-inverse-muted">{t.text}</p>
           </div>
           <div className="flex flex-col gap-4 lg:col-span-4 lg:items-end">
-            <LinkButton href={contactHref("angebot")} track="cta_offer_click">
+            <LinkButton href={contactHref("angebot")} track="cta_offer_click" trackLocation="pricing" arrow>
               {t.cta}
             </LinkButton>
+            <Reassurance tone="dark" className="lg:max-w-xs lg:flex-col lg:items-end" />
             {isFullMode && (
               <Link href={pricesHref()} className="inline-flex items-center gap-2 font-semibold text-white hover:underline">
                 {t.fullLink} <ArrowRightIcon className="h-4 w-4" />

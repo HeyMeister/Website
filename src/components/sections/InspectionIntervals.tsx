@@ -1,5 +1,7 @@
 import { home } from "@/content/home";
+import { contactHref } from "@/lib/links";
 import { Section } from "@/components/ui/layout";
+import { CtaBand } from "./CtaBand";
 
 /**
  * Inspection overview in the brandbook table style. Intervals are indicative values and are
@@ -68,6 +70,13 @@ export function InspectionIntervals({ tone = "muted" }: { tone?: "light" | "mute
       </ul>
 
       <p className="mt-6 max-w-prose border-l-2 border-accent pl-4 text-small text-ink-muted">{t.disclaimer}</p>
+
+      <CtaBand
+        location="intervals"
+        title={home.cta.afterIntervals.title}
+        text={home.cta.afterIntervals.text}
+        primary={{ label: home.cta.afterIntervals.primary, href: contactHref("angebot"), track: "cta_offer_click" }}
+      />
     </Section>
   );
 }

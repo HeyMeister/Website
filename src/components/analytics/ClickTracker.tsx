@@ -5,7 +5,7 @@ import { track, type AnalyticsEvent } from "@/lib/analytics";
 
 /**
  * One delegated listener instead of client components everywhere:
- * - elements with data-track="<event>" send that event
+ * - elements with data-track="<event>" send that event (plus data-track-location as "location")
  * - every tel: link sends phone_click
  */
 export function ClickTracker() {
@@ -15,7 +15,8 @@ export function ClickTracker() {
       const el = target?.closest<HTMLElement>("[data-track], a[href^='tel:']");
       if (!el) return;
       const event = el.dataset.track as AnalyticsEvent | undefined;
-      if (event) track(event);
+      const location = el.dataset.trackLocation;
+      if (event) track(event, location ? { location } : undefined);
       if (el instanceof HTMLAnchorElement && el.href.startsWith("tel:")) track("phone_click");
     };
     document.addEventListener("click", onClick, { capture: true });

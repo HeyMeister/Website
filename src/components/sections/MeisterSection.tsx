@@ -1,5 +1,7 @@
 import { home } from "@/content/home";
 import { publishedTeam, type TeamMember } from "@/content/team";
+import { contactHref } from "@/lib/links";
+import { LinkButton } from "@/components/ui/Button";
 import { Fill, Placeholder } from "@/components/ui/Placeholder";
 import { Section } from "@/components/ui/layout";
 import Image from "next/image";
@@ -22,6 +24,15 @@ export function MeisterSection({ tone = "muted" }: { tone?: "light" | "muted" })
         {meister && (
           <div className="lg:col-span-5">
             <MeisterCard member={meister} />
+            <LinkButton
+              href={contactHref("erstgespraech")}
+              variant="secondary"
+              track="cta_call_click"
+              trackLocation="meister"
+              className="mt-4 w-full"
+            >
+              {home.cta.meister.replace("{name}", meister.name.split(" ")[0] ?? meister.name)}
+            </LinkButton>
           </div>
         )}
       </div>

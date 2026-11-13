@@ -20,7 +20,23 @@ export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; to
           <LeadForm />
         </div>
         <aside className="space-y-6 lg:col-span-4" aria-label="Weitere Kontaktwege">
-          <div className="space-y-3">
+          <div>
+            <p className="font-display text-subheading font-bold text-ink">{c.nextStepsTitle}</p>
+            <ol className="mt-4 space-y-4">
+              {c.nextSteps.map((step, i) => (
+                <li key={step} className="flex gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-base font-mono text-small text-white"
+                  >
+                    {i + 1}
+                  </span>
+                  <span className="pt-0.5 text-ink">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="space-y-3 border-t border-line pt-6">
             <p className="font-display text-subheading font-bold text-ink">Lieber direkt?</p>
             <p className="flex items-center gap-3">
               <PhoneIcon className="text-accent" />
