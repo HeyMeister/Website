@@ -11,6 +11,10 @@ export type TeamMember = {
   quote?: string;
   /** Path under /public, or null to show a "Foto folgt" placeholder. */
   photo: string | null;
+  /** Pixel size of the photo file. */
+  photoSize?: { width: number; height: number };
+  /** Shown next to the name where the person is the customer's contact. */
+  contactLine?: string;
   qualification?: string;
   published: boolean;
 };
@@ -21,7 +25,10 @@ export const team: TeamMember[] = [
     name: "Leon Ellerbrake",
     role: "Elektrotechnikermeister, Betriebsleiter",
     quote: "[ZITAT IN LEONS WORTEN, von Leon freizugeben]",
-    photo: null,
+    /** Event photo, cropped; people in the background are blurred. Replace with a portrait shoot later. */
+    photo: "/team/leon-ellerbrake.jpg",
+    photoSize: { width: 340, height: 425 },
+    contactLine: "Ihr persönlicher Ansprechpartner",
     // Add "Eingetragen in der Handwerksrolle …" once the GmbH is registered.
     published: true,
   },

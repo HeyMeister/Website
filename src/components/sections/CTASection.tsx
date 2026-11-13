@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { home } from "@/content/home";
+import { publishedTeam } from "@/content/team";
 import { site } from "@/content/site";
 import { bookingUrl } from "@/lib/env";
 import { mailHref, telHref } from "@/lib/links";
@@ -11,6 +13,7 @@ export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; to
   const c = home.contact;
   const tel = telHref(site.contact.phone);
   const mail = mailHref(site.contact.email);
+  const meister = publishedTeam[0];
 
   const bg = tone === "muted" ? "bg-surface-2" : "bg-surface";
 
@@ -25,6 +28,22 @@ export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; to
             {c.title}
           </h2>
           <p className="mt-4 max-w-prose text-subheading text-ink-muted">{c.text}</p>
+
+          {meister?.photo && (
+            <div className="mt-8 flex items-center gap-4">
+              <Image
+                src={meister.photo}
+                alt={`${meister.name}, ${meister.role}`}
+                width={64}
+                height={64}
+                className="h-16 w-16 shrink-0 rounded-full object-cover object-top"
+              />
+              <p className="text-small leading-5">
+                <span className="block font-semibold text-ink">{meister.name}</span>
+                <span className="block text-ink-muted">{meister.contactLine ?? meister.role}</span>
+              </p>
+            </div>
+          )}
 
           <p className="mt-10 font-display text-subheading font-bold text-ink">{c.nextStepsTitle}</p>
           <ol className="mt-4 space-y-4">

@@ -178,6 +178,13 @@
     background-size: 32px 32px;
     mask-image: radial-gradient(ellipse 70% 80% at 75% 20%, #000 0%, transparent 75%);
   }
+  /* Film grain over the hero photograph (Floy-like texture). Static SVG noise, no animation. */
+  .hm-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    mix-blend-mode: overlay;
+    opacity: 0.35;
+  }
   /* Navy mockup stage: fine dot pattern. */
   .hm-dots {
     background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);

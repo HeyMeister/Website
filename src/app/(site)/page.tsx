@@ -43,7 +43,12 @@ export default function HomePage() {
         eyebrow={home.promise.eyebrow}
         before={home.promise.before}
         strong={home.promise.strong}
-        signature={meister ? `${meister.name}, ${meister.role}` : undefined}
+        signature={meister ? [meister.name, meister.role, meister.contactLine].filter(Boolean).join(" · ") : undefined}
+        portrait={
+          meister?.photo && meister.photoSize
+            ? { src: meister.photo, ...meister.photoSize, alt: `${meister.name}, ${meister.role}` }
+            : undefined
+        }
       />
       <Segments />
       <Pricing />

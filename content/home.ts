@@ -202,7 +202,7 @@ export const home = {
     nextStepsTitle: "So geht es weiter",
     nextSteps: [
       "Sie senden uns Ihre Anfrage.",
-      "Wir melden uns innerhalb von einem Werktag und klären Ihre Standorte.",
+      "Leon Ellerbrake meldet sich innerhalb von einem Werktag und klärt Ihre Standorte mit Ihnen.",
       "Sie erhalten Ihr Angebot zum festen Preis pro Standort und Monat.",
     ],
     submit: {

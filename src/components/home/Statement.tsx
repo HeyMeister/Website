@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { Container } from "@/components/ui/layout";
 
@@ -14,11 +15,14 @@ export function Statement({
   before,
   strong,
   signature,
+  portrait,
 }: {
   eyebrow: string;
   before: string;
   strong: string;
   signature?: string;
+  /** The person behind the promise, shown beside the statement. */
+  portrait?: { src: string; width: number; height: number; alt: string };
 }) {
   const textRef = useRef<HTMLHeadingElement>(null);
 
@@ -78,12 +82,19 @@ export function Statement({
       data-moment="word-highlight"
       className="min-h-[100svh] bg-surface pb-16 pt-24 sm:pb-20 lg:pb-24 lg:pt-[7.5rem]"
     >
-      <Container>
+      <Container className={portrait ? "grid gap-10 lg:grid-cols-12 lg:gap-12" : ""}>
+        <div className={portrait ? "lg:col-span-8" : ""}>
         <p className="label mb-6 text-accent-dark">{eyebrow}</p>
-        <h2 id="versprechen-heading" ref={textRef} className="max-w-[24ch] font-display text-[2rem] font-bold leading-[1.16] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:max-w-[28ch] lg:text-[3.75rem]">
+        <h2 id="versprechen-heading" ref={textRef} className="max-w-[24ch] font-display text-[2rem] font-bold leading-[1.16] tracking-[-0.02em] text-ink sm:text-[2.75rem] lg:max-w-[24ch] lg:text-[3.25rem]">
           {split(before)} <strong className="font-bold">{split(strong)}</strong>
         </h2>
         {signature && <p className="mt-8 text-small font-semibold text-ink-muted">{signature}</p>}
+        </div>
+        {portrait && (
+          <div className="relative aspect-[4/5] w-full max-w-[17rem] overflow-hidden rounded-card bg-surface-2 lg:col-span-3 lg:col-start-10 lg:mt-12 lg:max-w-none">
+            <Image src={portrait.src} alt={portrait.alt} fill sizes="(min-width: 1024px) 280px, 272px" className="object-cover object-top" />
+          </div>
+        )}
       </Container>
     </section>
   );
