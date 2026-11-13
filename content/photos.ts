@@ -1,7 +1,7 @@
 /**
  * Photographs on the landing page.
  *
- * All are licensed STAND-INS from Wikimedia Commons until HeyMeister has its own
+ * All are licensed STAND-INS (Wikimedia Commons, hero from Unsplash) until HeyMeister has its own
  * photographs (shot list: a distribution board on site, a test on a device, the testing kit,
  * Leon at work). None shows a face, so nothing implies these are HeyMeister staff or customers.
  * CC BY and CC BY-SA require the credit line in the footer; keep `credit` in sync when swapping.
@@ -19,12 +19,13 @@ export type Photo = {
 
 export const photos = {
   hero: {
-    src: "/photos/hochspannung-himmel.jpg",
+    src: "/photos/pruefung-schaltschrank.jpg",
     width: 2400,
     height: 1800,
-    alt: "Hochspannungsleitungen, die in einen tiefblauen Himmel laufen",
-    credit: "Rémih, CC BY-SA 4.0",
-    source: "https://commons.wikimedia.org/wiki/File:High-voltage_overhead_power_line_@_Plaine_de_Pierrelaye-Bessancourt_01.jpg",
+    alt: "Elektrofachkraft misst mit Prüfspitzen an einem Schaltschrank",
+    /** Unsplash License: free for commercial use, credit not required (given anyway). */
+    credit: "Toolmash Expo (Unsplash)",
+    source: "https://unsplash.com/photos/electrician-testing-electrical-panel-with-multimeter-PkHf7BUWbtk",
   },
   steps: {
     src: "/photos/unterverteilung-hoch.jpg",
@@ -53,7 +54,7 @@ export const photos = {
 } satisfies Record<string, Photo>;
 
 /** One footer line, as the licences require. */
-export const photoCreditLine = `Fotos via Wikimedia Commons: ${Object.values(photos)
+export const photoCreditLine = `Fotos via Wikimedia Commons und Unsplash: ${Object.values(photos)
   .map((p) => p.credit)
   .filter(Boolean)
   .join("; ")}; übrige Pittigrilli, CC0.`;
