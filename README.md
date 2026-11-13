@@ -99,6 +99,18 @@ in-memory otherwise), email via Resend, optional CRM webhook signed with HMAC-SH
 (`X-HeyMeister-Signature: sha256=<hex>` over `<timestamp>.<body>`, timestamp in `X-HeyMeister-Timestamp`).
 A failing webhook never affects the visitor.
 
+## Partner programme (`/partner`)
+
+Page for tip-givers (brokers, occupational safety specialists, property-management service providers, planners).
+Copy and the commission range live in `content/partner.ts`; `partnerConfig.commissionMaxPercent` and
+`partnerConfig.payoutRhythm` are TODO placeholders until decided.
+
+- `POST /api/partner` ("Partner werden", JSON) and `POST /api/tipp` ("Tipp einreichen", multipart with an optional PDF)
+  validate with zod (`src/lib/partner-schema.ts`), check honeypot, fill time and rate limit
+  (`src/lib/partner-handler.ts`, unit-tested) and send an email via Resend to `PARTNER_INBOX`. Nothing is stored.
+- PDF uploads are limited to 4 MB: Vercel Functions accept request bodies up to 4.5 MB. Larger files need a
+  direct-to-storage upload (e.g. Supabase Storage or Vercel Blob).
+
 ## Investor data room (`/dataroom`)
 
 Private area for investor materials: an admin creates personal logins, uploads decks and documents, decides who sees what,

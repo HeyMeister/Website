@@ -10,18 +10,22 @@ export async function sendViaResend(opts: {
   text: string;
   replyTo?: string;
   attachments?: Attachment[];
+  /** Name of the env variable holding the recipient address (default CONTACT_EMAIL). */
+  toEnv?: "CONTACT_EMAIL" | "PARTNER_INBOX";
 }): Promise<void> {
+  const toEnv = opts.toEnv ?? "CONTACT_EMAIL";
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_EMAIL;
+  const to = process.env[toEnv];
   const from = process.env.RESEND_FROM;
 
   if (!apiKey || !to || !from) {
     if (process.env.NODE_ENV !== "production") {
       // Local development without credentials: log instead of sending.
-      console.info(`[email:dev] ${opts.subject}\n${opts.text}`);
+      const files = opts.attachments?.map((a) => a.filename).join(", ");
+      console.info(`[email:dev → ${toEnv}] ${opts.subject}\n${opts.text}${files ? `\nAnhang: ${files}` : ""}`);
       return;
     }
-    throw new Error("Email not configured (RESEND_API_KEY, CONTACT_EMAIL, RESEND_FROM)");
+    throw new Error(`Email not configured (RESEND_API_KEY, ${toEnv}, RESEND_FROM)`);
   }
 
   const res = await fetch("https://api.resend.com/emails", {

@@ -17,11 +17,23 @@ export const robotsMeta: Metadata["robots"] = isLaunched
   : { index: false, follow: false, googleBot: { index: false, follow: false } };
 
 /** Per-page metadata helper. Title ≤ 60, description ≤ 155 chars (checked in tests). */
-export function pageMetadata(opts: { title?: string; description?: string; path: string; noindex?: boolean }): Metadata {
+export function pageMetadata(opts: {
+  title?: string;
+  description?: string;
+  path: string;
+  noindex?: boolean;
+  keywords?: string[];
+}): Metadata {
+  const description = opts.description ?? site.seo.defaultDescription;
   return {
     title: opts.title ?? { absolute: site.seo.defaultTitle },
-    description: opts.description ?? site.seo.defaultDescription,
+    description,
+    keywords: opts.keywords,
     alternates: { canonical: opts.path },
     robots: opts.noindex ? { index: false, follow: false } : robotsMeta,
+    // Page-specific Open Graph; image, locale and site name come from the root layout.
+    openGraph: opts.title
+      ? { title: opts.title, description, url: opts.path, type: "website", locale: "de_DE", siteName: site.name }
+      : undefined,
   };
 }

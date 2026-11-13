@@ -70,6 +70,14 @@ export const datenschutz = {
       ],
     },
     {
+      heading: "3a. Partnerprogramm und Tipps",
+      paragraphs: [
+        "Wenn Sie sich über das Formular „Partner werden“ registrieren, verarbeiten wir Ihre Angaben (Name, Firma, Rolle, Region, E-Mail, optional Telefon und Ihre Angaben zu betreuten Kunden), um die Zusammenarbeit mit Ihnen anzubahnen. Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).",
+        "Über das Formular „Tipp einreichen“ übermitteln Partner uns Kontaktdaten von Gewerbekunden (Firma, Ansprechpartner, Telefon oder E-Mail, Anlass) und optional einen Prüfbericht. Partner bestätigen, dass der Kunde der Weitergabe zugestimmt hat. Wir verwenden diese Daten, um den Kunden zu kontaktieren und ein Angebot zu erstellen (Art. 6 Abs. 1 lit. a und f DSGVO) und den Partner über den Stand zu informieren.",
+        "Die Angaben und Dateien werden per E-Mail über Resend (Resend, Inc., USA) an uns übermittelt und nicht dauerhaft auf dem Webserver gespeichert. [Speicherdauer für Partner- und Tippdaten ergänzen]",
+      ],
+    },
+    {
       heading: "4. Terminbuchung",
       paragraphs: [
         "Für die Buchung eines Erstgesprächs können Sie ein Buchungswerkzeug eines Drittanbieters nutzen. [ANBIETER, z. B. Cal.com, Anschrift] Das Buchungsfenster wird erst geladen, wenn Sie es aktiv anklicken. Vorher werden keine Daten an den Anbieter übertragen.",

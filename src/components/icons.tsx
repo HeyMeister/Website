@@ -84,3 +84,17 @@ export const MapPinIcon = (p: SVGProps<SVGSVGElement>) => (
     <circle cx="12" cy="9.5" r="2.5" />
   </Icon>
 );
+
+export const SendIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path d="M21 3 10 14" />
+    <path d="m21 3-7 18-4-7-7-4 18-7z" />
+  </Icon>
+);
+
+export const EuroIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path d="M17 6.5A7 7 0 1 0 17 17.5" />
+    <path d="M4 10h9M4 14h9" />
+  </Icon>
+);

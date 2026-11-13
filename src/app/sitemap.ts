@@ -6,7 +6,7 @@ import { siteUrl } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   if (!isLaunched) return [];
   const base = siteUrl();
-  const paths = ["/", "/impressum", "/datenschutz"];
+  const paths = ["/", "/partner", "/impressum", "/datenschutz"];
   if (isFullMode) {
     // Extended when the full-mode pages exist.
   }

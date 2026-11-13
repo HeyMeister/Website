@@ -3,10 +3,11 @@ export const navigation = {
   validation: [
     { label: "Leistung", href: "/#leistung" },
     { label: "Fristen", href: "/#fristen" },
-    { label: "Für wen", href: "/#fuer-wen" },
+    { label: "Ablauf", href: "/#ablauf" },
     { label: "Preise", href: "/#preise" },
-    { label: "Pilotprogramm", href: "/#pilot" },
+    { label: "Pilot", href: "/#pilot" },
     { label: "FAQ", href: "/#faq" },
+    { label: "Partner werden", href: "/partner" },
   ],
   full: [
     { label: "Leistungen", href: "/leistungen" },
@@ -14,6 +15,7 @@ export const navigation = {
     { label: "Für wen", href: "/fuer-filialisten" },
     { label: "Pilotprogramm", href: "/pilot" },
     { label: "Über uns", href: "/ueber-uns" },
+    { label: "Partner werden", href: "/partner" },
   ],
   footer: {
     validation: [
@@ -25,6 +27,7 @@ export const navigation = {
       { label: "Preise", href: "/preise" },
       { label: "Pilotprogramm", href: "/pilot" },
       { label: "Über uns", href: "/ueber-uns" },
+      { label: "Partner werden", href: "/partner" },
       { label: "Karriere", href: "/karriere" },
       { label: "Kontakt", href: "/kontakt" },
       { label: "Impressum", href: "/impressum" },
