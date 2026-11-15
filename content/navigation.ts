@@ -3,7 +3,7 @@ export const navigation = {
   validation: [
     { label: "Ablauf", href: "/#ablauf" },
     { label: "Leistungen", href: "/#leistungen" },
-    { label: "Pakete", href: "/#pakete" },
+    { label: "Konditionen", href: "/#konditionen" },
     { label: "Für Filialisten", href: "/#filialisten" },
     { label: "Kontakt", href: "/#kontakt" },
     { label: "Partner werden", href: "/partner" },

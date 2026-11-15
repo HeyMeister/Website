@@ -118,17 +118,3 @@ export const WrenchIcon = (p: SVGProps<SVGSVGElement>) => (
     <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6z" />
   </Icon>
 );
-
-export const ThermometerIcon = (p: SVGProps<SVGSVGElement>) => (
-  <Icon {...p}>
-    <path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z" />
-    <path d="M12 9v7" />
-  </Icon>
-);
-
-export const PersonIcon = (p: SVGProps<SVGSVGElement>) => (
-  <Icon {...p}>
-    <circle cx="12" cy="8" r="4" />
-    <path d="M4 21a8 8 0 0 1 16 0" />
-  </Icon>
-);

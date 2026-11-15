@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { home } from "@/content/home";
 import { photos } from "@/content/photos";
-import { lowestMonthlyPrice, pricing } from "@/content/pricing";
-import { formatEuro } from "@/lib/format";
 import { contactHref } from "@/lib/links";
 import { LinkButton } from "@/components/ui/Button";
 
 /**
  * Hero: a full-bleed photograph (a distribution board) in an inset frame with large corners and
  * fine film grain, the words in a navy box on the right, vertically centred on the page grid.
- * Claim, one sentence, two buttons and the entry price.
+ * Eyebrow, claim, one sentence with the price, two buttons and the key terms.
  * On phones the photograph sits on top and the words follow on the paper ground.
  *
  * Entrance (once): the h1, then the rest; the photograph settles from 1.05.
@@ -36,6 +34,9 @@ export function HomeHero() {
         <div className="relative px-1 sm:px-3 lg:absolute lg:inset-0 lg:flex lg:items-center lg:px-5">
           <div className="lg:mx-auto lg:flex lg:w-full lg:max-w-content lg:justify-end">
             <div className="pt-8 lg:w-[40rem] lg:max-w-full lg:rounded-[24px] lg:bg-base lg:p-12">
+              <p data-enter-step className="label mb-4 text-accent-dark lg:text-accent-light">
+                {hero.eyebrow}
+              </p>
               <h1
                 id="hero-heading"
                 data-enter-step
@@ -65,7 +66,7 @@ export function HomeHero() {
                   {hero.primaryCta}
                 </LinkButton>
                 <LinkButton
-                  href="/#pakete"
+                  href="/#leistungen"
                   variant="secondary"
                   className="shrink-0 whitespace-nowrap lg:bg-white/[0.12] lg:text-white lg:hover:bg-white/20"
                 >
@@ -77,7 +78,7 @@ export function HomeHero() {
                 style={{ "--step": 3 } as React.CSSProperties}
                 className="mt-6 text-small text-ink-muted lg:text-ink-inverse-muted"
               >
-                ab {formatEuro(lowestMonthlyPrice())} pro Standort und Monat, {pricing.vatNote}
+                {hero.meta}
               </p>
             </div>
           </div>

@@ -1,8 +1,9 @@
 /**
  * Copy for the landing page. Edit text here; components only handle layout.
  *
- * Page plan: hero · ablauf (3 steps) · leistungen (6 services + Anlagenakte) ·
- * pakete (5 packages + small print) · filialisten (framework agreement) · kontakt · closing
+ * Page plan: hero · ablauf (3 steps) · leistungen (included services + price card) ·
+ * konditionen (typical work, extras, conditions) · filialisten (framework agreement) · kontakt · closing
+ * Offer facts (price, scope, conditions) live in content/pricing.ts.
  *
  * Rules: Sie-form, plain language, no invented figures, references or seals, no fear.
  * Norms: never the withdrawn "DIN VDE 0701-0702"; its successors are DIN EN 50699 / 50678.
@@ -10,10 +11,12 @@
 
 export const home = {
   hero: {
-    title: "Elektroprüfung für alle Ihre Standorte – ein Vertrag, ein Ansprechpartner.",
-    lead: "Ein fester Monatspreis pro Standort. Alle Prüfungen digital dokumentiert. Keine Frist mehr verpasst.",
+    eyebrow: "HeyMeister Elektro-Service",
+    title: "Ihr fester Ansprechpartner für die Elektrik Ihrer Filiale.",
+    lead: "Für 199 € netto pro Monat und Standort übernehmen wir die vereinbarten Elektroprüfungen, behalten Ihre Prüftermine im Blick und unterstützen Sie bei Störungen.",
+    meta: "Mindestlaufzeit 12 Monate · Standortaufnahme einmalig 299 € netto",
     primaryCta: "Angebot anfragen",
-    secondaryCta: "Pakete ansehen",
+    secondaryCta: "Leistungen ansehen",
   },
 
   /** Main action, word for word the same in nav, hero, close and phone bar. */
@@ -21,48 +24,38 @@ export const home = {
 
   steps: {
     eyebrow: "So funktioniert es",
-    title: "In drei Schritten zum laufenden Vertrag.",
+    title: "So läuft der Elektro-Service.",
     items: [
-      { title: "Bestandsaufnahme", text: "Wir erfassen alle Geräte und Anlagen an jedem Ihrer Standorte." },
-      { title: "Prüfplan", text: "Wir planen alle Prüfungen und erledigen sie zu festen Terminen." },
-      { title: "Digitale Anlagenakte", text: "Alle Prüfberichte und Fristen online, für jeden Standort und jederzeit abrufbar." },
+      {
+        title: "Standortaufnahme",
+        text: "Einmalig 299 € netto. Wir erfassen Geräte, Anlagenumfang und Zustand und bestätigen, ob Ihr Standort in das Paket passt.",
+      },
+      {
+        title: "Prüfung nach Plan",
+        text: "Ein Prüftermin pro Vertragsjahr. Die Fristen richten sich nach Ihrer Gefährdungsbeurteilung, die Termine stimmen wir rechtzeitig ab.",
+      },
+      {
+        title: "Service bei Störungen",
+        text: "Telefonische Ersthilfe, Rückmeldung spätestens am folgenden Arbeitstag und bis zu 3 Serviceeinsätze pro Vertragsjahr.",
+      },
     ],
   },
 
-  services: {
+  offer: {
     eyebrow: "Leistungen",
-    title: "Alles, was die Elektrik Ihrer Standorte braucht.",
-    lead: "Geprüft wird nach DGUV Vorschrift 3 und den aktuellen Normen. Was Sie im Paket haben, steht vorher fest.",
-    items: [
-      {
-        icon: "plug",
-        title: "Prüfung ortsveränderlicher Geräte",
-        text: "Alle Geräte mit Stecker, nach DGUV Vorschrift 3 und DIN EN 50699 / 50678 (VDE 0702 / 0701).",
-      },
-      {
-        icon: "bolt",
-        title: "Wiederkehrende Prüfung der festen Anlage",
-        text: "Verteilungen, Stromkreise und fest angeschlossene Geräte nach DIN VDE 0105-100.",
-      },
-      { icon: "wrench", title: "Kleinreparaturen inkl. Material-Budget", text: "Kleine Mängel beheben wir direkt, mit Stunden- und Materialbudget je nach Paket." },
-      { icon: "thermo", title: "Thermografie von Verteilungen", text: "Wärmebilder zeigen lose Klemmen und überlastete Bauteile frühzeitig." },
-      { icon: "file", title: "Digitale Dokumentation & Fristenmanagement", text: "Prüfberichte und Fristen für jeden Standort in der digitalen Anlagenakte." },
-      { icon: "person", title: "Ein Ansprechpartner für alle Standorte", text: "Ein fester Kontakt, der Ihre Standorte kennt und sich um alles kümmert." },
-    ],
+    title: "Diese Leistungen sind enthalten.",
+    columns: { service: "Leistung", scope: "Enthaltener Umfang" },
+    perMonth: "netto pro Monat und Standort",
+    facts: ["Einmalige Standortaufnahme: 299 € netto", "Mindestlaufzeit 12 Monate", "Monatliche Abrechnung"],
+    cta: "Angebot anfragen",
   },
 
-  packages: {
-    eyebrow: "Pakete",
-    title: "Ein fester Preis pro Standort und Monat.",
-    lead: "Alle Preise sind Ab-Preise pro Standort und Monat, zzgl. MwSt., bei 36 Monaten Mindestlaufzeit.",
-    popularLabel: "Beliebt",
-    largeTitle: "Für größere Standorte und Lager",
-    perMonth: "pro Standort und Monat",
-    limitsDevices: "Geräte",
-    limitsCircuits: "Stromkreise",
-    upTo: "bis",
-    cta: "Angebot anfragen",
-    smallPrintTitle: "Gut zu wissen",
+  conditions: {
+    eyebrow: "Gut zu wissen",
+    title: "Konditionen und Zusatzleistungen.",
+    typicalTitle: "Typische Servicearbeiten",
+    extrasTitle: "Zusätzliche Leistungen",
+    conditionsTitle: "Vertragsbeginn und Konditionen",
   },
 
   framework: {
@@ -85,15 +78,15 @@ export const home = {
     nextSteps: [
       "Sie senden uns Ihre Anfrage.",
       "Leon Ellerbrake meldet sich innerhalb von einem Werktag und klärt Ihre Standorte mit Ihnen.",
-      "Sie erhalten Ihr Angebot zum festen Preis pro Standort und Monat.",
+      "Bei der Standortaufnahme bestätigen wir, ob Ihr Standort in das Paket passt.",
     ],
     submit: "Unverbindliches Angebot anfordern",
     submitNote: "Kostenlos und unverbindlich.",
   },
 
   closing: {
-    title: "Ein Vertrag für alle Ihre Standorte.",
-    text: "Fester Preis pro Standort, digitale Anlagenakte, ein Ansprechpartner.",
+    title: "Ein fester Ansprechpartner für alle Ihre Filialen.",
+    text: "199 € netto pro Monat und Standort: Prüfung, Fristen, Dokumentation und Service bei Störungen.",
   },
 
   /**

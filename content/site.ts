@@ -72,7 +72,7 @@ export const site = {
     titleTemplate: "%s | HeyMeister Elektro",
     defaultTitle: "Elektroprüfung DGUV V3 im Abo | HeyMeister Düsseldorf",
     defaultDescription:
-      "Elektroprüfung nach DGUV V3 für alle Ihre Standorte: fester Monatspreis, digitale Anlagenakte, ein Ansprechpartner. Pakete ab 109 € pro Standort.",
+      "Elektro-Service für Filialen: Elektroprüfung, Fristenverwaltung und Reparaturservice für 199 € netto pro Standort und Monat, mit festem Ansprechpartner.",
   },
 } as const;
 
