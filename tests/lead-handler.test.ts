@@ -11,6 +11,7 @@ const validLead = {
   industry: "Bäckerei",
   sites: "7",
   zip: "40210",
+  region: "Düsseldorf und Umgebung",
   lastCheck: "1-2-jahre",
   message: "",
   wish: "angebot",
@@ -51,11 +52,11 @@ describe("handleLead", () => {
     expect(d.sendEmail).not.toHaveBeenCalled();
   });
 
-  it("requires name, company, email, sites and wish", async () => {
+  it("requires name, company, email, region, sites and wish", async () => {
     const res = await handleLead({ startedAt: NOW - 10_000 }, "1.2.3.4", deps());
     expect(res.status).toBe(400);
     if (res.status !== 400) throw new Error();
-    expect(Object.keys(res.body.fieldErrors).sort()).toEqual(["company", "email", "name", "sites", "wish"]);
+    expect(Object.keys(res.body.fieldErrors).sort()).toEqual(["company", "email", "name", "region", "sites", "wish"]);
     // Every message is German, including for missing fields.
     for (const msg of Object.values(res.body.fieldErrors)) expect(msg).toMatch(/^Bitte|^Mindestens/);
   });

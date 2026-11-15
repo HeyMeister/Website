@@ -37,8 +37,8 @@ export function Footer() {
           </div>
           <div className="lg:col-span-4 lg:flex lg:justify-end">
             <LinkButton
-              href={contactHref("angebot")}
-              track="cta_offer_click"
+              href={contactHref("pilot")}
+              track="cta_pilot_click"
               trackLocation="close"
               arrow
               className="w-full px-8 py-4 sm:w-auto"
@@ -54,7 +54,7 @@ export function Footer() {
             <div className="lg:col-span-5">
               <Logo variant="on-dark" className="h-7 w-auto" />
               <p className="mt-4 max-w-sm text-small text-ink-inverse-muted">
-                {site.tagline}. Meisterbetrieb aus {site.contact.address.city}.
+                {site.tagline}. Meisterbetrieb aus {site.contact.address.city}, Einsatzgebiet {site.region.label}.
               </p>
             </div>
 

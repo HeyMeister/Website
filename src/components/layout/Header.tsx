@@ -13,7 +13,7 @@ import { MobileMenu } from "./MobileMenu";
 export function Header() {
   const items = navigation[siteMode];
   const tel = telHref(site.contact.phone);
-  const offerHref = contactHref("angebot");
+  const offerHref = contactHref("pilot");
 
   return (
     // Fixed, opaque bar (tasteskill nav-centre): logo left, words in the middle, main action right.
@@ -47,7 +47,7 @@ export function Header() {
             </a>
           )}
 
-          <LinkButton href={offerHref} size="md" track="cta_offer_click" trackLocation="nav" className="hidden sm:inline-flex">
+          <LinkButton href={offerHref} size="md" track="cta_pilot_click" trackLocation="nav" className="hidden sm:inline-flex">
             {home.mainAction}
           </LinkButton>
 

@@ -18,7 +18,7 @@ const toneClasses: Record<Tone, string> = {
 };
 
 /** Section heading sizes: heading (28/34) on mobile, display-l (44/50) from lg. */
-export const sectionHeadingClass = "text-heading lg:text-display-l";
+export const sectionHeadingClass = "text-heading hyphens-auto break-words lg:text-display-l lg:hyphens-manual";
 
 /** Card per brandbook: white on paper, 1 px border, radius 16 px, padding 24 px, no shadow. */
 export const cardClass = "rounded-card border border-line bg-surface-raised p-6";

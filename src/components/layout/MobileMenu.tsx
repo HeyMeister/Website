@@ -58,7 +58,7 @@ export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: 
               </li>
             ))}
           </ul>
-          <Link href={offerHref} onClick={close} data-track="cta_offer_click" className={buttonClass("primary", "lg", "mt-4 w-full")}>
+          <Link href={offerHref} onClick={close} data-track="cta_pilot_click" className={buttonClass("primary", "lg", "mt-4 w-full")}>
             Angebot anfordern
           </Link>
         </nav>

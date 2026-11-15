@@ -2,9 +2,9 @@
 export const navigation = {
   validation: [
     { label: "Ablauf", href: "/#ablauf" },
-    { label: "Leistungen", href: "/#leistungen" },
-    { label: "Konditionen", href: "/#konditionen" },
-    { label: "Für Filialisten", href: "/#filialisten" },
+    { label: "Für die Zentrale", href: "/#zentrale" },
+    { label: "Pilotfiliale", href: "/#pilot" },
+    { label: "FAQ", href: "/#faq" },
     { label: "Kontakt", href: "/#kontakt" },
     { label: "Partner werden", href: "/partner" },
   ],

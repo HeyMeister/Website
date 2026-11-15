@@ -56,7 +56,7 @@ export function StickyCta({ href, label, tel }: { href: string; label: string; t
         )}
         <Link
           href={href}
-          data-track="cta_offer_click"
+          data-track="cta_pilot_click"
           data-track-location="sticky"
           className={buttonClass("primary", "lg", "flex-1")}
         >

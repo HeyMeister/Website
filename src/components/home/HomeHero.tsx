@@ -7,7 +7,7 @@ import { LinkButton } from "@/components/ui/Button";
 /**
  * Hero: a full-bleed photograph (a distribution board) in an inset frame with large corners and
  * fine film grain, the words in a navy box on the right, vertically centred on the page grid.
- * Eyebrow, claim, one sentence with the price, two buttons and the key terms.
+ * Eyebrow, claim, what we do, the pilot button, a link to the process and the key terms.
  * On phones the photograph sits on top and the words follow on the paper ground.
  *
  * Entrance (once): the h1, then the rest; the photograph settles from 1.05.
@@ -57,8 +57,8 @@ export function HomeHero() {
                 className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
               >
                 <LinkButton
-                  href={contactHref("angebot")}
-                  track="cta_offer_click"
+                  href={contactHref("pilot")}
+                  track="cta_pilot_click"
                   trackLocation="hero"
                   arrow
                   className="shrink-0 whitespace-nowrap"
@@ -66,7 +66,7 @@ export function HomeHero() {
                   {hero.primaryCta}
                 </LinkButton>
                 <LinkButton
-                  href="/#leistungen"
+                  href="/#ablauf"
                   variant="secondary"
                   className="shrink-0 whitespace-nowrap lg:bg-white/[0.12] lg:text-white lg:hover:bg-white/20"
                 >

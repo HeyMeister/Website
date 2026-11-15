@@ -8,7 +8,7 @@
 export const site = {
   name: "HeyMeister Elektro",
   shortName: "HeyMeister",
-  tagline: "Elektroprüfung im Abo",
+  tagline: "Elektroprüfung und Mängelbeseitigung für Filialisten",
   /** Without protocol, e.g. "heymeister-elektro.de". Never hard-code the domain elsewhere. */
   domain: "www.hey-meister.de",
   locale: "de-DE",
@@ -70,9 +70,9 @@ export const site = {
 
   seo: {
     titleTemplate: "%s | HeyMeister Elektro",
-    defaultTitle: "Elektroprüfung DGUV V3 im Abo | HeyMeister Düsseldorf",
+    defaultTitle: "Elektroprüfung & Mängelbeseitigung für Filialen | HeyMeister",
     defaultDescription:
-      "Elektro-Service für Filialen: Elektroprüfung, Fristenverwaltung und Reparaturservice für 199 € netto pro Standort und Monat, mit festem Ansprechpartner.",
+      "Ein Ansprechpartner für Elektroprüfung und Mängelbeseitigung in allen Filialen: Prüfung planen, Mängel zur Freigabe vorlegen, Erledigung dokumentieren.",
   },
 } as const;
 

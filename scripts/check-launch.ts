@@ -7,8 +7,8 @@
  */
 import * as legal from "../content/legal";
 import { site } from "../content/site";
-import { pricing } from "../content/pricing";
-import { faq } from "../content/faq";
+import { home } from "../content/home";
+import { partner, partnerConfig, partnerFaq } from "../content/partner";
 import { publishedTeam } from "../content/team";
 import { findPlaceholders } from "../src/lib/placeholders";
 
@@ -17,8 +17,8 @@ export function checkLaunch(env: Record<string, string | undefined> = process.en
   const legalHits = findPlaceholders(legal);
   const otherHits = [
     ...findPlaceholders(site, "site"),
-    ...findPlaceholders(pricing, "pricing"),
-    ...findPlaceholders(faq, "faq"),
+    ...findPlaceholders(home, "home"),
+    ...findPlaceholders({ partner, partnerConfig, partnerFaq }, "partner"),
     ...findPlaceholders(publishedTeam, "team"),
   ];
   const messages: string[] = [];

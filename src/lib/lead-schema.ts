@@ -43,7 +43,7 @@ export const leadSchema = z.object({
   }),
   industry: z.enum(industries, { error: "Bitte wählen Sie eine Branche." }).optional(),
   sites: z.coerce
-    .number({ error: "Bitte geben Sie die Anzahl der Standorte an." })
+    .number({ error: "Bitte geben Sie die Anzahl der Filialen an." })
     .int({ error: "Bitte geben Sie eine ganze Zahl an." })
     .min(1, { error: "Mindestens 1 Standort." })
     .max(1000, { error: "Bitte geben Sie höchstens 1000 an oder schreiben Sie uns eine Nachricht." }),
@@ -51,6 +51,10 @@ export const leadSchema = z.object({
     error: "Bitte geben Sie eine fünfstellige PLZ an.",
   }),
   lastCheck: z.enum(lastCheckOptions.map((o) => o.value) as [string, ...string[]]).optional(),
+  /** Region of the sites, e.g. "Düsseldorf und Umgebung". */
+  region: z.string({ error: "Bitte geben Sie die Region Ihrer Standorte an." }).trim().min(2, { error: "Bitte geben Sie die Region Ihrer Standorte an." }).max(120, { error: "Die Angabe ist zu lang." }),
+  /** Free text, e.g. "März 2027". */
+  nextCheck: optionalText(60, "Die Angabe ist zu lang."),
   message: optionalText(4000, "Die Nachricht ist zu lang (max. 4000 Zeichen)."),
   wish: z.enum(["angebot", "erstgespraech", "pilot", "rahmenvertrag"], { error: "Bitte wählen Sie Ihr Anliegen." }),
   /** Optional pricing calculator configuration (JSON string), added in the pricing phase. */

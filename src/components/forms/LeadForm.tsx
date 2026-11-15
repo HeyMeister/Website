@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
-  industries,
   leadSchema,
   normalizeFormValues,
   toFieldErrors,
@@ -43,7 +42,7 @@ export function LeadForm(props: LeadFormProps) {
 
 
 
-function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: LeadFormProps & { initialWish?: Wish }) {
+function LeadFormInner({ initialWish = "pilot", successPath = "/danke" }: LeadFormProps & { initialWish?: Wish }) {
   const router = useRouter();
   const formId = useId();
   const formRef = useRef<HTMLFormElement>(null);
@@ -116,36 +115,25 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
       <input type="hidden" name="wish" value={initialWish} />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        <Field label="Firma" required error={errors.company} errorId={`${formId}-company-error`} htmlFor={`${formId}-company`}>
+        <Field label="Unternehmen" required error={errors.company} errorId={`${formId}-company-error`} htmlFor={`${formId}-company`}>
           <input {...fieldProps("company")} type="text" autoComplete="organization" required className={inputClass} />
         </Field>
         <Field label="Ansprechpartner" required error={errors.name} errorId={`${formId}-name-error`} htmlFor={`${formId}-name`}>
           <input {...fieldProps("name")} type="text" autoComplete="name" required className={inputClass} />
         </Field>
-        <Field label="E-Mail" required error={errors.email} errorId={`${formId}-email-error`} htmlFor={`${formId}-email`}>
+        <Field label="Geschäftliche E-Mail" required error={errors.email} errorId={`${formId}-email-error`} htmlFor={`${formId}-email`}>
           <input {...fieldProps("email")} type="email" autoComplete="email" inputMode="email" required className={inputClass} />
         </Field>
-        <Field label="Telefon" error={errors.phone} errorId={`${formId}-phone-error`} htmlFor={`${formId}-phone`}>
-          <input {...fieldProps("phone")} type="tel" autoComplete="tel" className={inputClass} />
+        <Field label="Standortregion" required error={errors.region} errorId={`${formId}-region-error`} htmlFor={`${formId}-region`}>
+          <input {...fieldProps("region")} type="text" required placeholder="z. B. Düsseldorf" className={inputClass} />
         </Field>
-        <Field label="Branche" error={errors.industry} errorId={`${formId}-industry-error`} htmlFor={`${formId}-industry`}>
-          <select {...fieldProps("industry")} defaultValue="" className={inputClass}>
-            <option value="">Bitte wählen</option>
-            {industries.map((i) => (
-              <option key={i} value={i}>
-                {i}
-              </option>
-            ))}
-          </select>
-        </Field>
-        <Field label="Anzahl Standorte" required error={errors.sites} errorId={`${formId}-sites-error`} htmlFor={`${formId}-sites`}>
+        <Field label="Anzahl Filialen" required error={errors.sites} errorId={`${formId}-sites-error`} htmlFor={`${formId}-sites`}>
           <input {...fieldProps("sites")} type="number" min={1} max={1000} step={1} inputMode="numeric" required className={inputClass} />
         </Field>
+        <Field label="Nächster Prüftermin (optional)" error={errors.nextCheck} errorId={`${formId}-nextCheck-error`} htmlFor={`${formId}-nextCheck`}>
+          <input {...fieldProps("nextCheck")} type="text" placeholder="z. B. März 2027" className={inputClass} />
+        </Field>
       </div>
-
-      <Field label="Nachricht" error={errors.message} errorId={`${formId}-message-error`} htmlFor={`${formId}-message`}>
-        <textarea {...fieldProps("message")} rows={3} className={inputClass} />
-      </Field>
 
       {/* Honeypot: hidden from people and assistive technology, bots fill it in. */}
       <div aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">
@@ -170,7 +158,7 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-        <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full shrink-0 whitespace-nowrap sm:w-auto")}>
+        <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full shrink-0 sm:w-auto sm:whitespace-nowrap")}>
           {submitting ? (
             "Wird gesendet …"
           ) : (

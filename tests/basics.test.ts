@@ -6,7 +6,6 @@ import { contrastRatio } from "@/lib/contrast";
 import { colors, contrastPairs, largeTextAndUiPairs } from "@/styles/tokens";
 import { postSignedWebhook, signPayload, SIGNATURE_HEADER } from "@/lib/webhook";
 import { contactHref, telHref } from "@/lib/links";
-import { lowestMonthlyPrice } from "@/content/pricing";
 import { site } from "@/content/site";
 import { checkLaunch } from "../scripts/check-launch";
 
@@ -87,9 +86,6 @@ describe("links and content", () => {
   it("points CTAs to the landing page in validation mode", () => {
     expect(contactHref("pilot", "validation")).toBe("/?wunsch=pilot#kontakt");
     expect(contactHref("angebot", "full")).toBe("/kontakt?wunsch=angebot#kontakt");
-  });
-  it("derives the teaser price from pricing.ts", () => {
-    expect(lowestMonthlyPrice()).toBe(199);
   });
   it("keeps SEO defaults within length limits", () => {
     expect(site.seo.defaultTitle.length).toBeLessThanOrEqual(60);
