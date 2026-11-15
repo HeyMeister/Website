@@ -86,7 +86,7 @@ export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; to
           </div>
         </div>
 
-        <div className="rounded-card border border-line bg-surface-raised p-6 lg:col-span-8 lg:p-8">
+        <div className="rounded-card border border-line bg-surface-raised p-6 lg:col-span-8 lg:self-start lg:p-8">
           <LeadForm />
         </div>
       </Container>

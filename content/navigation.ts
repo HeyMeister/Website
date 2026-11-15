@@ -1,12 +1,11 @@
 /** Header navigation per site mode. Validation mode uses in-page jump links only. */
 export const navigation = {
   validation: [
-    { label: "Leistung", href: "/#leistung" },
-    { label: "Fristen", href: "/#fristen" },
     { label: "Ablauf", href: "/#ablauf" },
-    { label: "Preise", href: "/#preise" },
-    { label: "Pilot", href: "/#pilot" },
-    { label: "FAQ", href: "/#faq" },
+    { label: "Leistungen", href: "/#leistungen" },
+    { label: "Pakete", href: "/#pakete" },
+    { label: "Für Filialisten", href: "/#filialisten" },
+    { label: "Kontakt", href: "/#kontakt" },
     { label: "Partner werden", href: "/partner" },
   ],
   full: [
@@ -21,6 +20,7 @@ export const navigation = {
     validation: [
       { label: "Impressum", href: "/impressum" },
       { label: "Datenschutz", href: "/datenschutz" },
+      { label: "AGB", href: "/agb" },
     ],
     full: [
       { label: "Leistungen", href: "/leistungen" },

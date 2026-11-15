@@ -5,11 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
   industries,
-  lastCheckOptions,
   leadSchema,
   normalizeFormValues,
   toFieldErrors,
-  wishOptions,
   type FieldErrors,
   type LeadInput,
 } from "@/lib/lead-schema";
@@ -22,7 +20,7 @@ import { Field, inputClass } from "./fields";
 type Wish = LeadInput["wish"];
 
 function isWish(v: string | null): v is Wish {
-  return v === "angebot" || v === "erstgespraech" || v === "pilot";
+  return v === "angebot" || v === "erstgespraech" || v === "pilot" || v === "rahmenvertrag";
 }
 
 /** Reads ?wunsch=… so CTAs can preselect the request type. */
@@ -53,8 +51,6 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  // Drives the submit label, so the button says exactly what happens next.
-  const [wish, setWish] = useState<Wish>(initialWish);
 
   // Set on the client only: used for the "submitted < 3 s" spam check.
   useEffect(() => {
@@ -116,33 +112,15 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
 
   return (
     <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-4" aria-describedby={formError ? `${formId}-form-error` : undefined}>
-      <fieldset>
-        <legend className="text-small font-semibold text-ink">Ihr Anliegen</legend>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {wishOptions.map((o) => (
-            <label key={o.value} className="cursor-pointer">
-              <input
-                type="radio"
-                name="wish"
-                value={o.value}
-                defaultChecked={o.value === initialWish}
-                onChange={() => setWish(o.value)}
-                className="peer sr-only"
-              />
-              <span className="inline-flex min-h-[44px] items-center rounded-control border border-line-strong bg-surface-raised px-4 text-small font-medium text-ink peer-checked:border-base peer-checked:bg-base peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-focus">
-                {o.label}
-              </span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      {/* The request type comes from the button that led here (?wunsch=…), not from a field. */}
+      <input type="hidden" name="wish" value={initialWish} />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        <Field label="Name" required error={errors.name} errorId={`${formId}-name-error`} htmlFor={`${formId}-name`}>
-          <input {...fieldProps("name")} type="text" autoComplete="name" required className={inputClass} />
-        </Field>
         <Field label="Firma" required error={errors.company} errorId={`${formId}-company-error`} htmlFor={`${formId}-company`}>
           <input {...fieldProps("company")} type="text" autoComplete="organization" required className={inputClass} />
+        </Field>
+        <Field label="Ansprechpartner" required error={errors.name} errorId={`${formId}-name-error`} htmlFor={`${formId}-name`}>
+          <input {...fieldProps("name")} type="text" autoComplete="name" required className={inputClass} />
         </Field>
         <Field label="E-Mail" required error={errors.email} errorId={`${formId}-email-error`} htmlFor={`${formId}-email`}>
           <input {...fieldProps("email")} type="email" autoComplete="email" inputMode="email" required className={inputClass} />
@@ -162,19 +140,6 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
         </Field>
         <Field label="Anzahl Standorte" required error={errors.sites} errorId={`${formId}-sites-error`} htmlFor={`${formId}-sites`}>
           <input {...fieldProps("sites")} type="number" min={1} max={1000} step={1} inputMode="numeric" required className={inputClass} />
-        </Field>
-        <Field label="PLZ des Hauptstandorts" error={errors.zip} errorId={`${formId}-zip-error`} htmlFor={`${formId}-zip`}>
-          <input {...fieldProps("zip")} type="text" inputMode="numeric" autoComplete="postal-code" maxLength={5} className={inputClass} />
-        </Field>
-        <Field label="Wann wurde zuletzt geprüft?" error={errors.lastCheck} errorId={`${formId}-lastCheck-error`} htmlFor={`${formId}-lastCheck`}>
-          <select {...fieldProps("lastCheck")} defaultValue="" className={inputClass}>
-            <option value="">Bitte wählen</option>
-            {lastCheckOptions.map((o) => (
-              <option key={o.value} value={o.value}>
-                {o.label}
-              </option>
-            ))}
-          </select>
         </Field>
       </div>
 
@@ -210,7 +175,7 @@ function LeadFormInner({ initialWish = "angebot", successPath = "/danke" }: Lead
             "Wird gesendet …"
           ) : (
             <>
-              {home.contact.submit[wish]}
+              {home.contact.submit}
               <ButtonArrow />
             </>
           )}

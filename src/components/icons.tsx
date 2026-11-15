@@ -98,3 +98,37 @@ export const EuroIcon = (p: SVGProps<SVGSVGElement>) => (
     <path d="M4 10h9M4 14h9" />
   </Icon>
 );
+
+export const PlugIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path d="M9 3v5M15 3v5" />
+    <path d="M6 8h12v3a6 6 0 0 1-12 0V8z" />
+    <path d="M12 17v4" />
+  </Icon>
+);
+
+export const BoltIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
+  </Icon>
+);
+
+export const WrenchIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6z" />
+  </Icon>
+);
+
+export const ThermometerIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z" />
+    <path d="M12 9v7" />
+  </Icon>
+);
+
+export const PersonIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4 21a8 8 0 0 1 16 0" />
+  </Icon>
+);

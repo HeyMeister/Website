@@ -13,7 +13,7 @@ export function mailHref(email: string): string | null {
   return `mailto:${email}`;
 }
 
-export type Wish = "angebot" | "erstgespraech" | "pilot";
+export type Wish = "angebot" | "erstgespraech" | "pilot" | "rahmenvertrag";
 
 /**
  * Where calls to action point. In validation mode everything lives on the landing page,

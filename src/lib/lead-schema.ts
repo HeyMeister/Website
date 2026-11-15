@@ -3,13 +3,12 @@ import { z } from "zod";
 /** Shared between client and server. Error messages are shown to users (German). */
 
 export const industries = [
+  "Einzelhandel / Filialist",
   "Bäckerei",
-  "Autohaus",
+  "Apotheke",
   "Gastronomie",
-  "Praxis",
-  "Einzelhandel",
-  "Büro",
-  "Hausverwaltung",
+  "Fitnessstudio",
+  "Autohaus",
   "Sonstiges",
 ] as const;
 
@@ -24,6 +23,7 @@ export const wishOptions = [
   { value: "angebot", label: "Angebot" },
   { value: "erstgespraech", label: "Erstgespräch" },
   { value: "pilot", label: "Pilotkunde werden" },
+  { value: "rahmenvertrag", label: "Rahmenvertrag" },
 ] as const;
 
 const optionalText = (max: number, msg: string) =>
@@ -52,7 +52,7 @@ export const leadSchema = z.object({
   }),
   lastCheck: z.enum(lastCheckOptions.map((o) => o.value) as [string, ...string[]]).optional(),
   message: optionalText(4000, "Die Nachricht ist zu lang (max. 4000 Zeichen)."),
-  wish: z.enum(["angebot", "erstgespraech", "pilot"], { error: "Bitte wählen Sie Ihr Anliegen." }),
+  wish: z.enum(["angebot", "erstgespraech", "pilot", "rahmenvertrag"], { error: "Bitte wählen Sie Ihr Anliegen." }),
   /** Optional pricing calculator configuration (JSON string), added in the pricing phase. */
   config: optionalText(2000, "Ungültige Konfiguration."),
 });

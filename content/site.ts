@@ -30,7 +30,7 @@ export const site = {
 
   /** Service area, used in copy and LocalBusiness JSON-LD. */
   region: {
-    label: "Düsseldorf und NRW",
+    label: "Düsseldorf und Umgebung",
     areaServed: "Nordrhein-Westfalen",
   },
 
@@ -72,7 +72,7 @@ export const site = {
     titleTemplate: "%s | HeyMeister Elektro",
     defaultTitle: "Elektroprüfung DGUV V3 im Abo | HeyMeister Düsseldorf",
     defaultDescription:
-      "Elektroprüfung nach DGUV Vorschrift 3 und BetrSichV im Monatsabo pro Standort: Prüfung, digitales Betriebsbuch und Kleinreparaturen vom Meisterbetrieb.",
+      "Elektroprüfung nach DGUV V3 für alle Ihre Standorte: fester Monatspreis, digitale Anlagenakte, ein Ansprechpartner. Pakete ab 109 € pro Standort.",
   },
 } as const;
 

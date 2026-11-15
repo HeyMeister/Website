@@ -62,7 +62,7 @@ export const datenschutz = {
     {
       heading: "3. Kontakt- und Angebotsformular",
       paragraphs: [
-        "Wenn Sie uns über das Formular kontaktieren, verarbeiten wir Ihre Angaben (Name, Firma, E-Mail, optional Telefon, Branche, Anzahl Standorte, PLZ, Angaben zur letzten Prüfung, Nachricht und Ihr Anliegen), um Ihre Anfrage zu beantworten und ein Angebot zu erstellen.",
+        "Wenn Sie uns über das Formular kontaktieren, verarbeiten wir Ihre Angaben (Firma, Ansprechpartner, E-Mail, optional Telefon, Anzahl Standorte, Branche und Nachricht), um Ihre Anfrage zu beantworten und ein Angebot zu erstellen.",
         "Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO) und unser berechtigtes Interesse an der Bearbeitung von Geschäftsanfragen (Art. 6 Abs. 1 lit. f DSGVO).",
         "Für den Versand der Formulardaten per E-Mail nutzen wir Resend (Resend, Inc., USA) als Auftragsverarbeiter. [Datenübermittlung und Garantien prüfen]",
         "Die Anfrage wird zusätzlich an unser Kundenverwaltungssystem (CRM) übertragen. [Anbieter, Serverstandort und Auftragsverarbeitungsvertrag ergänzen]",

@@ -89,7 +89,7 @@ describe("links and content", () => {
     expect(contactHref("angebot", "full")).toBe("/kontakt?wunsch=angebot#kontakt");
   });
   it("derives the teaser price from pricing.ts", () => {
-    expect(lowestMonthlyPrice()).toBe(29);
+    expect(lowestMonthlyPrice()).toBe(109);
   });
   it("keeps SEO defaults within length limits", () => {
     expect(site.seo.defaultTitle.length).toBeLessThanOrEqual(60);
