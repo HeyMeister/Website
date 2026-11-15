@@ -25,9 +25,8 @@ export const team: TeamMember[] = [
     name: "Leon Ellerbrake",
     role: "Elektrotechnikermeister, Betriebsleiter",
     quote: "[ZITAT IN LEONS WORTEN, von Leon freizugeben]",
-    /** Event photo, cropped; people in the background are blurred. Replace with a portrait shoot later. */
-    photo: "/team/leon-ellerbrake.jpg",
-    photoSize: { width: 340, height: 425 },
+    /** No photo on the site for now (removed on request). Add a portrait here later. */
+    photo: null,
     contactLine: "Ihr persönlicher Ansprechpartner",
     // Add "Eingetragen in der Handwerksrolle …" once the GmbH is registered.
     published: true,

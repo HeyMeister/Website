@@ -6,19 +6,19 @@ import { CheckIcon } from "@/components/icons";
 import { LinkButton } from "@/components/ui/Button";
 import { Container, Eyebrow, sectionHeadingClass } from "@/components/ui/layout";
 
-/** Framework agreement for chains (navy band), with the fixed contact person beside it. */
+/** Framework agreement for chains (navy band); the contact person's photo is shown when one is set in team.ts. */
 export function Framework() {
   const f = home.framework;
   const meister = publishedTeam[0];
   return (
-    <section id="filialisten" aria-labelledby="filialisten-heading" className="bg-base pb-16 pt-24 text-white sm:pb-20 lg:min-h-[100svh] lg:pb-24 lg:pt-[7.5rem]">
+    <section id="filialisten" aria-labelledby="filialisten-heading" className="bg-base pb-16 pt-24 text-white sm:pb-20 lg:pb-[7.5rem] lg:pt-[7.5rem]">
       <Container className="grid gap-12 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-7">
+        <div className={meister?.photo ? "lg:col-span-7" : "lg:col-span-12"}>
           <Eyebrow tone="dark">{f.eyebrow}</Eyebrow>
           <h2 id="filialisten-heading" className={sectionHeadingClass}>
             {f.title}
           </h2>
-          <ul className="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+          <ul className={`mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2 ${meister?.photo ? "" : "lg:grid-cols-4"}`}>
             {f.points.map((p) => (
               <li key={p.title} className="flex gap-3">
                 <CheckIcon className="mt-1 h-5 w-5 shrink-0 text-accent-light" strokeWidth={2.6} />
