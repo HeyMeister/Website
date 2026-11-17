@@ -7,8 +7,13 @@
  */
 import * as legal from "../content/legal";
 import { site } from "../content/site";
-import { home } from "../content/home";
-import { partner, partnerConfig, partnerFaq } from "../content/partner";
+import { cta, home } from "../content/home";
+import { homeFaq } from "../content/faq";
+import * as pages from "../content/pages";
+import { pricing } from "../content/pricing";
+import { segments } from "../content/segments";
+import { services, servicesOverview } from "../content/services";
+import { partner, partnerFaq } from "../content/partner";
 import { publishedTeam } from "../content/team";
 import { findPlaceholders } from "../src/lib/placeholders";
 
@@ -17,8 +22,12 @@ export function checkLaunch(env: Record<string, string | undefined> = process.en
   const legalHits = findPlaceholders(legal);
   const otherHits = [
     ...findPlaceholders(site, "site"),
-    ...findPlaceholders(home, "home"),
-    ...findPlaceholders({ partner, partnerConfig, partnerFaq }, "partner"),
+    ...findPlaceholders({ home, cta, homeFaq }, "home"),
+    ...findPlaceholders(pages, "pages"),
+    ...findPlaceholders(pricing, "pricing"),
+    ...findPlaceholders({ segments: segments.map((s) => ({ ...s, todo: undefined })) }, "segments"),
+    ...findPlaceholders({ services, servicesOverview }, "services"),
+    ...findPlaceholders({ partner, partnerFaq }, "partner"),
     ...findPlaceholders(publishedTeam, "team"),
   ];
   const messages: string[] = [];

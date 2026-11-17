@@ -5,7 +5,7 @@ import { findPlaceholders, hasPlaceholder, splitPlaceholders } from "@/lib/place
 import { contrastRatio } from "@/lib/contrast";
 import { colors, contrastPairs, largeTextAndUiPairs } from "@/styles/tokens";
 import { postSignedWebhook, signPayload, SIGNATURE_HEADER } from "@/lib/webhook";
-import { contactHref, telHref } from "@/lib/links";
+import { callHref, contactHref, homeFormHref, telHref } from "@/lib/links";
 import { site } from "@/content/site";
 import { checkLaunch } from "../scripts/check-launch";
 
@@ -83,9 +83,12 @@ describe("links and content", () => {
     expect(telHref("[TELEFON]")).toBeNull();
     expect(telHref("+49 211 123456-0")).toBe("tel:+492111234560");
   });
-  it("points CTAs to the landing page in validation mode", () => {
-    expect(contactHref("pilot", "validation")).toBe("/?wunsch=pilot#kontakt");
-    expect(contactHref("angebot", "full")).toBe("/kontakt?wunsch=angebot#kontakt");
+  it("points CTAs to the contact page, the homepage to its own form, the call to booking or form", () => {
+    expect(contactHref("check")).toBe("/kontakt?wunsch=check");
+    expect(contactHref()).toBe("/kontakt");
+    expect(homeFormHref("pilot")).toBe("/?wunsch=pilot#kontakt");
+    expect(callHref(null)).toBe("/kontakt?wunsch=erstgespraech");
+    expect(callHref("https://cal.example/hm")).toBe("https://cal.example/hm");
   });
   it("keeps SEO defaults within length limits", () => {
     expect(site.seo.defaultTitle.length).toBeLessThanOrEqual(60);

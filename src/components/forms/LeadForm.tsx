@@ -4,32 +4,51 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useId, useRef, useState, type FormEvent } from "react";
 import {
+  lastCheckOptions,
   leadSchema,
   normalizeFormValues,
+  siteCountOptions,
   toFieldErrors,
+  wishOptions,
   type FieldErrors,
   type LeadInput,
 } from "@/lib/lead-schema";
 import { track } from "@/lib/analytics";
-import { home } from "@/content/home";
-import { site } from "@/content/site";
+import { cta, home } from "@/content/home";
 import { ButtonArrow, buttonClass } from "@/components/ui/Button";
 import { Field, inputClass } from "./fields";
 
 type Wish = LeadInput["wish"];
 
-function isWish(v: string | null): v is Wish {
-  return v === "angebot" || v === "erstgespraech" || v === "pilot" || v === "rahmenvertrag";
-}
+const submitLabels: Record<string, string> = {
+  check: cta.primary,
+  erstgespraech: "15-Minuten-Gespräch anfragen",
+  pilot: "Pilotplatz anfragen",
+  angebot: "Dieses Angebot anfordern",
+};
 
-/** Reads ?wunsch=… so CTAs can preselect the request type. */
-function LeadFormWithParams(props: LeadFormProps) {
-  const params = useSearchParams();
-  const wish = params.get("wunsch");
-  return <LeadFormInner {...props} initialWish={isWish(wish) ? wish : props.initialWish} key={wish ?? "none"} />;
+function isWish(v: string | null): v is Wish {
+  return !!v && wishOptions.some((o) => o.value === v);
 }
 
 type LeadFormProps = { initialWish?: Wish; successPath?: string };
+type Prefill = { config?: string; sites?: string };
+
+/** Reads ?wunsch=…, ?config=… and ?standorte=… so CTAs and the price calculator can prefill the form. */
+function LeadFormWithParams(props: LeadFormProps) {
+  const params = useSearchParams();
+  const wish = params.get("wunsch");
+  const config = params.get("config") ?? undefined;
+  const sites = params.get("standorte") ?? undefined;
+  return (
+    <LeadFormInner
+      {...props}
+      initialWish={isWish(wish) ? wish : props.initialWish}
+      prefill={{ config: wish === "angebot" ? config?.slice(0, 2000) : undefined, sites }}
+      key={`${wish ?? "none"}-${config ?? ""}`}
+    />
+  );
+}
 
 export function LeadForm(props: LeadFormProps) {
   // The fallback renders the full form statically, so it is part of the prerendered HTML.
@@ -40,9 +59,11 @@ export function LeadForm(props: LeadFormProps) {
   );
 }
 
-
-
-function LeadFormInner({ initialWish = "pilot", successPath = "/danke" }: LeadFormProps & { initialWish?: Wish }) {
+function LeadFormInner({
+  initialWish = "check",
+  successPath = "/danke",
+  prefill = {},
+}: LeadFormProps & { initialWish?: Wish; prefill?: Prefill }) {
   const router = useRouter();
   const formId = useId();
   const formRef = useRef<HTMLFormElement>(null);
@@ -50,6 +71,7 @@ function LeadFormInner({ initialWish = "pilot", successPath = "/danke" }: LeadFo
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const sitesDefault = siteCountOptions.some((o) => o.value === prefill.sites) ? prefill.sites : "";
 
   // Set on the client only: used for the "submitted < 3 s" spam check.
   useEffect(() => {
@@ -113,25 +135,49 @@ function LeadFormInner({ initialWish = "pilot", successPath = "/danke" }: LeadFo
     <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-4" aria-describedby={formError ? `${formId}-form-error` : undefined}>
       {/* The request type comes from the button that led here (?wunsch=…), not from a field. */}
       <input type="hidden" name="wish" value={initialWish} />
+      {prefill.config && <input type="hidden" name="config" value={prefill.config} />}
 
-      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        <Field label="Unternehmen" required error={errors.company} errorId={`${formId}-company-error`} htmlFor={`${formId}-company`}>
-          <input {...fieldProps("company")} type="text" autoComplete="organization" required className={inputClass} />
-        </Field>
-        <Field label="Ansprechpartner" required error={errors.name} errorId={`${formId}-name-error`} htmlFor={`${formId}-name`}>
+      {prefill.config && (
+        <div className="rounded-control border border-line bg-surface-2 px-4 py-3 text-small">
+          <p className="font-semibold text-ink">Ihre Auswahl aus dem Preisrechner</p>
+          <p className="mt-1 whitespace-pre-line text-ink-muted">{prefill.config}</p>
+        </div>
+      )}
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Name" required error={errors.name} errorId={`${formId}-name-error`} htmlFor={`${formId}-name`}>
           <input {...fieldProps("name")} type="text" autoComplete="name" required className={inputClass} />
         </Field>
-        <Field label="Geschäftliche E-Mail" required error={errors.email} errorId={`${formId}-email-error`} htmlFor={`${formId}-email`}>
+        <Field label="Firma" required error={errors.company} errorId={`${formId}-company-error`} htmlFor={`${formId}-company`}>
+          <input {...fieldProps("company")} type="text" autoComplete="organization" required className={inputClass} />
+        </Field>
+        <Field label="E-Mail" required error={errors.email} errorId={`${formId}-email-error`} htmlFor={`${formId}-email`}>
           <input {...fieldProps("email")} type="email" autoComplete="email" inputMode="email" required className={inputClass} />
         </Field>
-        <Field label="Standortregion" required error={errors.region} errorId={`${formId}-region-error`} htmlFor={`${formId}-region`}>
-          <input {...fieldProps("region")} type="text" required placeholder="z. B. Düsseldorf" className={inputClass} />
+        <Field label="Telefon" required error={errors.phone} errorId={`${formId}-phone-error`} htmlFor={`${formId}-phone`}>
+          <input {...fieldProps("phone")} type="tel" autoComplete="tel" required className={inputClass} />
         </Field>
-        <Field label="Anzahl Filialen" required error={errors.sites} errorId={`${formId}-sites-error`} htmlFor={`${formId}-sites`}>
-          <input {...fieldProps("sites")} type="number" min={1} max={1000} step={1} inputMode="numeric" required className={inputClass} />
+        <Field label="Anzahl Standorte" required error={errors.sites} errorId={`${formId}-sites-error`} htmlFor={`${formId}-sites`}>
+          <select {...fieldProps("sites")} required defaultValue={sitesDefault} className={inputClass}>
+            <option value="" disabled>
+              Bitte wählen
+            </option>
+            {siteCountOptions.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
         </Field>
-        <Field label="Nächster Prüftermin (optional)" error={errors.nextCheck} errorId={`${formId}-nextCheck-error`} htmlFor={`${formId}-nextCheck`}>
-          <input {...fieldProps("nextCheck")} type="text" placeholder="z. B. März 2027" className={inputClass} />
+        <Field label="Wann wurde zuletzt geprüft? (optional)" error={errors.lastCheck} errorId={`${formId}-lastCheck-error`} htmlFor={`${formId}-lastCheck`}>
+          <select {...fieldProps("lastCheck")} defaultValue="" className={inputClass}>
+            <option value="">Keine Angabe</option>
+            {lastCheckOptions.map((o) => (
+              <option key={o.value} value={o.value}>
+                {o.label}
+              </option>
+            ))}
+          </select>
         </Field>
       </div>
 
@@ -141,14 +187,6 @@ function LeadFormInner({ initialWish = "pilot", successPath = "/danke" }: LeadFo
         <input id={`${formId}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
       </div>
 
-      <p className="text-small text-ink-muted">
-        Mit dem Absenden verarbeiten wir Ihre Angaben, um Ihre Anfrage zu beantworten. Details in der{" "}
-        <Link href="/datenschutz" className="font-semibold text-accent-dark underline underline-offset-2 hover:text-ink">
-          Datenschutzerklärung
-        </Link>
-        . Pflichtfelder sind mit * markiert.
-      </p>
-
       <div aria-live="polite" role="status">
         {formError && (
           <p id={`${formId}-form-error`} className="rounded-control border border-danger bg-danger-soft px-4 py-3 text-small font-medium text-danger">
@@ -157,19 +195,22 @@ function LeadFormInner({ initialWish = "pilot", successPath = "/danke" }: LeadFo
         )}
       </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-        <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full shrink-0 sm:w-auto sm:whitespace-nowrap")}>
+      <div className="space-y-3 pt-1">
+        <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "w-full sm:w-auto")}>
           {submitting ? (
             "Wird gesendet …"
           ) : (
             <>
-              {home.contact.submit}
+              {submitLabels[initialWish] ?? cta.primary}
               <ButtonArrow />
             </>
           )}
         </button>
         <p className="text-small text-ink-muted">
-          {home.contact.submitNote} Antwort {site.contact.responseTime}.
+          {home.contact.submitNote}{" "}
+          <Link href="/datenschutz" className="font-semibold text-accent-dark underline underline-offset-2 hover:text-ink">
+            Datenschutzerklärung
+          </Link>
         </p>
       </div>
     </form>

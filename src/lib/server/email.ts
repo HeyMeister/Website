@@ -1,5 +1,5 @@
 import "server-only";
-import { industries, lastCheckOptions, wishOptions, type LeadInput } from "@/lib/lead-schema";
+import { lastCheckOptions, siteCountOptions, wishOptions, type LeadInput } from "@/lib/lead-schema";
 import type { LeadMeta } from "@/lib/lead-handler";
 
 type Attachment = { filename: string; content: string /* base64 */ };
@@ -54,15 +54,9 @@ export function leadEmailText(lead: LeadInput, meta: LeadMeta): string {
     `Name: ${lead.name}`,
     `Firma: ${lead.company}`,
     `E-Mail: ${lead.email}`,
-    `Telefon: ${lead.phone ?? "–"}`,
-    `Branche: ${lead.industry && industries.includes(lead.industry) ? lead.industry : "–"}`,
-    `Anzahl Filialen: ${lead.sites}`,
-    `Standortregion: ${lead.region}`,
-    `Nächster Prüftermin: ${lead.nextCheck ?? "–"}`,
+    `Telefon: ${lead.phone}`,
+    `Anzahl Standorte: ${label(siteCountOptions, lead.sites)}`,
     `Zuletzt geprüft: ${label(lastCheckOptions, lead.lastCheck)}`,
-    "",
-    "Nachricht:",
-    lead.message ?? "–",
   ];
   if (lead.config) lines.push("", "Konfiguration aus dem Preisrechner:", lead.config);
   lines.push("", `Eingegangen: ${meta.receivedAt} (Quelle: ${meta.source})`);
@@ -71,7 +65,7 @@ export function leadEmailText(lead: LeadInput, meta: LeadMeta): string {
 
 export async function sendLeadEmail(lead: LeadInput, meta: LeadMeta): Promise<void> {
   await sendViaResend({
-    subject: `Neue Anfrage (${label(wishOptions, lead.wish)}): ${lead.company}, ${lead.sites} Standort(e)`,
+    subject: `Neue Anfrage (${label(wishOptions, lead.wish)}): ${lead.company}, ${label(siteCountOptions, lead.sites)}`,
     text: leadEmailText(lead, meta),
     replyTo: lead.email,
   });

@@ -32,12 +32,16 @@ All copy lives in typed files under [`content/`](content/). Components never con
 | File | Contents |
 | --- | --- |
 | `content/site.ts` | Name, domain, contact data, trust signals, pilot programme, SEO defaults |
-| `content/home.ts` | Landing page copy, logbook mockup example data |
-| `content/pricing.ts` | Prices per size and tier, setup fees, volume discounts |
-| `content/faq.ts` | FAQ (`short: true` = shown on the validation landing page) |
+| `content/home.ts` | Homepage copy, the CTA wording (`cta`), intervals table, logbook mockup example data |
+| `content/services.ts` | `/leistungen` and the four service pages |
+| `content/segments.ts` | The four segment landing pages (Praxen, Autohäuser, Filialisten, Hausverwaltungen) |
+| `content/pages.ts` | Betreiberpflichten, Preise, Pilot, Über uns, Karriere, Kontakt, Danke |
+| `content/pricing.ts` | Prices per size and tier, setup fees, volume discounts (calculator and examples read this) |
+| `content/faq.ts` | Homepage FAQ |
 | `content/legal.ts` | Impressum and Datenschutz |
 | `content/team.ts` | Team (only `published: true` is shown) |
-| `content/navigation.ts` | Header/footer links per mode |
+| `content/navigation.ts` | Header, mobile and footer links |
+| `content/partner.ts` | `/partner` (electrical contractors) |
 
 **Placeholders** are written in square brackets, e.g. `"[TELEFON]"`. They render as violet, dashed markers so nothing
 unfinished goes unnoticed. Phone/email links are only created once the value is real.
@@ -73,12 +77,16 @@ ring turns white on navy, where blue would not reach 3:1. `tests/basics.test.ts`
 Because `text-base` is Tailwind's font-size utility, the navy base colour is `text-ink` for text and `bg-base`/`border-base`
 elsewhere.
 
-## Site modes
+## Pages and calls to action
 
-`SITE_MODE=validation` (default): one landing page with jump links, plus Impressum, Datenschutz and the thank-you page.
-`SITE_MODE=full`: all pages (being built in later phases). Both modes use the same components and content.
+Home `/`, `/leistungen` (+ `geraete`, `anlagen`, `reparatur`, `betriebsbuch`), `/fuer-praxen`, `/fuer-autohaeuser`,
+`/fuer-filialisten`, `/fuer-hausverwaltungen`, `/preise` (with calculator), `/betreiberpflichten`, `/pilot`,
+`/ueber-uns`, `/karriere`, `/kontakt`, `/danke`, `/partner`, legal pages.
 
-Switch by setting `SITE_MODE=full` in Vercel and redeploying (values are baked in at build time).
+One goal per page: primary "Kostenlosen Standort-Check anfordern" → `/kontakt?wunsch=check` (on the homepage: its own
+form), secondary "15-Minuten-Gespräch buchen" → `BOOKING_URL` if set, else `/kontakt?wunsch=erstgespraech`.
+The calculator passes its configuration as `?wunsch=angebot&config=…&standorte=…`.
+`SITE_MODE` is no longer used.
 
 ## Visibility and protection
 
@@ -99,17 +107,14 @@ in-memory otherwise), email via Resend, optional CRM webhook signed with HMAC-SH
 (`X-HeyMeister-Signature: sha256=<hex>` over `<timestamp>.<body>`, timestamp in `X-HeyMeister-Timestamp`).
 A failing webhook never affects the visitor.
 
-## Partner programme (`/partner`)
+## Electrical contractors (`/partner`)
 
-Page for tip-givers (brokers, occupational safety specialists, property-management service providers, planners).
-Copy and the commission range live in `content/partner.ts`; `partnerConfig.commissionMaxPercent` and
-`partnerConfig.payoutRhythm` are TODO placeholders until decided.
+Page for electrical contractors who want inspection jobs ("Sie wollen Prüfaufträge? Wir vermitteln Ihnen Aufträge.").
+Copy lives in `content/partner.ts`. No job volumes or rates are promised; conditions go into the partner agreement.
 
-- `POST /api/partner` ("Partner werden", JSON) and `POST /api/tipp` ("Tipp einreichen", multipart with an optional PDF)
-  validate with zod (`src/lib/partner-schema.ts`), check honeypot, fill time and rate limit
-  (`src/lib/partner-handler.ts`, unit-tested) and send an email via Resend to `PARTNER_INBOX`. Nothing is stored.
-- PDF uploads are limited to 4 MB: Vercel Functions accept request bodies up to 4.5 MB. Larger files need a
-  direct-to-storage upload (e.g. Supabase Storage or Vercel Blob).
+- `POST /api/partner` ("Als Fachpartner bewerben", JSON) validates with zod (`src/lib/partner-schema.ts`), checks
+  honeypot, fill time and rate limit (`src/lib/partner-handler.ts`, unit-tested) and sends an email via Resend to
+  `PARTNER_INBOX`. Nothing is stored.
 
 ## Investor data room (`/dataroom`)
 

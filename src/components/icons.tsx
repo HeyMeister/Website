@@ -133,3 +133,17 @@ export const ListIcon = (p: SVGProps<SVGSVGElement>) => (
     <path d="m3.5 6 1 1 2-2M3.5 12h3M3.5 18h3" />
   </Icon>
 );
+
+export const ShieldIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.4 7.5 9.5 4.3-1.1 7.5-4.9 7.5-9.5V6z" />
+    <path d="m9 12 2 2 4-4" />
+  </Icon>
+);
+
+export const PersonIcon = (p: SVGProps<SVGSVGElement>) => (
+  <Icon {...p}>
+    <circle cx="12" cy="8" r="4" />
+    <path d="M4.5 21a7.5 7.5 0 0 1 15 0" />
+  </Icon>
+);

@@ -1,5 +1,4 @@
 import { hasPlaceholder } from "./placeholders";
-import { siteMode, type SiteMode } from "./env";
 
 /** Converts a display number like "+49 211 123456-0" into a tel: href, or null for placeholders. */
 export function telHref(phone: string): string | null {
@@ -13,17 +12,19 @@ export function mailHref(email: string): string | null {
   return `mailto:${email}`;
 }
 
-export type Wish = "angebot" | "erstgespraech" | "pilot" | "rahmenvertrag";
+export type Wish = "check" | "erstgespraech" | "pilot" | "angebot";
 
-/**
- * Where calls to action point. In validation mode everything lives on the landing page,
- * in full mode on dedicated pages.
- */
-export function contactHref(wish?: Wish, mode: SiteMode = siteMode): string {
-  const base = mode === "full" ? "/kontakt" : "/";
-  return wish ? `${base}?wunsch=${wish}#kontakt` : `${base}#kontakt`;
+/** The contact page with the form. Every page's calls to action point here, except the homepage's own form. */
+export function contactHref(wish?: Wish): string {
+  return wish ? `/kontakt?wunsch=${wish}` : "/kontakt";
 }
 
-export function pricesHref(mode: SiteMode = siteMode): string {
-  return mode === "full" ? "/preise" : "/#preise";
+/** The form at the end of the homepage (used by homepage sections only). */
+export function homeFormHref(wish: Wish = "check"): string {
+  return `/?wunsch=${wish}#kontakt`;
+}
+
+/** Secondary action "15-Minuten-Gespräch buchen": the booking tool if configured, else the form. */
+export function callHref(bookingUrl: string | null): string {
+  return bookingUrl ?? contactHref("erstgespraech");
 }

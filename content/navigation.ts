@@ -1,39 +1,42 @@
-/** Header navigation per site mode. Validation mode uses in-page jump links only. */
+/** Header, mobile and footer navigation. */
+export type NavItem = { label: string; href: string };
+
 export const navigation = {
-  validation: [
-    { label: "Ablauf", href: "/#ablauf" },
-    { label: "Für die Zentrale", href: "/#zentrale" },
-    { label: "Pilotfiliale", href: "/#pilot" },
-    { label: "FAQ", href: "/#faq" },
-    { label: "Kontakt", href: "/#kontakt" },
-    { label: "Partner werden", href: "/partner" },
-  ],
-  full: [
+  /** Header (from xl) and the top of the mobile menu. */
+  main: [
     { label: "Leistungen", href: "/leistungen" },
+    { label: "Für wen", href: "/#fuer-wen" },
     { label: "Preise", href: "/preise" },
-    { label: "Für wen", href: "/fuer-filialisten" },
-    { label: "Pilotprogramm", href: "/pilot" },
+    { label: "Betreiberpflichten", href: "/betreiberpflichten" },
     { label: "Über uns", href: "/ueber-uns" },
-    { label: "Partner werden", href: "/partner" },
   ],
   footer: {
-    validation: [
+    leistungen: [
+      { label: "Alle Leistungen", href: "/leistungen" },
+      { label: "Geräteprüfung", href: "/leistungen/geraete" },
+      { label: "Anlagenprüfung", href: "/leistungen/anlagen" },
+      { label: "Reparatur", href: "/leistungen/reparatur" },
+      { label: "Betriebsbuch", href: "/leistungen/betriebsbuch" },
+    ],
+    branchen: [
+      { label: "Für Praxen", href: "/fuer-praxen" },
+      { label: "Für Autohäuser", href: "/fuer-autohaeuser" },
+      { label: "Für Filialisten", href: "/fuer-filialisten" },
+      { label: "Für Hausverwaltungen", href: "/fuer-hausverwaltungen" },
+    ],
+    unternehmen: [
+      { label: "Preise", href: "/preise" },
+      { label: "Betreiberpflichten", href: "/betreiberpflichten" },
+      { label: "Pilotprogramm", href: "/pilot" },
+      { label: "Über uns", href: "/ueber-uns" },
+      { label: "Karriere", href: "/karriere" },
+      { label: "Für Elektrobetriebe", href: "/partner" },
+      { label: "Kontakt", href: "/kontakt" },
+    ],
+    legal: [
       { label: "Impressum", href: "/impressum" },
       { label: "Datenschutz", href: "/datenschutz" },
       { label: "AGB", href: "/agb" },
     ],
-    full: [
-      { label: "Leistungen", href: "/leistungen" },
-      { label: "Preise", href: "/preise" },
-      { label: "Pilotprogramm", href: "/pilot" },
-      { label: "Über uns", href: "/ueber-uns" },
-      { label: "Partner werden", href: "/partner" },
-      { label: "Karriere", href: "/karriere" },
-      { label: "Kontakt", href: "/kontakt" },
-      { label: "Impressum", href: "/impressum" },
-      { label: "Datenschutz", href: "/datenschutz" },
-    ],
   },
-} as const;
-
-export type NavItem = { label: string; href: string };
+} satisfies { main: NavItem[]; footer: Record<string, NavItem[]> };

@@ -18,7 +18,7 @@ export const operator = {
   city: "[ORT]",
   representatives: "[GESCHÄFTSFÜHRER/IN]",
   phone: "+49 1588 8628386",
-  email: "[E-MAIL]",
+  email: "info@hey-meister.de",
   /** Fill in after registration (GmbH i. G. is not registered yet). */
   registerCourt: "[REGISTERGERICHT, nach Eintragung]",
   registerNumber: "[HRB-NUMMER, nach Eintragung]",
@@ -48,7 +48,7 @@ export const datenschutz = {
     {
       heading: "1. Verantwortlicher",
       paragraphs: [
-        "Verantwortlich für die Datenverarbeitung auf dieser Website ist [BETREIBER-FIRMA], [STRASSE UND HAUSNUMMER], [PLZ] [ORT], E-Mail: [E-MAIL], Telefon: +49 1588 8628386.",
+        "Verantwortlich für die Datenverarbeitung auf dieser Website ist [BETREIBER-FIRMA], [STRASSE UND HAUSNUMMER], [PLZ] [ORT], E-Mail: info@hey-meister.de, Telefon: +49 1588 8628386.",
         "[Falls vorhanden: Kontaktdaten des Datenschutzbeauftragten]",
       ],
     },
@@ -62,7 +62,7 @@ export const datenschutz = {
     {
       heading: "3. Kontakt- und Angebotsformular",
       paragraphs: [
-        "Wenn Sie uns über das Formular kontaktieren, verarbeiten wir Ihre Angaben (Unternehmen, Ansprechpartner, geschäftliche E-Mail, Standortregion, Anzahl Filialen und optional nächster Prüftermin), um Ihre Anfrage zu beantworten und ein Angebot zu erstellen.",
+        "Wenn Sie uns über das Formular kontaktieren, verarbeiten wir Ihre Angaben (Name, Firma, E-Mail, Telefon, Anzahl Standorte, optional der Zeitpunkt der letzten Prüfung und gegebenenfalls Ihre Auswahl aus dem Preisrechner), um Ihre Anfrage zu beantworten und ein Angebot zu erstellen.",
         "Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO) und unser berechtigtes Interesse an der Bearbeitung von Geschäftsanfragen (Art. 6 Abs. 1 lit. f DSGVO).",
         "Für den Versand der Formulardaten per E-Mail nutzen wir Resend (Resend, Inc., USA) als Auftragsverarbeiter. [Datenübermittlung und Garantien prüfen]",
         "Die Anfrage wird zusätzlich an unser Kundenverwaltungssystem (CRM) übertragen. [Anbieter, Serverstandort und Auftragsverarbeitungsvertrag ergänzen]",
@@ -70,11 +70,10 @@ export const datenschutz = {
       ],
     },
     {
-      heading: "3a. Partnerprogramm und Tipps",
+      heading: "3a. Bewerbung als Fachpartner",
       paragraphs: [
-        "Wenn Sie sich über das Formular „Partner werden“ registrieren, verarbeiten wir Ihre Angaben (Name, Firma, Rolle, Region, E-Mail, optional Telefon und Ihre Angaben zu betreuten Kunden), um die Zusammenarbeit mit Ihnen anzubahnen. Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).",
-        "Über das Formular „Tipp einreichen“ übermitteln Partner uns Kontaktdaten von Gewerbekunden (Firma, Ansprechpartner, Telefon oder E-Mail, Anlass) und optional einen Prüfbericht. Partner bestätigen, dass der Kunde der Weitergabe zugestimmt hat. Wir verwenden diese Daten, um den Kunden zu kontaktieren und ein Angebot zu erstellen (Art. 6 Abs. 1 lit. a und f DSGVO) und den Partner über den Stand zu informieren.",
-        "Die Angaben und Dateien werden per E-Mail über Resend (Resend, Inc., USA) an uns übermittelt und nicht dauerhaft auf dem Webserver gespeichert. [Speicherdauer für Partner- und Tippdaten ergänzen]",
+        "Wenn Sie sich über das Formular „Als Fachpartner bewerben“ bewerben, verarbeiten wir Ihre Angaben (Betrieb, Ansprechpartner, E-Mail, optional Telefon, Einsatzgebiet, Leistungen, optional Anzahl Mitarbeitende und Anmerkungen), um die Zusammenarbeit mit Ihnen anzubahnen. Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).",
+        "Die Angaben werden per E-Mail über Resend (Resend, Inc., USA) an uns übermittelt und nicht dauerhaft auf dem Webserver gespeichert. [Speicherdauer für Bewerbungsdaten ergänzen]",
       ],
     },
     {

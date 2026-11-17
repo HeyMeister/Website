@@ -3,14 +3,31 @@ import { home } from "@/content/home";
 import { publishedTeam } from "@/content/team";
 import { site } from "@/content/site";
 import { bookingUrl } from "@/lib/env";
-import { mailHref, telHref } from "@/lib/links";
+import { mailHref, telHref, type Wish } from "@/lib/links";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { BookingWidget } from "@/components/forms/BookingWidget";
 import { MailIcon, PhoneIcon } from "@/components/icons";
 import { Container, Eyebrow, sectionHeadingClass } from "@/components/ui/layout";
 
-export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; tone?: "light" | "muted" }) {
+export function CTASection({
+  id = "kontakt",
+  tone = "muted",
+  eyebrow,
+  title,
+  text,
+  headingLevel = 2,
+  initialWish,
+}: {
+  id?: string;
+  tone?: "light" | "muted";
+  eyebrow?: string;
+  title?: string;
+  text?: string;
+  headingLevel?: 1 | 2;
+  initialWish?: Wish;
+}) {
   const c = home.contact;
+  const H = headingLevel === 1 ? "h1" : "h2";
   const tel = telHref(site.contact.phone);
   const mail = mailHref(site.contact.email);
   const meister = publishedTeam[0];
@@ -23,11 +40,11 @@ export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; to
     <section id={id} aria-labelledby={`${id}-heading`} className={`${bg} pb-16 pt-24 sm:pb-20 lg:min-h-[100svh] lg:pb-24 lg:pt-[7.5rem]`}>
       <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">
-          <Eyebrow tone={tone}>{c.eyebrow}</Eyebrow>
-          <h2 id={`${id}-heading`} className={sectionHeadingClass}>
-            {c.title}
-          </h2>
-          <p className="mt-4 max-w-prose text-subheading text-ink-muted">{c.text}</p>
+          <Eyebrow tone={tone}>{eyebrow ?? c.eyebrow}</Eyebrow>
+          <H id={`${id}-heading`} className={sectionHeadingClass}>
+            {title ?? c.title}
+          </H>
+          <p className="mt-4 max-w-prose text-subheading text-ink-muted">{text ?? c.text}</p>
 
           {meister?.photo && (
             <div className="mt-8 flex items-center gap-4">
@@ -66,7 +83,7 @@ export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; to
               {tel && (
                 <p className="flex items-center gap-3">
                   <PhoneIcon className="text-accent" />
-                  <a href={tel} className="m-link font-semibold text-ink">
+                  <a href={tel} data-track="phone_click" data-track-location="contact" className="m-link font-semibold text-ink">
                     {site.contact.phone}
                   </a>
                 </p>
@@ -86,8 +103,8 @@ export function CTASection({ id = "kontakt", tone = "muted" }: { id?: string; to
           </div>
         </div>
 
-        <div className="rounded-card border border-line bg-surface-raised p-6 lg:col-span-8 lg:self-start lg:p-8">
-          <LeadForm />
+        <div className="min-w-0 rounded-card border border-line bg-surface-raised p-6 lg:col-span-8 lg:self-start lg:p-8">
+          <LeadForm initialWish={initialWish} />
         </div>
       </Container>
     </section>

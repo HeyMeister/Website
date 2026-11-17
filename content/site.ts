@@ -8,7 +8,7 @@
 export const site = {
   name: "HeyMeister Elektro",
   shortName: "HeyMeister",
-  tagline: "Elektroprüfung und Mängelbeseitigung für Filialisten",
+  tagline: "Elektro im Full-Service: Prüfung, Reparatur und Betriebsbuch im Abo",
   /** Without protocol, e.g. "heymeister-elektro.de". Never hard-code the domain elsewhere. */
   domain: "www.hey-meister.de",
   locale: "de-DE",
@@ -16,7 +16,7 @@ export const site = {
   contact: {
     /** Display format, e.g. "+49 211 123456-0". The tel: link is derived from it. */
     phone: "+49 1588 8628386",
-    email: "[E-MAIL]",
+    email: "info@hey-meister.de",
     address: {
       street: "[STRASSE UND HAUSNUMMER]",
       zip: "[PLZ]",
@@ -70,9 +70,9 @@ export const site = {
 
   seo: {
     titleTemplate: "%s | HeyMeister Elektro",
-    defaultTitle: "Elektroprüfung & Mängelbeseitigung für Filialen | HeyMeister",
+    defaultTitle: "Elektro im Full-Service: Prüfung & Reparatur | HeyMeister",
     defaultDescription:
-      "Ein Ansprechpartner für Elektroprüfung und Mängelbeseitigung in allen Filialen: Prüfung planen, Mängel zur Freigabe vorlegen, Erledigung dokumentieren.",
+      "Elektroprüfung nach DGUV V3, Kleinreparaturen und digitales Betriebsbuch zum festen Monatspreis pro Standort. Meisterbetrieb aus Düsseldorf.",
   },
 } as const;
 

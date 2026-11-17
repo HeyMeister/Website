@@ -24,7 +24,7 @@ export function Field({
   children: ReactNode;
 }) {
   return (
-    <div>
+    <div className="min-w-0">
       <label htmlFor={htmlFor} className="block text-small font-semibold text-ink">
         {label}
         {required && (

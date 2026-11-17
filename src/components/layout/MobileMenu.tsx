@@ -6,7 +6,7 @@ import { CloseIcon, MenuIcon } from "@/components/icons";
 import { buttonClass } from "@/components/ui/Button";
 import type { NavItem } from "@/content/navigation";
 
-export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: string }) {
+export function MobileMenu({ items, offerHref, offerLabel }: { items: NavItem[]; offerHref: string; offerLabel: string }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -42,7 +42,7 @@ export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: 
       <div
         id={panelId}
         hidden={!open}
-        className="absolute inset-x-0 top-16 border-b border-line bg-surface"
+        className="absolute inset-x-0 top-16 max-h-[calc(100svh-4rem)] overflow-y-auto border-b border-line bg-surface"
       >
         <nav aria-label="Mobile Navigation" className="px-4 py-4 sm:px-6">
           <ul className="flex flex-col">
@@ -58,8 +58,8 @@ export function MobileMenu({ items, offerHref }: { items: NavItem[]; offerHref: 
               </li>
             ))}
           </ul>
-          <Link href={offerHref} onClick={close} data-track="cta_pilot_click" className={buttonClass("primary", "lg", "mt-4 w-full")}>
-            Angebot anfordern
+          <Link href={offerHref} onClick={close} data-track="cta_check_click" data-track-location="menu" className={buttonClass("primary", "lg", "mt-4 w-full")}>
+            {offerLabel}
           </Link>
         </nav>
       </div>

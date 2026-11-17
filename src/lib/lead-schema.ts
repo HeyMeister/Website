@@ -2,29 +2,28 @@ import { z } from "zod";
 
 /** Shared between client and server. Error messages are shown to users (German). */
 
-export const industries = [
-  "Einzelhandel / Filialist",
-  "Bäckerei",
-  "Apotheke",
-  "Gastronomie",
-  "Fitnessstudio",
-  "Autohaus",
-  "Sonstiges",
+export const siteCountOptions = [
+  { value: "1", label: "1 Standort" },
+  { value: "2-4", label: "2 bis 4" },
+  { value: "5-14", label: "5 bis 14" },
+  { value: "15-29", label: "15 bis 29" },
+  { value: "30+", label: "30 oder mehr" },
 ] as const;
 
 export const lastCheckOptions = [
   { value: "unbekannt", label: "Weiß ich nicht" },
   { value: "unter-1-jahr", label: "Vor weniger als 1 Jahr" },
-  { value: "1-2-jahre", label: "Vor 1 bis 2 Jahren" },
-  { value: "laenger", label: "Vor mehr als 2 Jahren" },
+  { value: "laenger", label: "Länger her" },
 ] as const;
 
 export const wishOptions = [
-  { value: "angebot", label: "Angebot" },
-  { value: "erstgespraech", label: "Erstgespräch" },
-  { value: "pilot", label: "Pilotkunde werden" },
-  { value: "rahmenvertrag", label: "Rahmenvertrag" },
+  { value: "check", label: "Kostenloser Standort-Check" },
+  { value: "erstgespraech", label: "15-Minuten-Gespräch" },
+  { value: "pilot", label: "Pilotplatz" },
+  { value: "angebot", label: "Angebot aus dem Preisrechner" },
 ] as const;
+
+const values = <T extends ReadonlyArray<{ value: string }>>(opts: T) => opts.map((o) => o.value) as [string, ...string[]];
 
 const optionalText = (max: number, msg: string) =>
   z
@@ -34,30 +33,21 @@ const optionalText = (max: number, msg: string) =>
     .optional()
     .transform((v) => (v ? v : undefined));
 
+/** At most five required fields: name, company, email, phone, number of sites. */
 export const leadSchema = z.object({
   name: z.string({ error: "Bitte geben Sie Ihren Namen an." }).trim().min(2, { error: "Bitte geben Sie Ihren Namen an." }).max(120, { error: "Der Name ist zu lang." }),
   company: z.string({ error: "Bitte geben Sie Ihre Firma an." }).trim().min(2, { error: "Bitte geben Sie Ihre Firma an." }).max(160, { error: "Der Firmenname ist zu lang." }),
   email: z.string({ error: "Bitte geben Sie Ihre E-Mail-Adresse an." }).trim().pipe(z.email({ error: "Bitte geben Sie eine gültige E-Mail-Adresse an." })),
-  phone: optionalText(40, "Die Telefonnummer ist zu lang.").refine((v) => !v || /^[+\d][\d\s/()-]{4,}$/.test(v), {
-    error: "Bitte geben Sie eine gültige Telefonnummer an.",
-  }),
-  industry: z.enum(industries, { error: "Bitte wählen Sie eine Branche." }).optional(),
-  sites: z.coerce
-    .number({ error: "Bitte geben Sie die Anzahl der Filialen an." })
-    .int({ error: "Bitte geben Sie eine ganze Zahl an." })
-    .min(1, { error: "Mindestens 1 Standort." })
-    .max(1000, { error: "Bitte geben Sie höchstens 1000 an oder schreiben Sie uns eine Nachricht." }),
-  zip: optionalText(5, "Bitte geben Sie eine fünfstellige PLZ an.").refine((v) => !v || /^\d{5}$/.test(v), {
-    error: "Bitte geben Sie eine fünfstellige PLZ an.",
-  }),
-  lastCheck: z.enum(lastCheckOptions.map((o) => o.value) as [string, ...string[]]).optional(),
-  /** Region of the sites, e.g. "Düsseldorf und Umgebung". */
-  region: z.string({ error: "Bitte geben Sie die Region Ihrer Standorte an." }).trim().min(2, { error: "Bitte geben Sie die Region Ihrer Standorte an." }).max(120, { error: "Die Angabe ist zu lang." }),
-  /** Free text, e.g. "März 2027". */
-  nextCheck: optionalText(60, "Die Angabe ist zu lang."),
-  message: optionalText(4000, "Die Nachricht ist zu lang (max. 4000 Zeichen)."),
-  wish: z.enum(["angebot", "erstgespraech", "pilot", "rahmenvertrag"], { error: "Bitte wählen Sie Ihr Anliegen." }),
-  /** Optional pricing calculator configuration (JSON string), added in the pricing phase. */
+  phone: z
+    .string({ error: "Bitte geben Sie Ihre Telefonnummer an." })
+    .trim()
+    .min(1, { error: "Bitte geben Sie Ihre Telefonnummer an." })
+    .max(40, { error: "Die Telefonnummer ist zu lang." })
+    .regex(/^[+\d][\d\s/()-]{4,}$/, { error: "Bitte geben Sie eine gültige Telefonnummer an." }),
+  sites: z.enum(values(siteCountOptions), { error: "Bitte wählen Sie die Anzahl Ihrer Standorte." }),
+  lastCheck: z.enum(values(lastCheckOptions)).optional(),
+  wish: z.enum(values(wishOptions), { error: "Bitte wählen Sie Ihr Anliegen." }),
+  /** Pricing calculator configuration (plain text summary), only with wish "angebot". */
   config: optionalText(2000, "Ungültige Konfiguration."),
 });
 

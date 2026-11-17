@@ -1,159 +1,134 @@
 /**
- * Partner programme page (/partner): copy and configuration.
+ * Page for electrical contractors (/partner): "Sie wollen Prüfaufträge? Wir vermitteln Ihnen Aufträge."
  *
- * Audience: tip-givers, mainly commercial insurance brokers, also occupational safety
- * specialists, property-management service providers and planners.
+ * Audience: electrical contractors (Elektrofachbetriebe) who want inspection jobs and, where they
+ * fit, approved defect repairs at the branches of HeyMeister's customers.
  *
- * TODO before launch (shown as visible [PLACEHOLDERS] on the page until then):
- * - partnerConfig.commissionMaxPercent: the real maximum commission rate
- * - partnerConfig.payoutRhythm: how often commissions are paid out
- * - Confirm the policy answers in the FAQ (known customers, no territory protection).
+ * Rules: no promised job volumes, no invented figures or rates. Conditions are agreed in the first
+ * conversation and the partner agreement.
  */
 import type { FaqItem } from "./faq";
 
-export const partnerConfig = {
-  /** TODO: maximum commission on projects in percent, e.g. "5". Keep the brackets until decided. */
-  commissionMaxPercent: "[X]",
-  /** TODO: payout rhythm, e.g. "monatlich" or "quartalsweise". */
-  payoutRhythm: "[TODO: monatlich oder quartalsweise]",
-  /** Response time promised to the partner after a tip. */
-  responseTime: "innerhalb von 24 Stunden",
-} as const;
-
 export const partner = {
   seo: {
-    title: "Partner werden: Provision für Tipps",
+    title: "Prüfaufträge für Elektrobetriebe",
     description:
-      "Partnerprogramm Elektro für Gewerbemakler: Sie geben den Tipp, wir beheben Mängel nach SK 3602 und DGUV V3 zum Festpreis. Provision nach Zahlung.",
-    keywords: ["Partnerprogramm Elektro", "Tippgeber Provision", "SK 3602 Mängel beheben", "VdS 3602", "DGUV V3 Mängel"],
+      "Sie wollen Prüfaufträge? HeyMeister vermittelt Elektrofachbetrieben Elektroprüfungen und freigegebene Reparaturen in Filialen ihrer Region.",
+    keywords: ["Prüfaufträge Elektro", "Aufträge für Elektriker", "Elektroprüfung Subunternehmer", "DGUV V3 Aufträge", "Fachpartner Elektro"],
   },
 
   hero: {
-    eyebrow: "Partnerprogramm",
-    title: "Ihre Gewerbekunden haben Mängel im Prüfbericht? Wir beheben sie – Sie erhalten eine Provision.",
-    lead: "Sie geben uns mit Einwilligung Ihres Kunden den Kontakt, wir machen ein Festpreisangebot und beheben die Mängel. Nach Zahlungseingang erhalten Sie Ihre Provision.",
-    cta: "Partner werden",
-    secondary: "Tipp einreichen",
+    eyebrow: "Für Elektrobetriebe",
+    title: "Sie wollen Prüfaufträge? Wir vermitteln Ihnen Aufträge.",
+    lead: "HeyMeister betreut Filialunternehmen bei Elektroprüfung und Mängelbeseitigung. Für Standorte in Ihrer Region suchen wir Elektrofachbetriebe, die Prüfungen und freigegebene Reparaturen übernehmen.",
+    cta: "Als Fachpartner bewerben",
+    secondary: "So funktioniert es",
+    meta: "Keine Akquise · Umfang vorab klar · Sie entscheiden, was Sie annehmen",
   },
 
-  /** Example status message for the hero (fictitious customer, clearly marked as an example). */
-  statusExample: {
-    label: "Beispiel einer Statusmeldung",
-    tip: "Tipp HM-0042",
-    customer: "Beispielhotel GmbH",
-    reason: "Mängel aus Prüfbericht nach SK 3602",
-    steps: [
-      { title: "Tipp eingegangen", date: "03.03.", done: true },
-      { title: "Kunde erreicht, Termin vor Ort", date: "04.03.", done: true },
-      { title: "Festpreisangebot verschickt", date: "06.03.", done: true },
-      { title: "Auftrag erteilt", date: "10.03.", done: true },
-      { title: "Provision nach Zahlungseingang", date: "offen", done: false },
+  /** Example job request for the hero (fictitious customer, always shown with the "Beispiel" label). */
+  jobExample: {
+    label: "Auftragsanfrage",
+    customer: "Beispiel GmbH",
+    site: "Filiale Benrath, Verkaufsfläche",
+    rows: [
+      { term: "Leistung", value: "Wiederholungsprüfung ortsfeste Anlage und ortsveränderliche Geräte" },
+      { term: "Umfang", value: "1 Unterverteilung, rund 40 Geräte" },
+      { term: "Terminvorschlag", value: "KW 48, vor Ladenöffnung" },
+      { term: "Unterlagen", value: "Letzter Prüfbericht, Verteilerplan" },
     ],
+    accept: "Zusagen",
+    decline: "Ablehnen",
   },
 
   steps: {
-    eyebrow: "So funktioniert's",
-    title: "Drei Schritte vom Tipp zur Provision.",
+    eyebrow: "Ablauf",
+    title: "Vom Kennenlernen zum ersten Auftrag.",
     items: [
-      { icon: "send", title: "Kontakt übermitteln", text: "Sie geben uns den Kontakt Ihres Kunden weiter, mit seiner Einwilligung." },
-      { icon: "offer", title: "Festpreisangebot", text: `HeyMeister meldet sich ${partnerConfig.responseTime} beim Kunden und macht ein Angebot zum Festpreis.` },
-      { icon: "payout", title: "Provision", text: "Nach Zahlungseingang des Kunden erhalten Sie Ihre Provision." },
-    ],
-  },
-
-  audiences: {
-    eyebrow: "Für wen",
-    title: "Für alle, die Gewerbekunden beraten.",
-    items: [
-      { title: "Gewerbemakler", occasion: "Beim Policengespräch kommt die Prüfung nach SK 3602 auf den Tisch." },
-      { title: "Fachkräfte für Arbeitssicherheit", occasion: "Bei der Begehung fallen Mängel an der Elektrik auf, die jemand beheben muss." },
-      { title: "Hausverwaltungs-Dienstleister", occasion: "Der Prüfbericht für ein Objekt liegt vor, die Mängelliste ist noch offen." },
-      { title: "Planer und Architekten", occasion: "Bei Umbau oder Sanierung braucht der Bauherr einen Elektrobetrieb mit festem Preis." },
+      { icon: "send", title: "Bewerben", text: "Sie schicken uns Ihre Region und Ihre Leistungen über das Formular." },
+      { icon: "calendar", title: "Kennenlernen", text: "Wir sprechen über Qualifikation, Kapazität und Konditionen und schließen eine Partnervereinbarung." },
+      { icon: "file", title: "Anfrage erhalten", text: "Steht in Ihrer Region ein Auftrag an, schicken wir Ihnen Standort, Umfang und Terminvorschlag. Sie sagen zu oder ab." },
+      { icon: "check", title: "Prüfen und abrechnen", text: "Sie führen die Arbeiten aus und liefern Bericht und Nachweise. Abgerechnet wird mit uns." },
     ],
   },
 
   benefits: {
     eyebrow: "Was Sie davon haben",
-    title: "Provision für Ihren Tipp, ohne Verkaufsaufwand.",
-    commissionPrefix: "bis zu",
-    commissionSuffix: "% auf Projekte",
-    recurring: "Laufende Beteiligung an Prüf-Abos",
+    title: "Aufträge ohne Akquise. Organisation übernehmen wir.",
     items: [
-      { title: "Statusmeldung zu jedem Tipp", text: "Sie wissen, ob wir den Kunden erreicht haben, ob ein Angebot steht und ob der Auftrag kommt." },
-      { title: "Kein Verkaufsaufwand", text: "Sie geben den Kontakt weiter. Angebot, Termine und Ausführung übernehmen wir." },
-      { title: "Keine Mindestmengen", text: "Ein Tipp im Jahr ist genauso willkommen wie zehn im Monat." },
+      { title: "Keine Akquise", text: "Wir gewinnen die Kunden und schicken Ihnen passende Anfragen aus Ihrer Region." },
+      { title: "Umfang vorab klar", text: "Sie wissen vor der Zusage, was zu prüfen ist und welche Unterlagen vorliegen." },
+      { title: "Termine stimmen wir ab", text: "Wir klären Termin und Zugang mit der Filiale. Sie kommen, wenn alles vorbereitet ist." },
+      { title: "Ein Auftraggeber", text: "Sie rechnen mit HeyMeister ab, nicht mit jeder Filiale einzeln." },
+      { title: "Freiwillig", text: "Keine Mindestmengen. Sie nehmen an, was in Ihre Planung passt." },
     ],
   },
 
-  conduct: {
-    eyebrow: "Was wir von Partnern erwarten",
-    title: "Ein kurzer Verhaltenskodex.",
+  requirements: {
+    eyebrow: "Voraussetzungen",
+    title: "Wen wir suchen.",
     items: [
-      { title: "Nur mit Einwilligung", text: "Sie geben Kontaktdaten nur weiter, wenn der Kunde zugestimmt hat." },
-      { title: "Keine Kaltakquise", text: "Bitte sprechen Sie keine Unternehmen ungefragt in unserem Namen an." },
-      { title: "Keine Zusagen in unserem Namen", text: "Preise, Termine und Leistungen sagen wir dem Kunden selbst zu." },
-      { title: "Provision offenlegen", text: "Wo es für Sie vorgeschrieben ist, legen Sie die Provision gegenüber dem Kunden offen." },
+      { title: "Elektrofachbetrieb", text: "Eingetragen in die Handwerksrolle, mit verantwortlicher Elektrofachkraft." },
+      { title: "Erfahrung mit Prüfungen", text: "Prüfung ortsfester Anlagen und/oder ortsveränderlicher Geräte im gewerblichen Umfeld." },
+      { title: "Geeignete Messtechnik", text: "Kalibrierte Prüf- und Messgeräte, Prüfprotokolle in digitaler Form." },
+      { title: "Betriebshaftpflicht", text: "Eine bestehende Betriebshaftpflichtversicherung." },
     ],
   },
 
   faq: {
     eyebrow: "Häufige Fragen",
-    title: "Fragen zum Partnerprogramm.",
-    disclaimer: "Diese Antworten sind allgemeine Hinweise und keine Rechtsberatung.",
+    title: "Fragen von Elektrobetrieben.",
+    disclaimer: "Die Einzelheiten regelt die Partnervereinbarung.",
   },
 
   signup: {
-    eyebrow: "Partner werden",
-    title: "Als Partner registrieren.",
-    text: "Wir melden uns, stimmen die Zusammenarbeit mit Ihnen ab und schicken Ihnen Ihren Partnercode.",
-    submit: "Partner werden",
-    success: "Danke. Ihre Anfrage ist bei uns eingegangen. Wir melden uns in Kürze bei Ihnen.",
-  },
-
-  tip: {
-    eyebrow: "Für bestehende Partner",
-    title: "Tipp einreichen.",
-    text: "Mit Ihrem Partnercode. Den Prüfbericht können Sie direkt mitschicken.",
-    submit: "Tipp senden",
-    success: `Danke. Wir haben Ihren Tipp erhalten und melden uns ${partnerConfig.responseTime} beim Kunden.`,
+    eyebrow: "Bewerbung",
+    title: "Als Fachpartner bewerben.",
+    text: "Wir melden uns, lernen Sie kennen und besprechen, welche Aufträge in Ihrer Region passen.",
+    submit: "Als Fachpartner bewerben",
+    success: "Danke. Ihre Bewerbung ist bei uns eingegangen. Wir melden uns in Kürze bei Ihnen.",
   },
 } as const;
 
 export const partnerFaq: FaqItem[] = [
   {
-    id: "vermittler",
-    question: "Muss ich Versicherungsvermittler sein?",
+    id: "menge",
+    question: "Wie viele Aufträge kann ich erwarten?",
     answer: [
-      "Nein. Partner kann werden, wer beruflich mit Gewerbekunden zu tun hat, zum Beispiel als Makler, Fachkraft für Arbeitssicherheit oder Planer. Sie empfehlen einen Elektrofachbetrieb, Sie vermitteln keine Versicherung.",
+      "Das hängt davon ab, welche Kunden wir in Ihrer Region betreuen. Wir versprechen keine Mengen. Wenn ein Auftrag zu Ihrer Region und Ihren Leistungen passt, fragen wir Sie zuerst.",
     ],
   },
   {
-    id: "ausschliesslichkeit",
-    question: "Brauche ich eine Genehmigung als Ausschließlichkeitsvertreter?",
+    id: "pflicht",
+    question: "Muss ich jede Anfrage annehmen?",
+    answer: ["Nein. Sie sagen zu, was in Ihre Planung passt, und lehnen ab, was nicht passt. Es gibt keine Mindestmengen."],
+  },
+  {
+    id: "verguetung",
+    question: "Wie werde ich vergütet?",
     answer: [
-      "Das hängt von Ihrem Agenturvertrag ab. Viele Verträge regeln Nebentätigkeiten und Empfehlungen an Dritte. Bitte klären Sie das vorab mit Ihrem Versicherer.",
+      "Die Konditionen vereinbaren wir im Kennenlernen und halten sie in der Partnervereinbarung fest. Für jede Anfrage nennen wir Ihnen vorab Umfang und Vergütung.",
     ],
   },
   {
-    id: "zahlung",
-    question: "Wann wird gezahlt?",
-    answer: [`Nach Zahlungseingang des Kunden. Die Provision rechnen wir ${partnerConfig.payoutRhythm} per Gutschrift ab.`],
-  },
-  {
-    id: "bekannt",
-    question: "Was passiert, wenn der Kunde schon bekannt ist?",
+    id: "kunde",
+    question: "Wer ist mein Auftraggeber?",
     answer: [
-      "Steht der Kunde bereits mit uns in Kontakt oder ist er schon Kunde, ist der Tipp nicht provisionsfähig. Das sagen wir Ihnen offen in der Statusmeldung.",
+      "HeyMeister. Die Filialen haben uns als Ansprechpartner. Termine, Zugang und Rückfragen laufen über uns, die Dokumentation geht an uns.",
     ],
   },
   {
-    id: "gebiet",
-    question: "Gibt es Gebietsschutz?",
-    answer: ["Nein. Es gibt keinen Gebietsschutz und keine Exklusivität."],
+    id: "maengel",
+    question: "Kann ich auch Mängel beseitigen?",
+    answer: [
+      "Ja, wenn es passt. Festgestellte Mängel legen wir dem Kunden mit Angebot zur Freigabe vor. Freigegebene Arbeiten können wir an Sie vergeben.",
+    ],
   },
   {
-    id: "privat",
-    question: "Arbeiten Sie auch mit Privatkunden?",
-    answer: ["Nein. Wir arbeiten nur für Gewerbekunden, zum Beispiel Hausverwaltungen, Hotels, Pflegeheimbetreiber und Bauträger."],
+    id: "region",
+    question: "In welchen Regionen suchen Sie Partner?",
+    answer: [
+      "Wir starten in Düsseldorf und Umgebung. Bewerbungen aus anderen Regionen nehmen wir gern auf und melden uns, sobald dort Aufträge anstehen.",
+    ],
   },
 ];

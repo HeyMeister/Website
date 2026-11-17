@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { contactHref, pricesHref } from "@/lib/links";
+import { contactHref } from "@/lib/links";
 import { Container } from "@/components/ui/layout";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -7,7 +7,8 @@ import { Footer } from "@/components/layout/Footer";
 export default function NotFound() {
   const links = [
     { href: "/", label: "Startseite" },
-    { href: pricesHref(), label: "Preise" },
+    { href: "/leistungen", label: "Leistungen" },
+    { href: "/preise", label: "Preise" },
     { href: contactHref(), label: "Kontakt" },
   ];
   return (

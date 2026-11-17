@@ -8,7 +8,7 @@ import { ButtonArrow, buttonClass } from "@/components/ui/Button";
 /**
  * Mobile-only bar at the bottom of the viewport. Shown once the hero has scrolled out of view
  * and hidden again as soon as the contact section (#kontakt) reaches the viewport, so it never
- * covers the form or the footer. Hidden bars are `inert`, so they cannot receive focus.
+ * covers the form or the footer (#footer). Hidden bars are `inert`, so they cannot receive focus.
  */
 export function StickyCta({ href, label, tel }: { href: string; label: string; tel: string | null }) {
   const [visible, setVisible] = useState(false);
@@ -20,7 +20,8 @@ export function StickyCta({ href, label, tel }: { href: string; label: string; t
     const update = () => {
       frame = 0;
       const pastHero = hero ? hero.getBoundingClientRect().bottom < 0 : window.scrollY > 600;
-      const contactReached = contact ? contact.getBoundingClientRect().top < window.innerHeight : false;
+      const footer = document.getElementById("footer");
+      const contactReached = [contact, footer].some((el) => el && el.getBoundingClientRect().top < window.innerHeight);
       setVisible(pastHero && !contactReached);
     };
     const onScroll = () => {
@@ -56,7 +57,7 @@ export function StickyCta({ href, label, tel }: { href: string; label: string; t
         )}
         <Link
           href={href}
-          data-track="cta_pilot_click"
+          data-track="cta_check_click"
           data-track-location="sticky"
           className={buttonClass("primary", "lg", "flex-1")}
         >

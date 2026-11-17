@@ -3,6 +3,8 @@ export type AnalyticsEvent =
   | "cta_offer_click"
   | "cta_call_click"
   | "cta_pilot_click"
+  | "cta_check_click"
+  | "cta_partner_click"
   | "form_submit_success"
   | "calculator_used"
   | "phone_click";
