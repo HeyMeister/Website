@@ -6,7 +6,7 @@ import { clientIp } from "@/lib/server/request";
 
 export const dynamic = "force-dynamic";
 
-/** "Als Fachpartner bewerben": JSON body, validated with zod, sent by email to PARTNER_INBOX. */
+/** "Als Fachpartner bewerben": JSON body, validated with zod, sent by email to the contact address. */
 export async function POST(req: NextRequest) {
   let raw: unknown;
   try {

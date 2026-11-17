@@ -86,7 +86,6 @@ Home `/`, `/leistungen` (+ `geraete`, `anlagen`, `reparatur`, `betriebsbuch`), `
 One goal per page: primary "Kostenlosen Standort-Check anfordern" → `/kontakt?wunsch=check` (on the homepage: its own
 form), secondary "15-Minuten-Gespräch buchen" → `BOOKING_URL` if set, else `/kontakt?wunsch=erstgespraech`.
 The calculator passes its configuration as `?wunsch=angebot&config=…&standorte=…`.
-`SITE_MODE` is no longer used.
 
 ## Visibility and protection
 
@@ -114,7 +113,7 @@ Copy lives in `content/partner.ts`. No job volumes or rates are promised; condit
 
 - `POST /api/partner` ("Als Fachpartner bewerben", JSON) validates with zod (`src/lib/partner-schema.ts`), checks
   honeypot, fill time and rate limit (`src/lib/partner-handler.ts`, unit-tested) and sends an email via Resend to
-  `PARTNER_INBOX`. Nothing is stored.
+  the contact address (`site.contact.email`, info@hey-meister.de). Nothing is stored.
 
 ## Investor data room (`/dataroom`)
 

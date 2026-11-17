@@ -3,7 +3,7 @@ import { labelOf, partnerServices, partnerTeamSizes, type PartnerInput } from "@
 import type { Meta } from "@/lib/partner-handler";
 import { sendViaResend } from "./email";
 
-/** Specialist-partner applications, sent to the address in PARTNER_INBOX. */
+/** Specialist-partner applications, sent to the site's contact address like every form. */
 
 export function partnerEmailText(p: PartnerInput, meta: Meta): string {
   return [
@@ -27,7 +27,6 @@ export function partnerEmailText(p: PartnerInput, meta: Meta): string {
 
 export async function sendPartnerEmail(p: PartnerInput, meta: Meta): Promise<void> {
   await sendViaResend({
-    toEnv: "PARTNER_INBOX",
     subject: `Fachpartner-Bewerbung: ${p.company} (${p.region})`,
     text: partnerEmailText(p, meta),
     replyTo: p.email,

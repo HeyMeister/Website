@@ -1,6 +1,14 @@
 import "server-only";
 import { lastCheckOptions, siteCountOptions, wishOptions, type LeadInput } from "@/lib/lead-schema";
 import type { LeadMeta } from "@/lib/lead-handler";
+import { site } from "@/content/site";
+
+/** Every form (leads and partner applications) goes to the site's contact address. */
+export const DEFAULT_FROM = "HeyMeister Website <website@hey-meister.de>";
+
+export function emailRecipient(): string {
+  return process.env.CONTACT_EMAIL?.trim() || site.contact.email;
+}
 
 type Attachment = { filename: string; content: string /* base64 */ };
 
@@ -10,22 +18,20 @@ export async function sendViaResend(opts: {
   text: string;
   replyTo?: string;
   attachments?: Attachment[];
-  /** Name of the env variable holding the recipient address (default CONTACT_EMAIL). */
-  toEnv?: "CONTACT_EMAIL" | "PARTNER_INBOX";
 }): Promise<void> {
-  const toEnv = opts.toEnv ?? "CONTACT_EMAIL";
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env[toEnv];
-  const from = process.env.RESEND_FROM;
+  const to = emailRecipient();
+  // The sender domain must be verified in Resend; RESEND_FROM overrides the default.
+  const from = process.env.RESEND_FROM?.trim() || DEFAULT_FROM;
 
-  if (!apiKey || !to || !from) {
+  if (!apiKey) {
     if (process.env.NODE_ENV !== "production") {
       // Local development without credentials: log instead of sending.
       const files = opts.attachments?.map((a) => a.filename).join(", ");
-      console.info(`[email:dev → ${toEnv}] ${opts.subject}\n${opts.text}${files ? `\nAnhang: ${files}` : ""}`);
+      console.info(`[email:dev → ${to}] ${opts.subject}\n${opts.text}${files ? `\nAnhang: ${files}` : ""}`);
       return;
     }
-    throw new Error(`Email not configured (RESEND_API_KEY, ${toEnv}, RESEND_FROM)`);
+    throw new Error("Email not configured (RESEND_API_KEY missing)");
   }
 
   const res = await fetch("https://api.resend.com/emails", {
