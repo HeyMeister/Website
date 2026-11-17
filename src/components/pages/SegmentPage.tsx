@@ -5,21 +5,14 @@ import { CheckIcon } from "@/components/icons";
 import { FAQ } from "@/components/sections/FAQ";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { LogbookScreen } from "@/components/sections/LogbookMockup";
+import { RelatedGuides } from "@/components/seo/GuideLinks";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container, Eyebrow, Section, sectionHeadingClass } from "@/components/ui/layout";
 import { ExampleQuote } from "./ExampleQuote";
 
-const heroVisual: Record<Segment["slug"], "devices" | "installation" | "steps" | "logbook"> = {
-  "fuer-praxen": "devices",
-  "fuer-autohaeuser": "installation",
-  "fuer-filialisten": "logbook",
-  "fuer-hausverwaltungen": "steps",
-};
-
-function Visual({ slug }: { slug: Segment["slug"] }) {
-  const v = heroVisual[slug];
-  if (v === "logbook") return <LogbookScreen />;
-  const photo = photos[v];
+function Visual({ visual }: { visual: Segment["visual"] }) {
+  if (visual === "logbook") return <LogbookScreen />;
+  const photo = photos[visual];
   return (
     <div className="relative aspect-[4/3] overflow-hidden rounded-card bg-surface-2">
       <Image src={photo.src} alt={photo.alt} fill priority sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
@@ -27,11 +20,24 @@ function Visual({ slug }: { slug: Segment["slug"] }) {
   );
 }
 
+/** Guides that fit every segment page. */
+const segmentGuides = ["dguv-v3-pruefung", "pruefristen", "kosten-elektropruefung"];
+
 /** Segment landing page: hero → 3 pain points → solution → example calculation → 3 FAQ → CTA. */
 export function SegmentPage({ segment }: { segment: Segment }) {
   return (
     <>
-      <PageHero eyebrow={segment.eyebrow} title={segment.title} lead={segment.lead} aside={<Visual slug={segment.slug} />} location={segment.slug} />
+      <PageHero
+        breadcrumbs={[
+          { label: "Branchen", href: "/branchen" },
+          { label: segment.card.title, href: `/${segment.slug}` },
+        ]}
+        eyebrow={segment.eyebrow}
+        title={segment.title}
+        lead={segment.lead}
+        aside={<Visual visual={segment.visual} />}
+        location={segment.slug}
+      />
 
       <Section id="kennen-sie-das" tone="muted" eyebrow="Kennen Sie das?" title="Drei Dinge, die Zeit kosten.">
         <ol className="grid gap-6 md:grid-cols-3">
@@ -78,6 +84,7 @@ export function SegmentPage({ segment }: { segment: Segment }) {
       </Section>
 
       <CtaBand title="Ein Anruf. Danach ist Elektro nicht mehr Ihr Thema." text="15 Minuten am Telefon: Standorte, Geräte, letzte Prüfung. Sie bekommen eine ehrliche Einschätzung und ein festes Angebot." location={`${segment.slug}-close`} />
+      <RelatedGuides slugs={segmentGuides} />
     </>
   );
 }

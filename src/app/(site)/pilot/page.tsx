@@ -15,6 +15,7 @@ export default function PilotPage() {
   return (
     <>
       <PageHero
+        breadcrumbs={[{ label: "Pilotprogramm", href: "/pilot" }]}
         eyebrow={p.eyebrow}
         title={p.title}
         lead={p.text}

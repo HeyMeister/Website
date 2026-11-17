@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { guides } from "@/content/guides";
 import { segments } from "@/content/segments";
 import { services } from "@/content/services";
 import { isLaunched } from "@/lib/env";
@@ -12,9 +13,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/leistungen",
     ...services.map((s) => `/leistungen/${s.slug}`),
+    "/branchen",
     ...segments.map((s) => `/${s.slug}`),
     "/preise",
+    "/ratgeber",
     "/betreiberpflichten",
+    ...guides.map((g) => `/ratgeber/${g.slug}`),
+    "/elektropruefung-duesseldorf",
     "/pilot",
     "/ueber-uns",
     "/karriere",

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Breadcrumbs, type Crumb } from "@/components/seo/Breadcrumbs";
 import { Fill } from "@/components/ui/Placeholder";
 import { Container, Eyebrow } from "@/components/ui/layout";
 import { Actions } from "./Actions";
@@ -14,7 +15,10 @@ export function PageHero({
   aside,
   actions,
   location,
+  breadcrumbs,
 }: {
+  /** Trail after "Startseite", ending with the current page. */
+  breadcrumbs?: Crumb[];
   eyebrow: string;
   title: string;
   lead?: string;
@@ -27,6 +31,7 @@ export function PageHero({
     <section id="hero" aria-labelledby="hero-heading" className="hero-enter bg-surface pb-16 pt-16 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
       <Container className={aside ? "grid gap-12 lg:grid-cols-12 lg:items-center" : ""}>
         <div className={aside ? "min-w-0 lg:col-span-7" : "max-w-4xl"}>
+          {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
           <div data-enter-step>
             <Eyebrow>{eyebrow}</Eyebrow>
           </div>

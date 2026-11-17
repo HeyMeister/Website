@@ -3,6 +3,7 @@ import { guide } from "@/content/pages";
 import { pageMetadata } from "@/lib/seo";
 import { ArrowRightIcon } from "@/components/icons";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { RelatedGuides } from "@/components/seo/GuideLinks";
 import { InspectionIntervals } from "@/components/sections/InspectionIntervals";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container } from "@/components/ui/layout";
@@ -15,7 +16,7 @@ export default function BetreiberpflichtenPage() {
   const fristenIndex = g.sections.findIndex((s) => s.id === "fristen");
   return (
     <>
-      <PageHero eyebrow={g.eyebrow} title={g.title} lead={g.intro} location="ratgeber" />
+      <PageHero breadcrumbs={[{ label: "Ratgeber", href: "/ratgeber" }, { label: "Betreiberpflichten", href: "/betreiberpflichten" }]} eyebrow={g.eyebrow} title={g.title} lead={g.intro} location="ratgeber" />
 
       <div className="bg-surface-2 py-16 sm:py-20 lg:py-24">
         <Container className="grid gap-12 lg:grid-cols-12">
@@ -83,6 +84,7 @@ export default function BetreiberpflichtenPage() {
 
       <InspectionIntervals tone="light" />
       <CtaBand title={g.close.title} text={g.close.text} location="ratgeber-close" />
+      <RelatedGuides slugs={["dguv-v3-pruefung", "pruefristen", "pruefprotokoll"]} title="Weiterlesen" tone="muted" />
     </>
   );
 }

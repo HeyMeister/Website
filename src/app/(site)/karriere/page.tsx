@@ -18,6 +18,7 @@ export default function KarrierePage() {
   return (
     <>
       <PageHero
+        breadcrumbs={[{ label: "Karriere", href: "/karriere" }]}
         eyebrow={c.eyebrow}
         title={c.title}
         lead={`${c.text} ${c.emergencyNote}`}

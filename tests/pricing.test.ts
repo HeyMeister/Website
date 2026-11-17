@@ -1,7 +1,13 @@
+import fs from "node:fs";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { pricing, lowestMonthlyPrice } from "@/content/pricing";
 import { segments } from "@/content/segments";
 import { services, servicesOverview } from "@/content/services";
+import { guides, guidesHub } from "@/content/guides";
+import { localPage } from "@/content/local";
+import { segmentsHub } from "@/content/segments";
+import { photos } from "@/content/photos";
 import * as pages from "@/content/pages";
 import { site } from "@/content/site";
 import { discountFor, quote, siteCountBucket } from "@/lib/pricing";
@@ -58,6 +64,10 @@ describe("page SEO", () => {
     pages.aboutPage.seo,
     pages.careersPage.seo,
     pages.contactPage.seo,
+    guidesHub.seo,
+    ...guides.map((g) => g.seo),
+    segmentsHub.seo,
+    localPage.seo,
   ];
   it.each(all.map((s) => [s.title, s] as const))("%s stays within title and description limits", (_t, seo) => {
     expect(site.seo.titleTemplate.replace("%s", seo.title).length).toBeLessThanOrEqual(60);
@@ -66,12 +76,31 @@ describe("page SEO", () => {
 });
 
 describe("copy rules", () => {
-  const text = JSON.stringify([pages, segments, services]);
+  const text = JSON.stringify([pages, segments, services, guides, localPage]);
   it("never calls the subscription an insurance without 'wie'", () => {
     const hits = text.match(/[^.]{0,40}Versicherung(?!sprodukt)[^.]{0,10}/g) ?? [];
     for (const h of hits) expect(h).toMatch(/wie (eine|bei einer) Versicherung|Versicherer|Betriebshaftpflicht|Versicherungs/);
   });
   it("does not use the withdrawn standard name", () => {
     expect(text).not.toMatch(/0701-0702/);
+  });
+});
+
+describe("links between content", () => {
+  it("links only to guides that exist", () => {
+    const slugs = new Set(guides.map((g) => g.slug));
+    for (const g of guides) for (const r of g.related) expect(slugs).toContain(r);
+    for (const s of services) for (const r of s.related) expect(slugs).toContain(r);
+  });
+  it("uses only photographs that exist, each with alt text", () => {
+    for (const g of guides) expect(photos[g.photo]?.alt).toBeTruthy();
+    for (const s of segments) if (s.visual !== "logbook") expect(photos[s.visual]?.alt).toBeTruthy();
+  });
+  it("has a route for every segment", () => {
+    for (const s of segments) expect(fs.existsSync(path.join(process.cwd(), "src/app/(site)", s.slug, "page.tsx"))).toBe(true);
+  });
+  it("keeps every segment and guide slug unique", () => {
+    expect(new Set(segments.map((s) => s.slug)).size).toBe(segments.length);
+    expect(new Set(guides.map((g) => g.slug)).size).toBe(guides.length);
   });
 });

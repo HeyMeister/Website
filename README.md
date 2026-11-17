@@ -34,7 +34,10 @@ All copy lives in typed files under [`content/`](content/). Components never con
 | `content/site.ts` | Name, domain, contact data, trust signals, pilot programme, SEO defaults |
 | `content/home.ts` | Homepage copy, the CTA wording (`cta`), intervals table, logbook mockup example data |
 | `content/services.ts` | `/leistungen` and the four service pages |
-| `content/segments.ts` | The four segment landing pages (Praxen, Autohäuser, Filialisten, Hausverwaltungen) |
+| `content/segments.ts` | The ten segment landing pages and `/branchen` (`featured` = shown on the homepage) |
+| `content/guides.ts` | Ratgeber articles (`/ratgeber/[slug]`) and the hub |
+| `content/local.ts` | `/elektropruefung-duesseldorf` |
+| `content/photos.ts` | Photographs (Wikimedia Commons stand-ins) with alt text and the footer credit line |
 | `content/pages.ts` | Betreiberpflichten, Preise, Pilot, Über uns, Karriere, Kontakt, Danke |
 | `content/pricing.ts` | Prices per size and tier, setup fees, volume discounts (calculator and examples read this) |
 | `content/faq.ts` | Homepage FAQ |
@@ -79,9 +82,10 @@ elsewhere.
 
 ## Pages and calls to action
 
-Home `/`, `/leistungen` (+ `geraete`, `anlagen`, `reparatur`, `betriebsbuch`), `/fuer-praxen`, `/fuer-autohaeuser`,
-`/fuer-filialisten`, `/fuer-hausverwaltungen`, `/preise` (with calculator), `/betreiberpflichten`, `/pilot`,
-`/ueber-uns`, `/karriere`, `/kontakt`, `/danke`, `/partner`, legal pages.
+Home `/`, `/leistungen` (+ `geraete`, `anlagen`, `reparatur`, `betriebsbuch`), `/branchen` with ten segment pages
+(`/fuer-…`, each needs a route folder; a test checks this), `/ratgeber` with seven articles, `/betreiberpflichten`,
+`/elektropruefung-duesseldorf`, `/preise` (with calculator), `/pilot`, `/ueber-uns`, `/karriere`, `/kontakt`, `/danke`,
+`/partner`, legal pages. Subpages carry breadcrumbs with BreadcrumbList JSON-LD; guides carry Article JSON-LD.
 
 One goal per page: primary "Kostenlosen Standort-Check anfordern" → `/kontakt?wunsch=check` (on the homepage: its own
 form), secondary "15-Minuten-Gespräch buchen" → `BOOKING_URL` if set, else `/kontakt?wunsch=erstgespraech`.

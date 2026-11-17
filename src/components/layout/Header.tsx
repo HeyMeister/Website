@@ -16,7 +16,7 @@ import { MobileMenu } from "./MobileMenu";
 export function Header() {
   const tel = telHref(site.contact.phone);
   const offerHref = contactHref("check");
-  const mobileItems = [...navigation.main.filter((i) => i.href !== "/#fuer-wen"), ...navigation.footer.branchen, { label: "Pilotprogramm", href: "/pilot" }, { label: "Kontakt", href: "/kontakt" }];
+  const mobileItems = [...navigation.main, ...navigation.mobileExtra];
 
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-line bg-surface">

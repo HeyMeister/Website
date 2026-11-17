@@ -45,7 +45,7 @@ export function Footer() {
         {/* Row 2: links and legal */}
         <div>
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
-            <div className="lg:col-span-4">
+            <div className="sm:col-span-2 lg:col-span-4">
               <Logo variant="on-dark" className="h-7 w-auto" />
               <p className="mt-4 max-w-sm text-small text-ink-inverse-muted">
                 {site.tagline}. Meisterbetrieb aus {site.contact.address.city}, Einsatzgebiet {site.region.label}.
@@ -72,8 +72,9 @@ export function Footer() {
                 )}
               </ul>
             </div>
-            <FooterColumn title="Leistungen" items={f.leistungen} className="lg:col-span-2 lg:col-start-6" />
-            <FooterColumn title="Branchen" items={f.branchen} className="lg:col-span-3" />
+            <FooterColumn title="Leistungen" items={f.leistungen} className="lg:col-span-2" />
+            <FooterColumn title="Branchen" items={f.branchen} className="lg:col-span-2" />
+            <FooterColumn title="Ratgeber" items={f.ratgeber} className="lg:col-span-2" />
             <FooterColumn title="Unternehmen" items={f.unternehmen} className="lg:col-span-2" />
           </div>
 

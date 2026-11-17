@@ -14,7 +14,7 @@ export default function LeistungenPage() {
   const o = servicesOverview;
   return (
     <>
-      <PageHero eyebrow={o.eyebrow} title={o.title} lead={o.lead} aside={<LogbookScreen />} location="leistungen" />
+      <PageHero breadcrumbs={[{ label: "Leistungen", href: "/leistungen" }]} eyebrow={o.eyebrow} title={o.title} lead={o.lead} aside={<LogbookScreen />} location="leistungen" />
       <Section id="uebersicht" tone="muted" eyebrow="Im Abo enthalten" title="Vier Leistungen, ein Monatspreis.">
         <ul className="grid gap-6 sm:grid-cols-2">
           {services.map((s) => (

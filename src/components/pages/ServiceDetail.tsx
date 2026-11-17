@@ -5,6 +5,7 @@ import { intervalNote, services, type Service } from "@/content/services";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { LogbookScreen, ReportScreen } from "@/components/sections/LogbookMockup";
 import { CtaBand } from "@/components/sections/CtaBand";
+import { RelatedGuides } from "@/components/seo/GuideLinks";
 import { PageHero } from "@/components/ui/PageHero";
 import { Container, Eyebrow, Section } from "@/components/ui/layout";
 
@@ -27,7 +28,17 @@ export function ServiceDetail({ service }: { service: Service }) {
   const others = services.filter((s) => s.slug !== service.slug);
   return (
     <>
-      <PageHero eyebrow={`Leistungen · ${service.nav}`} title={service.title} lead={service.lead} aside={<Visual kind={service.visual} />} location={`service-${service.slug}`} />
+      <PageHero
+        breadcrumbs={[
+          { label: "Leistungen", href: "/leistungen" },
+          { label: service.nav, href: `/leistungen/${service.slug}` },
+        ]}
+        eyebrow={`Leistungen · ${service.nav}`}
+        title={service.title}
+        lead={service.lead}
+        aside={<Visual kind={service.visual} />}
+        location={`service-${service.slug}`}
+      />
 
       <Section id="details" tone="muted">
         <div className="grid gap-12 lg:grid-cols-12">
@@ -81,6 +92,8 @@ export function ServiceDetail({ service }: { service: Service }) {
       </section>
 
       <CtaBand title="Ein Abo für alles, was Ihre Elektrik braucht." text="Prüfung, Reparatur und Betriebsbuch zum festen Monatspreis pro Standort." location={`service-${service.slug}-close`} />
+
+      <RelatedGuides slugs={service.related} />
 
       <nav aria-label="Weitere Leistungen" className="border-t border-line py-12">
         <Container>

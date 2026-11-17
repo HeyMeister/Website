@@ -11,7 +11,9 @@ import { cta, home } from "../content/home";
 import { homeFaq } from "../content/faq";
 import * as pages from "../content/pages";
 import { pricing } from "../content/pricing";
-import { segments } from "../content/segments";
+import { guides, guidesHub } from "../content/guides";
+import { localPage } from "../content/local";
+import { segments, segmentsHub } from "../content/segments";
 import { services, servicesOverview } from "../content/services";
 import { partner, partnerFaq } from "../content/partner";
 import { publishedTeam } from "../content/team";
@@ -25,7 +27,8 @@ export function checkLaunch(env: Record<string, string | undefined> = process.en
     ...findPlaceholders({ home, cta, homeFaq }, "home"),
     ...findPlaceholders(pages, "pages"),
     ...findPlaceholders(pricing, "pricing"),
-    ...findPlaceholders({ segments: segments.map((s) => ({ ...s, todo: undefined })) }, "segments"),
+    ...findPlaceholders({ segments: segments.map((s) => ({ ...s, todo: undefined })), segmentsHub }, "segments"),
+    ...findPlaceholders({ guides, guidesHub, localPage }, "guides"),
     ...findPlaceholders({ services, servicesOverview }, "services"),
     ...findPlaceholders({ partner, partnerFaq }, "partner"),
     ...findPlaceholders(publishedTeam, "team"),

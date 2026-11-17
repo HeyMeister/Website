@@ -18,7 +18,7 @@ export default function PreisePage() {
   const p = pricesPage;
   return (
     <>
-      <PageHero eyebrow={p.eyebrow} title={p.title} lead={p.lead} location="preise" />
+      <PageHero breadcrumbs={[{ label: "Preise", href: "/preise" }]} eyebrow={p.eyebrow} title={p.title} lead={p.lead} location="preise" />
 
       <Section id="tabelle" tone="muted" eyebrow="Preistabelle" title={p.tableTitle}>
         <div className="overflow-x-auto rounded-card border border-line bg-surface-raised">

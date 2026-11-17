@@ -14,7 +14,7 @@ export default function UeberUnsPage() {
   const leon = publishedTeam[0];
   return (
     <>
-      <PageHero eyebrow={a.eyebrow} title={a.title} lead={a.story} location="ueber-uns" />
+      <PageHero breadcrumbs={[{ label: "Über uns", href: "/ueber-uns" }]} eyebrow={a.eyebrow} title={a.title} lead={a.story} location="ueber-uns" />
       <Section id="werte" tone="muted" eyebrow={a.valuesTitle} title="Planbar, dokumentiert, ehrlich.">
         <ul className="grid gap-6 md:grid-cols-3">
           {a.values.map((v, i) => (

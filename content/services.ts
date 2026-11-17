@@ -29,6 +29,8 @@ export type Service = {
   showIntervalNote: boolean;
   /** Visual on the right of the hero. */
   visual: "photo-devices" | "photo-installation" | "defects" | "logbook";
+  /** Ratgeber articles linked from the page (slugs in content/guides.ts). */
+  related: string[];
 };
 
 export const servicesOverview = {
@@ -86,6 +88,7 @@ export const services: Service[] = [
     ],
     showIntervalNote: true,
     visual: "photo-devices",
+    related: ["ortsveraenderliche-geraete", "pruefristen", "wer-darf-pruefen"],
   },
   {
     slug: "anlagen",
@@ -126,6 +129,7 @@ export const services: Service[] = [
     ],
     showIntervalNote: true,
     visual: "photo-installation",
+    related: ["pruefristen", "wer-darf-pruefen", "dguv-v3-pruefung"],
   },
   {
     slug: "reparatur",
@@ -162,6 +166,7 @@ export const services: Service[] = [
     ],
     showIntervalNote: false,
     visual: "defects",
+    related: ["maengel-im-pruefbericht", "pruefprotokoll", "kosten-elektropruefung"],
   },
   {
     slug: "betriebsbuch",
@@ -199,6 +204,7 @@ export const services: Service[] = [
     ],
     showIntervalNote: false,
     visual: "logbook",
+    related: ["pruefprotokoll", "pruefristen", "maengel-im-pruefbericht"],
   },
 ];
 
