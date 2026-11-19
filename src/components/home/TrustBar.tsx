@@ -1,7 +1,6 @@
 import { home } from "@/content/home";
 import { site } from "@/content/site";
 import { CheckIcon } from "@/components/icons";
-import { Fill } from "@/components/ui/Placeholder";
 import { Container } from "@/components/ui/layout";
 
 /** Trust bar under the hero. Only true statements: the Handwerksrolle item waits for site.trust. */
@@ -20,7 +19,7 @@ export function TrustBar() {
           {items.map((item) => (
             <li key={item} className="flex items-center gap-2.5 text-small font-semibold text-ink">
               <CheckIcon className="h-4 w-4 shrink-0 text-accent-dark" strokeWidth={3} />
-              <Fill text={item} />
+              {item}
             </li>
           ))}
         </ul>

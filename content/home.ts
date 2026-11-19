@@ -198,7 +198,7 @@ export const home = {
     eyebrow: "Pilotprogramm",
     title: "Pilotkunde werden.",
     text: "Von Februar bis Juni 2027 nehmen wir eine begrenzte Zahl von Betrieben im Raum Düsseldorf zu Pilotkonditionen auf.",
-    conditions: "[Konditionen festlegen]",
+    conditions: "Keine Einrichtungsgebühr, direkter Draht zum Meister, Feedbackgespräch nach drei Monaten.",
     cta: "Platz anfragen",
     more: "Mehr zum Pilotprogramm",
   },

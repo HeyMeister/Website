@@ -47,9 +47,6 @@ export const colors = {
   "danger-soft": "#FBE4E2",
   /** Keyboard focus ring: blue, distinct from coral and critical. */
   focus: "#1F4FD8",
-  /** Visible placeholder for missing content. Intentionally off-brand. */
-  placeholder: "#6D28D9",
-  "placeholder-soft": "#F4EEFF",
 } as const;
 
 export type ColorToken = keyof typeof colors;
@@ -111,7 +108,6 @@ export const contrastPairs: Array<[fg: ColorToken, bg: ColorToken]> = [
   ["warning", "warning-soft"],
   ["danger", "danger-soft"],
   ["danger", "surface-raised"], // form errors
-  ["placeholder", "placeholder-soft"],
 ];
 
 /**

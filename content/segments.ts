@@ -77,7 +77,7 @@ export const segments: Segment[] = [
         id: "medizinprodukte",
         question: "Prüfen Sie auch unsere Medizingeräte?",
         answer: [
-          "Medizinprodukte haben eigene Prüfpflichten, etwa sicherheitstechnische und messtechnische Kontrollen nach der Medizinprodukte-Betreiberverordnung. Was davon im Abo enthalten ist, klären wir im Erstgespräch. [Abgrenzung STK/MTK mit Leon klären]",
+          "Medizinprodukte haben eigene Prüfpflichten, etwa sicherheitstechnische und messtechnische Kontrollen nach der Medizinprodukte-Betreiberverordnung. Diese Kontrollen sind nicht automatisch Teil des Abos. Enthalten ist die Prüfung Ihrer übrigen elektrischen Geräte und Anlagen, vom Empfang bis zur Teeküche. Was wir darüber hinaus übernehmen, klären wir im Erstgespräch.",
         ],
       },
       {
@@ -237,7 +237,7 @@ export const segments: Segment[] = [
         id: "umfang",
         question: "Was genau prüfen Sie im Objekt?",
         answer: [
-          "Allgemeinstrom, Gemeinschaftsflächen wie Treppenhaus und Keller sowie Technikräume. Den genauen Umfang legen wir je Objekt fest. [Leistungsumfang mit Leon festlegen]",
+          "Allgemeinstrom, Gemeinschaftsflächen wie Treppenhaus und Keller sowie Technikräume. Den genauen Umfang legen wir je Objekt beim Erstbesuch fest und halten ihn im Angebot fest. Wohnungen der Mieter gehören nicht dazu.",
         ],
       },
       {

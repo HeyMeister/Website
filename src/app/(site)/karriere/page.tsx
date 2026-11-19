@@ -4,7 +4,6 @@ import { mailHref, telHref } from "@/lib/links";
 import { pageMetadata } from "@/lib/seo";
 import { MailIcon, PhoneIcon } from "@/components/icons";
 import { PageHero } from "@/components/ui/PageHero";
-import { Fill } from "@/components/ui/Placeholder";
 import { Container, Eyebrow, Section } from "@/components/ui/layout";
 import { LinkButton } from "@/components/ui/Button";
 
@@ -21,7 +20,7 @@ export default function KarrierePage() {
         breadcrumbs={[{ label: "Karriere", href: "/karriere" }]}
         eyebrow={c.eyebrow}
         title={c.title}
-        lead={`${c.text} ${c.emergencyNote}`}
+        lead={c.text}
         location="karriere"
         actions={
           <LinkButton href="#bewerben" arrow>
@@ -82,7 +81,7 @@ export default function KarrierePage() {
                 </a>
               ) : (
                 <span>
-                  Bewerbung per E-Mail an <Fill text={site.contact.email} />
+                  Bewerbung per E-Mail an {site.contact.email}
                 </span>
               )}
             </li>

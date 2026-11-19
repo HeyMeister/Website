@@ -17,16 +17,16 @@ describe("quote", () => {
   it("sums sites, applies the volume discount and waives the setup fee for 24 months", () => {
     const q = quote({ lines: [{ size: "s", count: 12 }], tier: "basis", term: 24 });
     expect(q.sites).toBe(12);
-    expect(q.monthlyGross).toBe(12 * 39);
+    expect(q.monthlyGross).toBe(12 * 249);
     expect(q.discountPercent).toBe(5);
-    expect(q.monthly).toBe(444.6);
+    expect(q.monthly).toBe(2838.6);
     expect(q.setup).toBe(0);
     expect(q.setupWaived).toBe(true);
   });
 
   it("charges the setup fee for 12 months and mixes sizes", () => {
     const q = quote({ lines: [{ size: "m", count: 1 }, { size: "l", count: 1 }], tier: "plus", term: 12 });
-    expect(q.monthly).toBe(125 + 219);
+    expect(q.monthly).toBe(549 + 899);
     expect(q.setup).toBe(375 + 750);
     expect(q.discountPercent).toBe(0);
   });
@@ -46,6 +46,10 @@ describe("quote", () => {
     const values = siteCountOptions.map((o) => o.value as string);
     for (const n of [1, 3, 5, 14, 15, 29, 30, 200]) expect(values).toContain(siteCountBucket(n));
     expect(siteCountBucket(5)).toBe("5-14");
+  });
+
+  it("starts at 199 euros", () => {
+    expect(lowestMonthlyPrice()).toBe(199);
   });
 
   it("starts the teaser at the lowest price", () => {

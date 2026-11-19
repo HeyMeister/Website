@@ -5,7 +5,6 @@ import { CheckIcon } from "@/components/icons";
 import { CTASection } from "@/components/sections/CTASection";
 import { Actions } from "@/components/ui/Actions";
 import { PageHero } from "@/components/ui/PageHero";
-import { Fill } from "@/components/ui/Placeholder";
 import { Section } from "@/components/ui/layout";
 
 export const metadata = pageMetadata({ ...pilotPage.seo, path: "/pilot" });
@@ -35,7 +34,7 @@ export default function PilotPage() {
           {site.pilot.conditions.map((c) => (
             <li key={c} className="flex gap-4 border-b border-line py-5 text-subheading text-ink">
               <CheckIcon className="mt-1 h-5 w-5 shrink-0 text-accent-deep" strokeWidth={2.6} />
-              <Fill text={c} />
+              {c}
             </li>
           ))}
         </ul>

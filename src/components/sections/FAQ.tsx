@@ -1,6 +1,5 @@
 import type { FaqItem } from "@/content/faq";
 import { ChevronDownIcon } from "@/components/icons";
-import { Fill } from "@/components/ui/Placeholder";
 import { hasPlaceholder } from "@/lib/placeholders";
 
 /**
@@ -32,7 +31,7 @@ export function FAQ({ items, disclaimer }: { items: FaqItem[]; disclaimer?: stri
             <div className="max-w-prose space-y-3 pb-6 pr-10 text-ink-muted">
               {item.answer.map((p, i) => (
                 <p key={i}>
-                  <Fill text={p} />
+                  {p}
                 </p>
               ))}
             </div>

@@ -1,8 +1,8 @@
 /**
  * Global site settings.
  *
- * Text in [SQUARE BRACKETS] is a placeholder. It is rendered as a clearly visible marker
- * and must be replaced before launch.
+ * Text in [SQUARE BRACKETS] is a placeholder. It is never shown on the site (the parts using it
+ * are left out) and blocks PUBLIC_LAUNCH=true via scripts/check-launch.ts.
  */
 
 export const site = {
@@ -43,7 +43,7 @@ export const site = {
     /** Off until the GmbH (i. G.) itself is entered in the Handwerksrolle. */
     handwerksrolle: false,
     /** Chamber shown next to the Handwerksrolle entry. */
-    chamber: "[HWK Düsseldorf]",
+    chamber: "Handwerkskammer Düsseldorf",
     norms: true,
   },
 
@@ -59,11 +59,10 @@ export const site = {
     region: "im Raum Düsseldorf",
     intro:
       "Wir starten mit einer kleinen Gruppe von Betrieben. Sie bekommen das volle Abo und einen direkten Draht zu uns. Wir bekommen Ihre ehrliche Rückmeldung.",
-    /** Conditions are not decided yet. Do not promise anything that is not decided. */
     conditions: [
-      "[KONDITION OFFEN, z. B. Einrichtung entfällt]",
-      "[KONDITION OFFEN, z. B. Pilotpreis]",
-      "[KONDITION OFFEN, z. B. Feedbackgespräch nach 3 Monaten]",
+      "Keine Einrichtungsgebühr",
+      "Direkter Draht zum Meister, ohne Hotline",
+      "Feedbackgespräch nach drei Monaten",
     ],
     seats: "Begrenzte Plätze",
   },

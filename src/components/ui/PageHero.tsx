@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Breadcrumbs, type Crumb } from "@/components/seo/Breadcrumbs";
-import { Fill } from "@/components/ui/Placeholder";
 import { Container, Eyebrow } from "@/components/ui/layout";
 import { Actions } from "./Actions";
 
@@ -44,7 +43,7 @@ export function PageHero({
           </h1>
           {lead && (
             <p data-enter-step style={{ "--step": 1 } as React.CSSProperties} className="mt-6 max-w-prose text-subheading font-normal text-ink-muted">
-              <Fill text={lead} />
+              {lead}
             </p>
           )}
           <div data-enter-step style={{ "--step": 2 } as React.CSSProperties} className="mt-8">

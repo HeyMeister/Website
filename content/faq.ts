@@ -49,7 +49,7 @@ export const homeFaq: FaqItem[] = [
   {
     id: "schliessung",
     question: "Was passiert, wenn ein Standort schließt?",
-    answer: ["Sie melden ihn mit einer Frist von [X] Monaten ab."],
+    answer: ["Sie melden ihn mit einer Frist von drei Monaten zum Monatsende ab."],
   },
   {
     id: "erstgespraech",

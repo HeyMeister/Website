@@ -24,7 +24,6 @@ export const team: TeamMember[] = [
     id: "leon",
     name: "Leon Ellerbrake",
     role: "Elektrotechnikermeister, Betriebsleiter",
-    quote: "[ZITAT IN LEONS WORTEN, von Leon freizugeben]",
     /** No photo on the site for now (removed on request). Add a portrait here later. */
     photo: null,
     contactLine: "Ihr persönlicher Ansprechpartner",

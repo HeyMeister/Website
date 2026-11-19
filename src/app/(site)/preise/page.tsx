@@ -7,7 +7,6 @@ import { FAQ } from "@/components/sections/FAQ";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PriceCalculator } from "@/components/pages/PriceCalculator";
 import { PageHero } from "@/components/ui/PageHero";
-import { Fill } from "@/components/ui/Placeholder";
 import { Container, Eyebrow, Section, sectionHeadingClass } from "@/components/ui/layout";
 
 export const metadata = pageMetadata({ ...pricesPage.seo, path: "/preise" });
@@ -41,7 +40,7 @@ export default function PreisePage() {
                   <th scope="row" className="px-6 py-4 font-normal">
                     <span className="block font-semibold text-ink">{s.label}</span>
                     <span className="mt-1 block text-small text-ink-muted">
-                      <Fill text={s.guide} />
+                      {s.guide}
                     </span>
                   </th>
                   <td className="px-4 py-4 font-display text-subheading font-bold text-ink">{formatEuro(s.monthly.basis)}</td>
@@ -58,7 +57,7 @@ export default function PreisePage() {
             <ul className="mt-2 space-y-2 text-small text-ink-muted">
               {pricing.tiers.map((t) => (
                 <li key={t.id}>
-                  <span className="font-semibold text-ink">{t.label}:</span> <Fill text={t.description} />
+                  <span className="font-semibold text-ink">{t.label}:</span> {t.description}
                 </li>
               ))}
             </ul>
@@ -66,7 +65,7 @@ export default function PreisePage() {
           <div className="rounded-card border border-line bg-surface-raised p-6">
             <p className="font-semibold text-ink">Einrichtung</p>
             <p className="mt-2 text-small text-ink-muted">
-              Einmalig pro Standort. Entfällt bei {pricing.setupFeeWaivedForTermMonths} Monaten Laufzeit. <Fill text={pricing.setupFeeNote} />
+              Einmalig pro Standort. Entfällt bei {pricing.setupFeeWaivedForTermMonths} Monaten Laufzeit. {pricing.setupFeeNote}
             </p>
           </div>
           <div className="rounded-card border border-line bg-surface-raised p-6">
@@ -97,9 +96,6 @@ export default function PreisePage() {
           <aside className="self-end rounded-card border border-line bg-surface-2 p-6 lg:col-span-3">
             <p className="font-semibold text-ink">{p.anchor.title}</p>
             <p className="mt-2 text-small text-ink-muted">{p.anchor.text}</p>
-            <p className="mt-2 text-small">
-              <Fill text={p.anchor.figure} />
-            </p>
             {p.riskReversal.enabled && <p className="mt-4 text-small font-semibold text-ink">{p.riskReversal.text}</p>}
           </aside>
         </Container>

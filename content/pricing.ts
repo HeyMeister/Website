@@ -14,18 +14,18 @@ export const pricing = {
     {
       id: "s-buero",
       label: "S-Büro",
-      monthly: { basis: 29, plus: 49 },
+      monthly: { basis: 199, plus: 279 },
       setupFee: 225,
-      /** Indicative thresholds (devices, sub-distributions, circuits). */
-      guide: "[SCHWELLEN OFFEN, von Leon festlegen]",
+      /** Indicative size (devices, sub-distributions). Final classification at the first visit. */
+      guide: "Büro oder Agentur, bis etwa 50 Geräte, eine Unterverteilung",
     },
-    { id: "s", label: "S", monthly: { basis: 39, plus: 65 }, setupFee: 225, guide: "[SCHWELLEN OFFEN, von Leon festlegen]" },
-    { id: "m", label: "M", monthly: { basis: 79, plus: 125 }, setupFee: 375, guide: "[SCHWELLEN OFFEN, von Leon festlegen]" },
-    { id: "l", label: "L", monthly: { basis: 145, plus: 219 }, setupFee: 750, guide: "[SCHWELLEN OFFEN, von Leon festlegen]" },
+    { id: "s", label: "S", monthly: { basis: 249, plus: 349 }, setupFee: 225, guide: "Laden, Praxis oder kleiner Betrieb, bis etwa 100 Geräte" },
+    { id: "m", label: "M", monthly: { basis: 399, plus: 549 }, setupFee: 375, guide: "Mittlerer Betrieb, bis etwa 250 Geräte, mehrere Unterverteilungen" },
+    { id: "l", label: "L", monthly: { basis: 649, plus: 899 }, setupFee: 750, guide: "Werkstatt, Halle oder großer Betrieb, mehr als 250 Geräte" },
   ] satisfies Array<{ id: SiteSize; label: string; monthly: Record<Tier, number>; setupFee: number; guide: string }>,
 
-  /** Setup fee mapping to sizes still needs confirmation. */
-  setupFeeNote: "[Zuordnung Einrichtungsgebühr zu Größen bestätigen]",
+  /** Shown under the setup fee table on /preise. */
+  setupFeeNote: "Sie deckt Bestandsaufnahme, Geräteerfassung und Prüfplan beim Erstbesuch.",
   /** Setup fee is waived for this contract term (months). */
   setupFeeWaivedForTermMonths: 24,
   terms: [12, 24],
@@ -40,8 +40,16 @@ export const pricing = {
   classificationNote: "Die endgültige Einstufung erfolgt beim Erstbesuch.",
 
   tiers: [
-    { id: "basis", label: "Basis", description: "[LEISTUNGSUNTERSCHIED OFFEN]" },
-    { id: "plus", label: "Plus", description: "[LEISTUNGSUNTERSCHIED OFFEN, z. B. Prüfintervall, Reaktionszeit, Anzahl Kleinreparaturen]" },
+    {
+      id: "basis",
+      label: "Basis",
+      description: "Prüfung von Geräten und Anlagen nach Prüfplan, Kleinreparaturen beim Prüftermin, digitales Betriebsbuch.",
+    },
+    {
+      id: "plus",
+      label: "Plus",
+      description: "Alles aus Basis, dazu Mängelbehebung zwischen den Prüfterminen, bevorzugte Termine und ein fester Ansprechpartner für alle Standorte.",
+    },
   ] satisfies Array<{ id: Tier; label: string; description: string }>,
 } as const;
 

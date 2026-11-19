@@ -1,6 +1,6 @@
 /**
  * Copy for the remaining pages: Betreiberpflichten (guide), Preise, Pilot, Über uns, Karriere,
- * Kontakt and Danke. Text in [SQUARE BRACKETS] is a placeholder and must be filled before launch.
+ * Kontakt and Danke.
  */
 
 export const guide = {
@@ -76,11 +76,10 @@ export const pricesPage = {
   tableTitle: "Preise nach Standortgröße",
   calculatorTitle: "Preis für Ihre Standorte berechnen",
   calculatorCta: "Dieses Angebot anfordern",
-  /** Anchor box next to the calculator. Keep the figure out until real values exist. */
+  /** Anchor box next to the calculator. */
   anchor: {
-    title: "Zum Vergleich",
-    text: "Ein einzelner Elektriker-Einsatz mit Anfahrt und zwei Stunden Arbeit kostet schnell mehr als ein Monat HeyMeister.",
-    figure: "[Zahl erst mit echten Werten nennen]",
+    title: "Was Sie sich sparen",
+    text: "Prüfer suchen, Termine abstimmen, Mängel nachverfolgen, Reparaturen einzeln beauftragen, Protokolle ablegen. Bei uns ist das alles im Monatspreis, mit einer Rechnung pro Monat.",
   },
   /** Risk reversal. Only enable when it is really offered. */
   riskReversal: { enabled: false, text: "Nicht zufrieden nach dem ersten Prüftermin? Dann endet der Vertrag." },
@@ -107,7 +106,8 @@ export const aboutPage = {
   },
   eyebrow: "Über uns",
   title: "Ein Meisterbetrieb, der Elektro planbar macht",
-  story: "[Max. 5 Sätze Geschichte]",
+  story:
+    "HeyMeister ist aus einer einfachen Beobachtung entstanden: Betriebe wissen, dass ihre Elektrik geprüft werden muss, aber niemand hat Zeit, sich darum zu kümmern. Termine rutschen, Protokolle liegen in Ordnern und kleine Mängel bleiben liegen. Deshalb haben wir Prüfung, Reparatur und Nachweise in ein Abo gepackt. Jede Prüfung verantwortet ein Elektrotechnikermeister aus Düsseldorf. Unser Ziel ist einfach: Sie müssen nie wieder an Ihre Elektrik denken.",
   valuesTitle: "Wofür wir stehen",
   values: [
     { title: "Planbar", text: "Feste Termine, feste Preise." },
@@ -125,8 +125,6 @@ export const careersPage = {
   eyebrow: "Karriere",
   title: "Elektriker ohne Notdienst-Chaos. Mit Plan.",
   text: "Planbare Touren, moderne Prüfgeräte, digitale Doku statt Papierkram.",
-  /** Must be confirmed with Leon before launch. */
-  emergencyNote: "[Notdienst: mit Leon bestätigen]",
   benefits: [
     { title: "Planbare Touren", text: "Prüftermine nach Plan statt Feuerwehreinsätzen." },
     { title: "Moderne Prüfgeräte", text: "Kalibrierte Mess- und Prüftechnik." },

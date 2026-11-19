@@ -3,10 +3,10 @@ import { cta, home } from "@/content/home";
 import { photoCreditLine } from "@/content/photos";
 import { site } from "@/content/site";
 import { navigation, type NavItem } from "@/content/navigation";
-import { operator } from "@/content/legal";
 import { bookingUrl } from "@/lib/env";
 import { callHref, contactHref, mailHref, telHref } from "@/lib/links";
 import { hasPlaceholder } from "@/lib/placeholders";
+import { operatorName } from "@/lib/operator";
 import { Logo } from "@/components/brand/Logo";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/layout";
@@ -19,7 +19,7 @@ import { Container } from "@/components/ui/layout";
 export function Footer() {
   const tel = telHref(site.contact.phone);
   const mail = mailHref(site.contact.email);
-  const company = hasPlaceholder(operator.company) ? site.name : `${operator.company} ${operator.legalForm}`;
+  const company = operatorName();
   const street = hasPlaceholder(site.contact.address.street) ? null : site.contact.address.street;
   const f = navigation.footer;
 

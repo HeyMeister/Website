@@ -2,7 +2,6 @@ import Link from "next/link";
 import { home } from "@/content/home";
 import { homeFormHref } from "@/lib/links";
 import { LinkButton } from "@/components/ui/Button";
-import { Fill } from "@/components/ui/Placeholder";
 import { Container } from "@/components/ui/layout";
 
 /** Pilot banner (validation phase only): February to June 2027, conditions still open. */
@@ -23,7 +22,7 @@ export function PilotBanner() {
             </h2>
             <p className="mt-3 text-ink">{p.text}</p>
             <p className="mt-2 text-small text-ink-muted">
-              <Fill text={p.conditions} />
+              {p.conditions}
             </p>
           </div>
           <div className="flex flex-col gap-3 lg:col-span-3 lg:items-end">

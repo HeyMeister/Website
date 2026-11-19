@@ -3,10 +3,9 @@ import { home } from "@/content/home";
 import { photos } from "@/content/photos";
 import { site } from "@/content/site";
 import { publishedTeam } from "@/content/team";
-import { Fill } from "@/components/ui/Placeholder";
 import { Container, Eyebrow, sectionHeadingClass } from "@/components/ui/layout";
 
-/** The master electrician behind it: name, role, his sentence (placeholder until approved). */
+/** The master electrician behind it: name, role and, once approved, a sentence in his own words. */
 export function Meister() {
   const m = home.meister;
   const leon = publishedTeam[0];
@@ -24,7 +23,7 @@ export function Meister() {
           </h2>
           {leon.quote && (
             <blockquote className="mt-8 border-l-4 border-accent pl-6 font-display text-heading font-bold leading-snug text-ink">
-              „<Fill text={leon.quote} />“
+              „{leon.quote}“
             </blockquote>
           )}
           <p className="mt-6 text-ink">
@@ -33,7 +32,7 @@ export function Meister() {
           </p>
           {site.trust.handwerksrolle && (
             <p className="mt-2 text-small text-ink-muted">
-              Eingetragen in der Handwerksrolle der <Fill text={site.trust.chamber} />.
+              Eingetragen in der Handwerksrolle der {site.trust.chamber}.
             </p>
           )}
         </div>

@@ -4,7 +4,6 @@ import { publishedTeam } from "@/content/team";
 import { pageMetadata } from "@/lib/seo";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { PageHero } from "@/components/ui/PageHero";
-import { Fill } from "@/components/ui/Placeholder";
 import { Container, Eyebrow, Section } from "@/components/ui/layout";
 
 export const metadata = pageMetadata({ ...aboutPage.seo, path: "/ueber-uns" });
@@ -37,14 +36,14 @@ export default function UeberUnsPage() {
               <p className="mt-2 text-ink-muted">{leon.role}</p>
               {site.trust.handwerksrolle && (
                 <p className="mt-2 text-small text-ink-muted">
-                  Eingetragen in der Handwerksrolle der <Fill text={site.trust.chamber} />.
+                  Eingetragen in der Handwerksrolle der {site.trust.chamber}.
                 </p>
               )}
             </div>
             <div className="lg:col-span-8">
               {leon.quote && (
                 <blockquote className="border-l-4 border-accent pl-6 font-display text-heading font-bold leading-snug text-ink">
-                  „<Fill text={leon.quote} />“
+                  „{leon.quote}“
                 </blockquote>
               )}
               <p className="mt-8 text-ink-muted">

@@ -29,6 +29,27 @@ describe("formatDate", () => {
 });
 
 describe("placeholders", () => {
+  it("leaves no placeholders in the copy outside the operator details", async () => {
+    const { home, cta } = await import("@/content/home");
+    const { homeFaq } = await import("@/content/faq");
+    const pages = await import("@/content/pages");
+    const { pricing } = await import("@/content/pricing");
+    const { segments } = await import("@/content/segments");
+    const { services } = await import("@/content/services");
+    const { guides } = await import("@/content/guides");
+    const { localPage } = await import("@/content/local");
+    const { publishedTeam } = await import("@/content/team");
+    const { datenschutz, impressum } = await import("@/content/legal");
+    const { site } = await import("@/content/site");
+    const copy = {
+      home, cta, homeFaq, pages, pricing, services, guides, localPage, publishedTeam, datenschutz, impressum,
+      segments: segments.map((s) => ({ ...s, todo: undefined })),
+      site: { ...site, contact: { ...site.contact, address: undefined } },
+    };
+    expect(findPlaceholders(copy)).toEqual([]);
+  });
+
+
   it("detects and splits bracket placeholders", () => {
     expect(hasPlaceholder("Telefon [TELEFON]")).toBe(true);
     expect(hasPlaceholder("Düsseldorf")).toBe(false);
