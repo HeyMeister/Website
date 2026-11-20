@@ -13,8 +13,8 @@
  *   "15-Minuten-Gespräch buchen". Phone number always visible.
  * - No invented figures, logos or customer quotes.
  *
- * Page plan: hero · problem · kern (like an insurance) · vergleich · abo · ablauf · fuer-wen ·
- * preise · meister · pilot · faq · kontakt
+ * Page plan: hero with instant price, vergleich (like an insurance), abo, ablauf, fuer-wen,
+ * meister and pilot, faq, kontakt.
  */
 
 export const cta = {
@@ -23,12 +23,11 @@ export const cta = {
   /** Short form for the header bar. */
   primaryShort: "Standort-Check anfordern",
   secondary: "15-Minuten-Gespräch buchen",
-  micro: "Unverbindlich · Antwort innerhalb eines Werktags · Kein Verkaufsdruck",
+  micro: "Kostenlos und unverbindlich. Wir melden uns innerhalb eines Werktags.",
 } as const;
 
 export const home = {
   hero: {
-    eyebrow: "Prüfung · Reparatur · Betriebsbuch",
     /**
      * Headline (recommendation). Alternatives to test:
      * - "Prüfung und Reparatur im Abo. Für alle Ihre Standorte."
@@ -47,88 +46,22 @@ export const home = {
     logbook: "Digitales Betriebsbuch inklusive",
   },
 
-  problem: {
-    eyebrow: "Kennen Sie das?",
-    title: "Elektrik ist Chefsache. Aber niemand hat Zeit dafür.",
-    items: [
-      {
-        icon: "file",
-        title: "„Wann wurde eigentlich zuletzt geprüft?“",
-        text: "Die Antwort steht in einem Ordner, in einer Excel-Liste oder nirgends. Spätestens wenn der Versicherer fragt, wird es hektisch.",
-      },
-      {
-        icon: "people",
-        title: "„Kein Elektriker hat Zeit.“",
-        text: "Für zwei defekte Steckdosen kommt niemand. Und wenn doch, dann in sechs Wochen.",
-      },
-      {
-        icon: "list",
-        title: "„Der Prüfbericht liegt seit Monaten in der Schublade.“",
-        text: "Mängel notiert, nichts behoben. Auf dem Papier ist das schlimmer, als gar nicht geprüft zu haben.",
-      },
-      {
-        icon: "euro",
-        title: "„Jede Rechnung ist eine Überraschung.“",
-        text: "Anfahrt, Stundensatz, Kleinmaterial. Planen lässt sich das nicht.",
-      },
-    ],
-  },
-
-  core: {
-    eyebrow: "Der Kern",
+  compare: {
     title: "Wie eine Versicherung für Ihre Elektrik. Nur dass wir wirklich vorbeikommen.",
     lead: "Sie zahlen einen festen Betrag im Monat. Dafür kümmern wir uns um alles, was an Elektroprüfung und Kleinreparatur anfällt. Bevor etwas passiert, nicht erst danach.",
-    items: [
-      {
-        icon: "shield",
-        title: "Compliance ohne Aufwand",
-        text: "Prüfungen nach DGUV Vorschrift 3 und Betriebssicherheitsverordnung, fristgerecht und dokumentiert. Wir planen die Termine, Sie bekommen den Nachweis.",
-      },
-      {
-        icon: "calendar",
-        title: "Sie müssen nicht mehr daran denken",
-        text: "Keine Fristen im Kalender, keine Angebote einholen, keine Handwerker hinterhertelefonieren. Wir melden uns, bevor etwas fällig ist.",
-      },
-      {
-        icon: "person",
-        title: "Persönliches Haftungsrisiko senken",
-        text: "Für den sicheren Zustand der Elektrik ist der Betreiber verantwortlich, also die Geschäftsführung. Mit lückenlosen Prüfnachweisen zeigen Sie, dass Sie Ihrer Pflicht nachgekommen sind. Fehlen sie nach einem Schaden, kann der Versicherer die Leistung kürzen.",
-      },
-      {
-        icon: "euro",
-        title: "Kosten, die Sie vorher kennen",
-        text: "Ein Monatspreis pro Standort, Kleinreparaturen inklusive. Kein Stundenzettel, keine Anfahrtspauschale, kein Kleinmaterial auf der Rechnung.",
-      },
-      {
-        icon: "tool",
-        title: "Ein Elektriker, der wirklich kommt",
-        text: "Sie sind Abo-Kunde, kein Gelegenheitsauftrag. Deshalb haben Sie bei uns einen festen Platz im Tourenplan und eine feste Ansprechperson.",
-      },
-      {
-        icon: "list",
-        title: "Alles auf einen Blick",
-        text: "Alle Standorte, alle Geräte, alle Fristen im digitalen Betriebsbuch. Ampel grün, gelb, rot. Prüfberichte als PDF, jederzeit abrufbar, auch für Versicherer und Berufsgenossenschaft.",
-      },
-    ],
-    closing: "Ein Anruf, und das Thema ist erledigt.",
-  },
-
-  compare: {
-    eyebrow: "Vorher und nachher",
-    title: "Was sich für Sie ändert",
     columns: { topic: "Thema", without: "Ohne HeyMeister", with: "Mit HeyMeister" },
     rows: [
       { topic: "Prüffristen", without: "Im Kopf oder in Excel", with: "Wir planen, Sie werden informiert" },
       { topic: "Nachweise", without: "Suchen, wenn jemand fragt", with: "Digital, auf Knopfdruck" },
       { topic: "Mängel", without: "Im Bericht notiert, liegen geblieben", with: "Kleine Mängel direkt behoben" },
-      { topic: "Elektriker finden", without: "Anrufen, warten, nachhaken", with: "Feste Ansprechperson, feste Termine" },
-      { topic: "Kosten", without: "Jede Rechnung anders", with: "Ein Monatspreis pro Standort" },
+      { topic: "Elektriker finden", without: "Für zwei defekte Steckdosen kommt niemand", with: "Feste Ansprechperson, fester Platz im Tourenplan" },
+      { topic: "Kosten", without: "Anfahrt, Stundensatz, Kleinmaterial", with: "Ein Monatspreis pro Standort, Kleinreparaturen inklusive" },
+      { topic: "Haftung", without: "Lücken, wenn der Versicherer nach Nachweisen fragt", with: "Jede Prüfung lückenlos dokumentiert" },
       { topic: "Mehrere Standorte", without: "Mehrere Dienstleister", with: "Ein Partner, ein Betriebsbuch" },
     ],
   },
 
   included: {
-    eyebrow: "Was im Abo steckt",
     title: "Prüfen, reparieren, dokumentieren. Alles drin.",
     items: [
       {
@@ -165,7 +98,6 @@ export const home = {
   },
 
   steps: {
-    eyebrow: "So funktioniert es",
     title: "In vier Schritten zum Thema, um das Sie sich nicht mehr kümmern.",
     items: [
       { title: "Kostenloser Standort-Check", text: "15 Minuten am Telefon: Wie viele Standorte, welche Geräte, wann zuletzt geprüft?" },
@@ -176,22 +108,12 @@ export const home = {
   },
 
   segments: {
-    eyebrow: "Für wen",
     title: "Gemacht für Betriebe, in denen Elektrik arbeiten muss.",
   },
 
-  priceTeaser: {
-    eyebrow: "Preise",
-    title: "Ein fester Preis pro Standort. Keine Überraschungen.",
-    prefix: "Ab",
-    suffix: "pro Standort und Monat, netto.",
-    points: ["Kleinreparaturen inklusive.", "Mengenrabatt ab 5 Standorten."],
-    cta: "Preis für Ihre Standorte berechnen",
-  },
-
   meister: {
-    eyebrow: "Der Meister dahinter",
     title: "Kein Callcenter. Ein Meisterbetrieb.",
+    text: "Hinter jeder Prüfung steht ein Elektrotechnikermeister aus Düsseldorf. Sie haben eine feste Ansprechperson, die Ihre Standorte kennt, statt einer Hotline mit Ticketnummer.",
   },
 
   pilot: {
@@ -204,14 +126,12 @@ export const home = {
   },
 
   faq: {
-    eyebrow: "Häufige Fragen",
     title: "Ihre Fragen, kurz beantwortet.",
     intro: "Ihre Frage ist nicht dabei? Rufen Sie uns an.",
     disclaimer: "Diese Antworten sind allgemeine Hinweise und keine Rechtsberatung.",
   },
 
   contact: {
-    eyebrow: "Standort-Check",
     title: "Ein Anruf. Danach ist Elektro nicht mehr Ihr Thema.",
     text: "Erzählen Sie uns in 15 Minuten, wie viele Standorte Sie haben. Sie bekommen eine ehrliche Einschätzung und ein festes Angebot.",
     nextStepsTitle: "So geht es weiter",

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { site } from "@/content/site";
 import { contactHref } from "@/lib/links";
 import { pageMetadata } from "@/lib/seo";
 import { Container } from "@/components/ui/layout";
@@ -24,7 +23,6 @@ export default function AgbPage() {
         <Link href={contactHref()} className="font-semibold text-accent-dark underline underline-offset-4">
           Kontakt aufnehmen
         </Link>
-        <span className="text-ink-muted"> · {site.name}</span>
       </p>
     </Container>
   );

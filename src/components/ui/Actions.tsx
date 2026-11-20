@@ -27,7 +27,7 @@ export function Actions({
   return (
     <div className={className}>
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-        <LinkButton href={primaryHref} track={primaryWish === "pilot" ? "cta_pilot_click" : "cta_check_click"} trackLocation={location} arrow>
+        <LinkButton href={primaryHref} track={primaryWish === "pilot" ? "cta_pilot_click" : "cta_check_click"} trackLocation={location}>
           {primaryLabel}
         </LinkButton>
         <LinkButton href={callHref(bookingUrl)} variant={onDark ? "inverse" : "secondary"} track="cta_call_click" trackLocation={location}>

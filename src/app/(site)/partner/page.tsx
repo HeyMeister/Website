@@ -46,7 +46,7 @@ export default function PartnerPage() {
             </h1>
             <p className="mt-6 max-w-prose text-subheading font-normal text-ink-muted">{hero.lead}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <LinkButton href="#bewerben" track="cta_partner_click" trackLocation="partner_hero" arrow>
+              <LinkButton href="#bewerben" track="cta_partner_click" trackLocation="partner_hero">
                 {hero.cta}
               </LinkButton>
               <LinkButton href="#ablauf" variant="secondary">
@@ -86,7 +86,7 @@ export default function PartnerPage() {
       <section
         id="vorteile"
         aria-labelledby="vorteile-heading"
-        className="bg-base pb-16 pt-24 text-white sm:pb-20 lg:pb-24 lg:pt-[7.5rem]"
+        className="bg-base py-20 text-white lg:py-28"
       >
         <Container className="grid gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-5">
@@ -127,7 +127,7 @@ export default function PartnerPage() {
       </Section>
 
       {/* Bewerbung */}
-      <section id="bewerben" aria-labelledby="bewerben-heading" className="pb-16 pt-24 sm:pb-20 lg:pb-24 lg:pt-[7.5rem]">
+      <section id="bewerben" aria-labelledby="bewerben-heading" className="py-20 lg:py-28">
         <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-4">
             <Eyebrow>{signup.eyebrow}</Eyebrow>

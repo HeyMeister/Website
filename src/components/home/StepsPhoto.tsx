@@ -1,16 +1,15 @@
 import Image from "next/image";
 import { home } from "@/content/home";
 import { photos } from "@/content/photos";
-import { Container, Eyebrow, sectionHeadingClass } from "@/components/ui/layout";
+import { Container, sectionHeadingClass } from "@/components/ui/layout";
 
 /** How it runs: four steps as rows beside a photograph of a distribution board. */
 export function StepsPhoto() {
   const s = home.steps;
   return (
-    <section id="ablauf" aria-labelledby="ablauf-heading" className="pb-16 pt-24 sm:pb-20 lg:min-h-[100svh] lg:pb-24 lg:pt-[7.5rem]">
+    <section id="ablauf" aria-labelledby="ablauf-heading" className="py-20 lg:py-28">
       <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
-          <Eyebrow>{s.eyebrow}</Eyebrow>
           <h2 id="ablauf-heading" className={sectionHeadingClass}>
             {s.title}
           </h2>
@@ -26,10 +25,10 @@ export function StepsPhoto() {
             ))}
           </ol>
         </div>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-card bg-surface-2 lg:col-span-5 lg:aspect-auto lg:min-h-[36rem]">
+        <div className="relative hidden overflow-hidden rounded-card bg-surface-2 lg:col-span-5 lg:block lg:min-h-[36rem]">
           <Image
-            src={photos.steps.src}
-            alt={photos.steps.alt}
+            src={photos.cabinet.src}
+            alt={photos.cabinet.alt}
             fill
             sizes="(min-width: 1024px) 600px, 100vw"
             className="object-cover object-center"

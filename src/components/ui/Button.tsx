@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
-import { ArrowRightIcon } from "@/components/icons";
 
 /**
  * Brandbook: primary coral with coral-dark hover, radius 10 px. Secondary is "tonal"
@@ -40,8 +39,6 @@ type LinkButtonProps = Omit<ComponentProps<typeof Link>, "className"> & {
   track?: string;
   /** Where on the page the button sits, sent as event property "location". */
   trackLocation?: string;
-  /** Trailing arrow that nudges right on hover. */
-  arrow?: boolean;
   children: ReactNode;
 };
 
@@ -51,20 +48,12 @@ export function LinkButton({
   className = "",
   track,
   trackLocation,
-  arrow = false,
   children,
   ...props
 }: LinkButtonProps) {
   return (
     <Link {...props} data-track={track} data-track-location={trackLocation} className={buttonClass(variant, size, className)}>
       {children}
-      {arrow && <ButtonArrow />}
     </Link>
-  );
-}
-
-export function ButtonArrow() {
-  return (
-    <ArrowRightIcon className="m-arrow h-5 w-5 shrink-0" strokeWidth={2.4} />
   );
 }

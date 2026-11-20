@@ -96,7 +96,7 @@ export const segments: Segment[] = [
   {
     slug: "fuer-autohaeuser",
     featured: true,
-    visual: "installation",
+    visual: "workshop",
     card: {
       title: "Autohäuser und Werkstätten",
       text: "Werkstatt, Showroom, Ladeinfrastruktur, hohe Beanspruchung.",

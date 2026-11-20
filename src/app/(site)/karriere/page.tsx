@@ -23,7 +23,7 @@ export default function KarrierePage() {
         lead={c.text}
         location="karriere"
         actions={
-          <LinkButton href="#bewerben" arrow>
+          <LinkButton href="#bewerben">
             Jetzt bewerben
           </LinkButton>
         }

@@ -2,17 +2,16 @@ import Link from "next/link";
 import { home } from "@/content/home";
 import { ArrowRightIcon, CheckIcon } from "@/components/icons";
 import { LogbookScreen } from "@/components/sections/LogbookMockup";
-import { Container, Eyebrow, sectionHeadingClass } from "@/components/ui/layout";
+import { Container, sectionHeadingClass } from "@/components/ui/layout";
 
 /** What the subscription contains: the list on the left, the logbook (example) on the right. */
 export function Included() {
   const s = home.included;
   const items: ReadonlyArray<{ title: string; text: string; href?: string; bullets?: readonly string[] }> = s.items;
   return (
-    <section id="abo" aria-labelledby="abo-heading" className="bg-surface-2 pb-16 pt-24 sm:pb-20 lg:min-h-[100svh] lg:pb-24 lg:pt-[7.5rem]">
+    <section id="abo" aria-labelledby="abo-heading" className="bg-surface-2 py-20 lg:py-28">
       <Container className="grid gap-12 lg:grid-cols-12 lg:gap-12">
         <div className="min-w-0 lg:col-span-6">
-          <Eyebrow tone="muted">{s.eyebrow}</Eyebrow>
           <h2 id="abo-heading" className={sectionHeadingClass}>
             {s.title}
           </h2>

@@ -18,7 +18,7 @@ export function PageHero({
 }: {
   /** Trail after "Startseite", ending with the current page. */
   breadcrumbs?: Crumb[];
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead?: string;
   aside?: ReactNode;
@@ -32,7 +32,7 @@ export function PageHero({
         <div className={aside ? "min-w-0 lg:col-span-7" : "max-w-4xl"}>
           {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
           <div data-enter-step>
-            <Eyebrow>{eyebrow}</Eyebrow>
+            {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
           </div>
           <h1
             id="hero-heading"

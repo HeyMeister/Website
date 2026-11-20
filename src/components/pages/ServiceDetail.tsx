@@ -33,7 +33,6 @@ export function ServiceDetail({ service }: { service: Service }) {
           { label: "Leistungen", href: "/leistungen" },
           { label: service.nav, href: `/leistungen/${service.slug}` },
         ]}
-        eyebrow={`Leistungen · ${service.nav}`}
         title={service.title}
         lead={service.lead}
         aside={<Visual kind={service.visual} />}

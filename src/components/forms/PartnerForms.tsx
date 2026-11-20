@@ -11,7 +11,7 @@ import {
   type PartnerFieldErrors,
 } from "@/lib/partner-schema";
 import { CheckIcon } from "@/components/icons";
-import { ButtonArrow, buttonClass } from "@/components/ui/Button";
+import { buttonClass } from "@/components/ui/Button";
 import { Field, checkboxClass, inputClass } from "./fields";
 
 /**
@@ -226,7 +226,6 @@ export function PartnerSignupForm({ submitLabel, successText }: { submitLabel: s
         ) : (
           <>
             {submitLabel}
-            <ButtonArrow />
           </>
         )}
       </button>

@@ -18,11 +18,13 @@ export const pricing = {
       setupFee: 225,
       /** Indicative size (devices, sub-distributions). Final classification at the first visit. */
       guide: "Büro oder Agentur, bis etwa 50 Geräte, eine Unterverteilung",
+      /** Short choice in the hero price check. */
+      pick: { label: "Büro", hint: "bis etwa 50 Geräte" },
     },
-    { id: "s", label: "S", monthly: { basis: 249, plus: 349 }, setupFee: 225, guide: "Laden, Praxis oder kleiner Betrieb, bis etwa 100 Geräte" },
-    { id: "m", label: "M", monthly: { basis: 399, plus: 549 }, setupFee: 375, guide: "Mittlerer Betrieb, bis etwa 250 Geräte, mehrere Unterverteilungen" },
-    { id: "l", label: "L", monthly: { basis: 649, plus: 899 }, setupFee: 750, guide: "Werkstatt, Halle oder großer Betrieb, mehr als 250 Geräte" },
-  ] satisfies Array<{ id: SiteSize; label: string; monthly: Record<Tier, number>; setupFee: number; guide: string }>,
+    { id: "s", label: "S", monthly: { basis: 249, plus: 349 }, setupFee: 225, guide: "Laden, Praxis oder kleiner Betrieb, bis etwa 100 Geräte", pick: { label: "Laden oder Praxis", hint: "bis etwa 100 Geräte" } },
+    { id: "m", label: "M", monthly: { basis: 399, plus: 549 }, setupFee: 375, guide: "Mittlerer Betrieb, bis etwa 250 Geräte, mehrere Unterverteilungen", pick: { label: "Mittlerer Betrieb", hint: "bis etwa 250 Geräte" } },
+    { id: "l", label: "L", monthly: { basis: 649, plus: 899 }, setupFee: 750, guide: "Werkstatt, Halle oder großer Betrieb, mehr als 250 Geräte", pick: { label: "Werkstatt oder Halle", hint: "mehr als 250 Geräte" } },
+  ] satisfies Array<{ id: SiteSize; label: string; monthly: Record<Tier, number>; setupFee: number; guide: string; pick: { label: string; hint: string } }>,
 
   /** Shown under the setup fee table on /preise. */
   setupFeeNote: "Sie deckt Bestandsaufnahme, Geräteerfassung und Prüfplan beim Erstbesuch.",

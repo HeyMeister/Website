@@ -2,11 +2,11 @@ import { home } from "@/content/home";
 import { CheckIcon, CloseIcon } from "@/components/icons";
 import { Section } from "@/components/ui/layout";
 
-/** Before/after as a table (desktop) and as stacked pairs (mobile). */
+/** The core promise (like an insurance) and before/after as a table (desktop) or stacked pairs (mobile). */
 export function Compare() {
   const c = home.compare;
   return (
-    <Section id="vergleich" eyebrow={c.eyebrow} title={c.title}>
+    <Section id="vergleich" layout="row" title={c.title} intro={c.lead}>
       <div className="hidden overflow-hidden rounded-card border border-line md:block">
         <table className="w-full text-left">
           <caption className="sr-only">{c.title}</caption>
@@ -38,10 +38,10 @@ export function Compare() {
           </tbody>
         </table>
       </div>
-      <ul className="space-y-4 md:hidden">
+      <ul className="border-t border-line md:hidden">
         {c.rows.map((r) => (
-          <li key={r.topic} className="rounded-card border border-line bg-surface-raised p-5">
-            <p className="label text-accent-dark">{r.topic}</p>
+          <li key={r.topic} className="border-b border-line py-5">
+            <p className="font-semibold text-ink">{r.topic}</p>
             <p className="mt-3 flex items-start gap-2.5 text-ink-muted">
               <CloseIcon className="mt-0.5 h-4 w-4 shrink-0" />
               <span>

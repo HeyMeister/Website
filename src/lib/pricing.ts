@@ -1,4 +1,5 @@
 import { pricing, type SiteSize, type Tier } from "@/content/pricing";
+import { formatEuro } from "@/lib/format";
 
 /** One line of a configuration: how many sites of one size. */
 export type QuoteLine = { size: SiteSize; count: number };
@@ -55,4 +56,28 @@ export function siteCountBucket(sites: number): string {
   if (sites <= 14) return "5-14";
   if (sites <= 29) return "15-29";
   return "30+";
+}
+
+/** Plain-text summary of a configuration, carried into the contact form as "Ihre Auswahl". */
+export function quoteSummary({ lines, tier, term }: QuoteInput): string {
+  const q = quote({ lines, tier, term });
+  const tierLabel = pricing.tiers.find((t) => t.id === tier)?.label ?? tier;
+  return [
+    ...lines
+      .filter((l) => l.count > 0)
+      .map((l) => {
+        const size = pricing.sizes.find((s) => s.id === l.size);
+        return `Größe ${size?.label ?? l.size}: ${l.count} ${l.count === 1 ? "Standort" : "Standorte"}`;
+      }),
+    `Tarif: ${tierLabel}, Laufzeit: ${term} Monate`,
+    `Monatlich netto: ${formatEuro(q.monthly, { cents: true })}${q.discountPercent ? ` (inkl. ${q.discountPercent} % Mengenrabatt)` : ""}`,
+    `Einrichtung: ${q.setupWaived ? "entfällt" : formatEuro(q.setup)}`,
+  ].join("\n");
+}
+
+/** Link into a contact form, prefilled with the configuration. */
+export function quoteHref(input: QuoteInput, base: "/kontakt" | "/" = "/kontakt"): string {
+  const q = quote(input);
+  const params = `wunsch=angebot&standorte=${encodeURIComponent(siteCountBucket(q.sites))}&config=${encodeURIComponent(quoteSummary(input))}`;
+  return base === "/" ? `/?${params}#kontakt` : `/kontakt?${params}`;
 }

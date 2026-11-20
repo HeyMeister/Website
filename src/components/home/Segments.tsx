@@ -12,25 +12,25 @@ export function Segments() {
   const featured = segments.filter((seg) => seg.featured);
   const more = segments.filter((seg) => !seg.featured);
   return (
-    <Section id="fuer-wen" tone="muted" eyebrow={s.eyebrow} title={s.title}>
-      <ul className="grid gap-6 sm:grid-cols-2">
+    <Section id="fuer-wen" tone="muted" title={s.title}>
+      <ul className="grid gap-3 sm:grid-cols-2 sm:gap-6">
         {featured.map((seg) => {
           const photo = photos[seg.visual === "logbook" ? "counter" : seg.visual];
           return (
             <li key={seg.slug} className="min-w-0">
               <Link
                 href={`/${seg.slug}`}
-                className="m-card group grid h-full overflow-hidden rounded-card border border-line bg-surface-raised hover:border-line-strong sm:grid-cols-[2fr_3fr]"
+                className="m-card group grid h-full overflow-hidden rounded-card border border-line bg-surface-raised hover:border-line-strong grid-cols-[6.5rem_1fr] sm:grid-cols-[2fr_3fr]"
               >
-                <span className="m-zoom relative block aspect-[16/9] overflow-hidden bg-surface-2 sm:aspect-auto">
-                  <Image src={photo.src} alt="" fill sizes="(min-width: 1024px) 240px, (min-width: 640px) 20vw, 100vw" className="object-cover" />
+                <span className="m-zoom relative block min-h-[7rem] overflow-hidden bg-surface-2">
+                  <Image src={photo.src} alt="" fill sizes="(min-width: 1024px) 240px, (min-width: 640px) 20vw, 104px" className="object-cover" />
                 </span>
-                <span className="flex flex-col justify-between gap-6 p-6">
+                <span className="flex min-w-0 flex-col justify-between gap-6 p-4 sm:p-6">
                   <span>
                     <span className="block hyphens-auto break-words font-display text-subheading font-bold text-ink">{seg.card.title}</span>
-                    <span className="mt-2 block text-ink-muted">{seg.card.text}</span>
+                    <span className="mt-1 block text-small text-ink-muted sm:mt-2 sm:text-body">{seg.card.text}</span>
                   </span>
-                  <span className="inline-flex items-center gap-2 font-semibold text-accent-dark">
+                  <span className="hidden items-center gap-2 font-semibold text-accent-dark sm:inline-flex">
                     Mehr erfahren
                     <ArrowRightIcon className="m-arrow h-4 w-4" />
                   </span>

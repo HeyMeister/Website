@@ -130,6 +130,14 @@ export const photos = {
     credit: "",
     source: "https://commons.wikimedia.org/wiki/File:Fuse_box_in_German_shop,_2024.jpg",
   },
+  workshop: {
+    src: "/photos/werkstatt.jpg",
+    width: 2000,
+    height: 1334,
+    alt: "Kfz-Werkstatt mit Neonröhren, einem Auto mit geöffneter Motorhaube und einem Motor am Kettenzug",
+    credit: "Martin Vorel, CC BY-SA 4.0",
+    source: "https://commons.wikimedia.org/wiki/File:Car_repair_shop.jpg",
+  },
 } satisfies Record<string, Photo>;
 
 /** One footer line, as the licences require (every photograph in this file, used or not). */

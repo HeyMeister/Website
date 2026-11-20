@@ -4,7 +4,7 @@ import { useId, useRef, useState } from "react";
 import { pricing, type SiteSize, type Tier } from "@/content/pricing";
 import { track } from "@/lib/analytics";
 import { formatEuro } from "@/lib/format";
-import { quote, siteCountBucket } from "@/lib/pricing";
+import { quote, quoteHref } from "@/lib/pricing";
 import { LinkButton } from "@/components/ui/Button";
 
 const MAX = 500;
@@ -34,14 +34,7 @@ export function PriceCalculator({ ctaLabel }: { ctaLabel: string }) {
   const lines = pricing.sizes.map((s) => ({ size: s.id, count: counts[s.id] }));
   const q = quote({ lines, tier, term });
   const tierLabel = pricing.tiers.find((t) => t.id === tier)?.label ?? tier;
-
-  const summary = [
-    ...pricing.sizes.filter((s) => counts[s.id] > 0).map((s) => `Größe ${s.label}: ${counts[s.id]} ${counts[s.id] === 1 ? "Standort" : "Standorte"}`),
-    `Tarif: ${tierLabel}, Laufzeit: ${term} Monate`,
-    `Monatlich netto: ${formatEuro(q.monthly, { cents: true })}${q.discountPercent ? ` (inkl. ${q.discountPercent} % Mengenrabatt)` : ""}`,
-    `Einrichtung: ${q.setupWaived ? "entfällt" : formatEuro(q.setup)}`,
-  ].join("\n");
-  const href = `/kontakt?wunsch=angebot&standorte=${encodeURIComponent(siteCountBucket(q.sites))}&config=${encodeURIComponent(summary)}`;
+  const href = quoteHref({ lines, tier, term });
 
   return (
     <div className="grid gap-8 rounded-card border border-line bg-surface-raised p-4 sm:p-6 lg:grid-cols-12 lg:p-8">
@@ -107,7 +100,7 @@ export function PriceCalculator({ ctaLabel }: { ctaLabel: string }) {
       <div className="flex min-w-0 flex-col justify-between gap-6 rounded-card bg-base p-6 text-white lg:col-span-5" aria-live="polite">
         <div>
           <p className="text-small text-ink-inverse-muted">
-            {q.sites} {q.sites === 1 ? "Standort" : "Standorte"} · {tierLabel} · {term} Monate
+            {q.sites} {q.sites === 1 ? "Standort" : "Standorte"}, Tarif {tierLabel}, {term} Monate Laufzeit
           </p>
           <p className="mt-4 text-small text-ink-inverse-muted">Monatlich, netto</p>
           <p className="mt-1 font-display text-[2.75rem] font-bold leading-none">{formatEuro(q.monthly, { cents: true })}</p>
@@ -124,7 +117,7 @@ export function PriceCalculator({ ctaLabel }: { ctaLabel: string }) {
         </div>
         <div>
           {q.sites > 0 ? (
-            <LinkButton href={href} track="cta_check_click" trackLocation="calculator" arrow className="w-full">
+            <LinkButton href={href} track="cta_check_click" trackLocation="calculator" className="w-full">
               {ctaLabel}
             </LinkButton>
           ) : (

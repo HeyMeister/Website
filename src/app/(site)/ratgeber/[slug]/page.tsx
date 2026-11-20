@@ -53,7 +53,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           { label: "Ratgeber", href: "/ratgeber" },
           { label: g.short, href: `/ratgeber/${g.slug}` },
         ]}
-        eyebrow={`Ratgeber · Stand ${formatDate(g.updated)}`}
+        eyebrow={`Aktualisiert am ${formatDate(g.updated)}`}
         title={g.title}
         lead={g.lead}
         location={`ratgeber-${g.slug}`}

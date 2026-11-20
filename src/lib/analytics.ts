@@ -7,6 +7,7 @@ export type AnalyticsEvent =
   | "cta_partner_click"
   | "form_submit_success"
   | "calculator_used"
+  | "hero_quote_used"
   | "phone_click";
 
 type Props = Record<string, string | number | boolean>;

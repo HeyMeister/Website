@@ -84,7 +84,7 @@ export default function PreisePage() {
         </p>
       </Section>
 
-      <section id="rechner" aria-labelledby="rechner-heading" className="scroll-mt-20 pb-16 pt-24 sm:pb-20 lg:pb-24 lg:pt-[7.5rem]">
+      <section id="rechner" aria-labelledby="rechner-heading" className="scroll-mt-20 py-20 lg:py-28">
         <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="min-w-0 lg:col-span-9">
             <Eyebrow>Preisrechner</Eyebrow>

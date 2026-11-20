@@ -15,7 +15,7 @@ import {
 } from "@/lib/lead-schema";
 import { track } from "@/lib/analytics";
 import { cta, home } from "@/content/home";
-import { ButtonArrow, buttonClass } from "@/components/ui/Button";
+import { buttonClass } from "@/components/ui/Button";
 import { Field, inputClass } from "./fields";
 
 type Wish = LeadInput["wish"];
@@ -202,7 +202,6 @@ function LeadFormInner({
           ) : (
             <>
               {submitLabels[initialWish] ?? cta.primary}
-              <ButtonArrow />
             </>
           )}
         </button>

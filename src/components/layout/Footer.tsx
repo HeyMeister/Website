@@ -10,6 +10,7 @@ import { operatorName } from "@/lib/operator";
 import { Logo } from "@/components/brand/Logo";
 import { LinkButton } from "@/components/ui/Button";
 import { Container } from "@/components/ui/layout";
+import { FooterClose } from "./FooterClose";
 
 /**
  * Close and footer as one section: row 1 the close (heading, one line, both actions), row 2 the
@@ -25,22 +26,24 @@ export function Footer() {
 
   return (
     <footer id="footer" className="bg-base text-white">
-      <Container className="flex flex-col gap-16 pb-10 pt-24 lg:gap-24 lg:pb-[4.5rem] lg:pt-[7.5rem]">
-        {/* Row 1: the close */}
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
+      <Container className="flex flex-col gap-16 pb-10 pt-20 lg:gap-24 lg:pb-[4.5rem] lg:pt-28">
+        {/* Row 1: the close (left out on pages that end with the form) */}
+        <FooterClose>
+          <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
           <div className="lg:col-span-7">
             <h2 className="text-[2.5rem] leading-[1.05] tracking-[-0.025em] sm:text-[3.5rem] xl:text-[4.25rem]">{home.closing.title}</h2>
             <p className="mt-4 max-w-prose text-subheading text-ink-inverse-muted">{home.closing.text}</p>
           </div>
           <div className="flex flex-col gap-3 lg:col-span-5 lg:items-end">
-            <LinkButton href={contactHref("check")} track="cta_check_click" trackLocation="close" arrow className="w-full sm:w-auto">
+            <LinkButton href={contactHref("check")} track="cta_check_click" trackLocation="close" className="w-full sm:w-auto">
               {cta.primary}
             </LinkButton>
             <LinkButton href={callHref(bookingUrl)} variant="inverse" track="cta_call_click" trackLocation="close" className="w-full sm:w-auto">
               {cta.secondary}
             </LinkButton>
           </div>
-        </div>
+          </div>
+        </FooterClose>
 
         {/* Row 2: links and legal */}
         <div>

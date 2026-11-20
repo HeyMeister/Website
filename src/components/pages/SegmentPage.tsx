@@ -7,7 +7,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { LogbookScreen } from "@/components/sections/LogbookMockup";
 import { RelatedGuides } from "@/components/seo/GuideLinks";
 import { PageHero } from "@/components/ui/PageHero";
-import { Container, Eyebrow, Section, sectionHeadingClass } from "@/components/ui/layout";
+import { Container, Section, sectionHeadingClass } from "@/components/ui/layout";
 import { ExampleQuote } from "./ExampleQuote";
 
 function Visual({ visual }: { visual: Segment["visual"] }) {
@@ -39,22 +39,20 @@ export function SegmentPage({ segment }: { segment: Segment }) {
         location={segment.slug}
       />
 
-      <Section id="kennen-sie-das" tone="muted" eyebrow="Kennen Sie das?" title="Drei Dinge, die Zeit kosten.">
-        <ol className="grid gap-6 md:grid-cols-3">
-          {segment.pains.map((p, i) => (
+      <Section id="kennen-sie-das" tone="muted" title="Drei Dinge, die Zeit kosten.">
+        <ul className="grid gap-6 md:grid-cols-3">
+          {segment.pains.map((p) => (
             <li key={p.title} className="rounded-card border border-line bg-surface-raised p-6">
-              <span className="font-mono text-data text-accent-deep">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-3 text-subheading text-ink">{p.title}</h3>
+              <h3 className="text-subheading text-ink">{p.title}</h3>
               <p className="mt-2 text-ink-muted">{p.text}</p>
             </li>
           ))}
-        </ol>
+        </ul>
       </Section>
 
-      <section id="loesung" aria-labelledby="loesung-heading" className="pb-16 pt-24 sm:pb-20 lg:pb-24 lg:pt-[7.5rem]">
+      <section id="loesung" aria-labelledby="loesung-heading" className="py-20 lg:py-28">
         <Container className="grid gap-12 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-6">
-            <Eyebrow>Die Lösung</Eyebrow>
             <h2 id="loesung-heading" className={sectionHeadingClass}>
               {segment.solution.title}
             </h2>
@@ -79,7 +77,7 @@ export function SegmentPage({ segment }: { segment: Segment }) {
         </Container>
       </section>
 
-      <Section id="faq" tone="muted" layout="split" eyebrow="Häufige Fragen" title="Kurz beantwortet.">
+      <Section id="faq" tone="muted" layout="split" title="Häufige Fragen, kurz beantwortet.">
         <FAQ items={segment.faq} disclaimer="Diese Antworten sind allgemeine Hinweise und keine Rechtsberatung." />
       </Section>
 

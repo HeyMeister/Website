@@ -37,10 +37,10 @@ export function CTASection({
   // Heading, next steps and direct contact on the left; the form on the right, so the whole
   // section fits one screen on desktop (tasteskill: one section per screen).
   return (
-    <section id={id} aria-labelledby={`${id}-heading`} className={`${bg} pb-16 pt-24 sm:pb-20 lg:min-h-[100svh] lg:pb-24 lg:pt-[7.5rem]`}>
+    <section id={id} aria-labelledby={`${id}-heading`} className={`${bg} py-20 lg:py-28`}>
       <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">
-          <Eyebrow tone={tone}>{eyebrow ?? c.eyebrow}</Eyebrow>
+          {eyebrow && <Eyebrow tone={tone}>{eyebrow}</Eyebrow>}
           <H id={`${id}-heading`} className={sectionHeadingClass}>
             {title ?? c.title}
           </H>

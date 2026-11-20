@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PhoneIcon } from "@/components/icons";
-import { ButtonArrow, buttonClass } from "@/components/ui/Button";
+import { buttonClass } from "@/components/ui/Button";
 
 /**
  * Mobile-only bar at the bottom of the viewport. Shown once the hero has scrolled out of view
@@ -62,7 +62,6 @@ export function StickyCta({ href, label, tel }: { href: string; label: string; t
           className={buttonClass("primary", "lg", "flex-1")}
         >
           {label}
-          <ButtonArrow />
         </Link>
       </div>
     </div>

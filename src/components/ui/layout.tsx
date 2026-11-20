@@ -33,7 +33,6 @@ export function Section({
   className = "",
   headingLevel = 2,
   layout = "stacked",
-  screens = 1,
 }: {
   id?: string;
   tone?: Tone;
@@ -45,11 +44,6 @@ export function Section({
   headingLevel?: 1 | 2;
   /** "split": heading column left, content right. "row": h2 left, intro right, content below. */
   layout?: "stacked" | "split" | "row";
-  /**
-   * tasteskill "one section per screen": from lg the section is at least 1 or 2 screens tall and
-   * its h2 sits 120px under the top, so each screen tile shows one section.
-   */
-  screens?: 1 | 2;
 }) {
   const H = headingLevel === 1 ? "h1" : "h2";
   const headingId = id ? `${id}-heading` : undefined;
@@ -57,8 +51,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={title ? headingId : undefined}
-      style={{ "--h": screens } as React.CSSProperties}
-      className={`pb-16 pt-24 sm:pb-20 lg:min-h-[calc(var(--h)*100svh)] lg:pb-24 lg:pt-[7.5rem] ${toneClasses[tone]} ${className}`}
+      className={`py-20 lg:py-28 ${toneClasses[tone]} ${className}`}
     >
       <Container className={layout === "split" ? "grid gap-10 lg:grid-cols-12 lg:gap-12" : ""}>
         {(eyebrow || title || intro) && (

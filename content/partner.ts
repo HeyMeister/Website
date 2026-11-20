@@ -23,7 +23,7 @@ export const partner = {
     lead: "HeyMeister betreut Filialunternehmen bei Elektroprüfung und Mängelbeseitigung. Für Standorte in Ihrer Region suchen wir Elektrofachbetriebe, die Prüfungen und freigegebene Reparaturen übernehmen.",
     cta: "Als Fachpartner bewerben",
     secondary: "So funktioniert es",
-    meta: "Keine Akquise · Umfang vorab klar · Sie entscheiden, was Sie annehmen",
+    meta: "Keine Akquise. Umfang vorab klar. Sie entscheiden, was Sie annehmen.",
   },
 
   /** Example job request for the hero (fictitious customer, always shown with the "Beispiel" label). */
